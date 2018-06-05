@@ -1,0 +1,236 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{2076F64E-514E-4B04-8484-4010DE2B390B}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>mdwBunifu</RootNamespace>
+    <AssemblyName>mdwBunifu</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Bunifu_UI_v1.52">
+      <HintPath>..\..\..\Downloads\Bunifu_UI_v1.52.dll</HintPath>
+    </Reference>
+    <Reference Include="MySql.Data, Version=6.9.9.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL" />
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Windows.Forms.DataVisualization" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="boxMesures.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="boxMesures.Designer.cs">
+      <DependentUpon>boxMesures.cs</DependentUpon>
+    </Compile>
+    <Compile Include="boxProfil.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="boxProfil.Designer.cs">
+      <DependentUpon>boxProfil.cs</DependentUpon>
+    </Compile>
+    <Compile Include="boxTableau.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="boxTableau.Designer.cs">
+      <DependentUpon>boxTableau.cs</DependentUpon>
+    </Compile>
+    <Compile Include="btnAccueil.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="btnAccueil.designer.cs">
+      <DependentUpon>btnAccueil.cs</DependentUpon>
+    </Compile>
+    <Compile Include="btnNewMesure.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="btnNewMesure.designer.cs">
+      <DependentUpon>btnNewMesure.cs</DependentUpon>
+    </Compile>
+    <Compile Include="btnProfil.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="btnProfil.designer.cs">
+      <DependentUpon>btnProfil.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Measure.cs" />
+    <Compile Include="Connexion.cs" />
+    <Compile Include="frm_login.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frm_login.Designer.cs">
+      <DependentUpon>frm_login.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmMain.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmMain.Designer.cs">
+      <DependentUpon>frmMain.cs</DependentUpon>
+    </Compile>
+    <Compile Include="boxGraphique.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="boxGraphique.Designer.cs">
+      <DependentUpon>boxGraphique.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ModelMeasure.cs" />
+    <Compile Include="ModelMyInsulin.cs" />
+    <Compile Include="ModelUser.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="btnTableau.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="btnTableau.Designer.cs">
+      <DependentUpon>btnTableau.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Recommandation.cs" />
+    <Compile Include="User.cs" />
+    <Compile Include="vRecommandation.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="vRecommandation.Designer.cs">
+      <DependentUpon>vRecommandation.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="boxMesures.resx">
+      <DependentUpon>boxMesures.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="boxProfil.resx">
+      <DependentUpon>boxProfil.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="boxTableau.resx">
+      <DependentUpon>boxTableau.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="btnAccueil.resx">
+      <DependentUpon>btnAccueil.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="btnNewMesure.resx">
+      <DependentUpon>btnNewMesure.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="btnProfil.resx">
+      <DependentUpon>btnProfil.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="btnTableau.resx">
+      <DependentUpon>btnTableau.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frm_login.resx">
+      <DependentUpon>frm_login.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmMain.resx">
+      <DependentUpon>frmMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="boxGraphique.resx">
+      <DependentUpon>boxGraphique.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <EmbeddedResource Include="vRecommandation.resx">
+      <DependentUpon>vRecommandation.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-user-32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-statistics-32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-plus-32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-home-32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-edit-property-26-lightGrey.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-edit-property-26-red.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-edit-green.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-edit-orange.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-multiplier-24 %281%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-plus-50 %281%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\aae2e24b-33dd-486c-b18b-a1a25c455359.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\6d065362-b0c1-4b37-8f3e-c556d5710132.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\6d065362-b0c1-4b37-8f3e-c556d57101321.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-conseil-50.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-conseil-32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-droite-26.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-gauche-26.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
