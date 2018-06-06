@@ -16,6 +16,13 @@ namespace mdwBunifu
         private ModelMeasure _model;
         private bool _mod;
 
+        private ModelMyInsulin _modelInsu;
+
+        public ModelMyInsulin ModelInsu
+        {
+            get { return _modelInsu; }
+            set { _modelInsu = value; }
+        }
         public bool Modification
         {
             get { return _mod; }
@@ -34,6 +41,7 @@ namespace mdwBunifu
             InitializeComponent();
             Modele = modele;
             this.Modification = mod;
+            this.ModelInsu = new ModelMyInsulin();
             tbxInsuline.Enabled = false;
             btnDelete.Visible = false;
             if (this.Modification)
@@ -69,7 +77,7 @@ namespace mdwBunifu
         }
         private void lblGlycemie_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Glycémie obligatoire");
+            MessageBox.Show("Champs obligatoire");
         }
 
         private void btnSendMesure_Click(object sender, EventArgs e)
@@ -81,12 +89,21 @@ namespace mdwBunifu
                 //Mode insertion
                 if (this.Modele.isCoOpen())
                 {
-                    if (tbxGlycemie.Text != "")
+                    string type;
+                    try
+                    {
+                        type = ddType.selectedValue;
+                    }
+                    catch
+                    {
+                        type = "0";
+                    }
+                    if (tbxGlycemie.Text != "" && type !="0")
                     {
                         double glucose = Convert.ToDouble(tbxGlycemie.Text);
                         string comment = tbxCommentary.Text;
                         
-                        string type = ddType.selectedValue;
+                        
                         tbxGlycemie.Text = "";
                         DateTime dateMesure = dtpDateMesure.Value;                      
                         string sqlDate = dateMesure.ToString("yyyy-MM-dd");
@@ -94,7 +111,8 @@ namespace mdwBunifu
 
                         if (!this.Modele.verifMeasure(sqlDate, type))
                         {
-                            this.Modele.AddMesure(glucose,0, comment, type, sqlDate);
+                            double reco = this.ModelInsu.getRecommandationInsu(glucose, this.Modele.ConnectedUser.IdUser);
+                            this.Modele.AddMesure(glucose,reco, comment, type, sqlDate);
                             lblSend.Visible = true;
                             lblSend.Text = "Mesure ajoutée";
                             lblSend.Refresh();
@@ -108,7 +126,7 @@ namespace mdwBunifu
                             {
                                 this.Modele.Mes = this.Modele.GetMesureByTypeAndDate(sqlDate, type);
 
-                                this.Modele.ChangeMesure(glucose, this.Modele.Mes.InsulinRecommandation , comment, type, sqlDate, this.Modele.Mes.IdMesure);
+                                this.Modele.ChangeMesure(glucose, this.ModelInsu.getRecommandationInsu(glucose,this.Modele.ConnectedUser.IdUser) , comment, type, sqlDate, this.Modele.Mes.IdMesure);
 
 
 
@@ -170,8 +188,8 @@ namespace mdwBunifu
                             DialogResult dialogResult = MessageBox.Show("Vous avez déjà une mesure de ce type", "Souhaitez-vous modifier la mesure existante ? ", MessageBoxButtons.YesNo);
                             if (dialogResult == DialogResult.Yes)
                             {
-                                
-                                this.Modele.ChangeMesure(glucose, insu, comment, type, sqlDate, this.Modele.Mes.IdMesure);
+
+                                this.Modele.ChangeMesure(glucose, this.ModelInsu.getRecommandationInsu(glucose,this.Modele.ConnectedUser.IdUser), comment, type, sqlDate, this.Modele.Mes.IdMesure);
 
 
 

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace mdwBunifu
 {
-    public class Recommandation
+    public class InsulineTable
     {
         private int _idReco;
 
@@ -45,7 +45,7 @@ namespace mdwBunifu
         }
 
 
-        public Recommandation(int id, int min, int max, int reco)
+        public InsulineTable(int id, int min, int max, int reco)
         {
             this.IdReco = id;
             this.Min = min;

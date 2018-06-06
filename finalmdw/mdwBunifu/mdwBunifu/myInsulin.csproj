@@ -74,18 +74,6 @@
     <Compile Include="btnAccueil.designer.cs">
       <DependentUpon>btnAccueil.cs</DependentUpon>
     </Compile>
-    <Compile Include="btnNewMesure.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="btnNewMesure.designer.cs">
-      <DependentUpon>btnNewMesure.cs</DependentUpon>
-    </Compile>
-    <Compile Include="btnProfil.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="btnProfil.designer.cs">
-      <DependentUpon>btnProfil.cs</DependentUpon>
-    </Compile>
     <Compile Include="Measure.cs" />
     <Compile Include="Connexion.cs" />
     <Compile Include="frm_login.cs">
@@ -111,13 +99,7 @@
     <Compile Include="ModelUser.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="btnTableau.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="btnTableau.Designer.cs">
-      <DependentUpon>btnTableau.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Recommandation.cs" />
+    <Compile Include="InsulineTable.cs" />
     <Compile Include="User.cs" />
     <Compile Include="vRecommandation.cs">
       <SubType>UserControl</SubType>
@@ -136,15 +118,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="btnAccueil.resx">
       <DependentUpon>btnAccueil.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="btnNewMesure.resx">
-      <DependentUpon>btnNewMesure.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="btnProfil.resx">
-      <DependentUpon>btnProfil.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="btnTableau.resx">
-      <DependentUpon>btnTableau.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frm_login.resx">
       <DependentUpon>frm_login.cs</DependentUpon>

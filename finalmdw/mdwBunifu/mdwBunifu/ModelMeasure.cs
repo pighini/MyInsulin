@@ -43,8 +43,7 @@ namespace mdwBunifu
                 return false;
             }
         }
-
-        public List<Measure> GetMesure(int interval, string unit)
+        public List<Measure> GetMesureWeekly(int interval, string unit)
         {
 
             Connexion connect = new Connexion();
@@ -55,7 +54,7 @@ namespace mdwBunifu
             MySqlCommand cmd = connect.Connection.CreateCommand();
 
             // Requête SQL
-            cmd.CommandText = "SELECT `idMeasure`, `glucose`, `insulinRecommandation`, `type`, `dateMesure`, `idUser` FROM `measures` WHERE `dateMesure` < NOW() and `dateMesure` > DATE_SUB( @today , INTERVAL @interval "+unit+") and idUser = @idUser ORDER BY `dateMesure` ASC";
+            cmd.CommandText = "SELECT `idMesure`, `glucose`, `insulinRecommandation`, `type`, `dateMesure`, `idUser` FROM `measures` WHERE `dateMesure` < NOW() and `dateMesure` > DATE_SUB( @today , INTERVAL @interval " + unit + ") and idUser = @idUser ORDER BY `dateMesure` ASC";
             cmd.Parameters.AddWithValue("@today", DateTime.Now);
             cmd.Parameters.AddWithValue("@idUser", ConnectedUser.IdUser);
             cmd.Parameters.AddWithValue("@interval", interval);
@@ -67,11 +66,11 @@ namespace mdwBunifu
             List<Measure> measures = new List<Measure>();
             while (data.Read())
             {
-                measures.Add(new Measure((int)data["idMeasure"],
+                measures.Add(new Measure((int)data["idMesure"],
                (int)data["glucose"],
                (int)data["insulinRecommandation"],
                (string)data["commentary"],
-               (string)data["typeofMeasure"],
+               GetTypeById((int)data["idMeasure"]),
                ((DateTime)data["dateofMeasure"]).ToString()));
 
             }
@@ -79,7 +78,165 @@ namespace mdwBunifu
 
             return measures;
         }
-        
+        public List<Measure> GetMesure(string dateDebut, string dateFin)
+        {
+
+            Connexion connect = new Connexion();
+            // Ouverture de la connexion SQL
+            connect.OpenConnection();
+
+            // Création d'une commande SQL en fonction de l'objet connection
+            MySqlCommand cmd = connect.Connection.CreateCommand();
+
+            // Requête SQL
+            cmd.CommandText = "SELECT * FROM `measures` WHERE `idUser` = @idUser AND `dateofMeasure` >= @dateDeb AND `dateofMeasure` <= @dateFin ";
+            cmd.Parameters.AddWithValue("@dateDeb", dateDebut);
+            cmd.Parameters.AddWithValue("@dateFin", dateFin);
+            cmd.Parameters.AddWithValue("@idUser", ConnectedUser.IdUser);
+
+
+
+
+            MySqlDataReader data = cmd.ExecuteReader();
+            List<Measure> measures = new List<Measure>();
+            while (data.Read())
+            {
+                measures.Add(new Measure((int)data["idMeasure"],
+               (double)data["glucose"],
+               (double)data["insulinRecommandation"],
+               (string)data["commentary"],
+                GetTypeById((int)data["idMeasure"]),
+               ((DateTime)data["dateofMeasure"]).ToString()));
+
+            }
+            data.Close();
+
+            return measures;
+        }
+        public List<Measure> GetMesureByType(string dateDebut, string dateFin, int type)
+        {
+
+            Connexion connect = new Connexion();
+            // Ouverture de la connexion SQL
+            connect.OpenConnection();
+
+            // Création d'une commande SQL en fonction de l'objet connection
+            MySqlCommand cmd = connect.Connection.CreateCommand();
+
+            // Requête SQL
+            cmd.CommandText = "SELECT * FROM `measures` WHERE `idUser` = @idUser AND `dateofMeasure` >= @dateDeb AND `dateofMeasure` <= @dateFin AND `typeofMeasure`= @type ";
+            cmd.Parameters.AddWithValue("@dateDeb", dateDebut);
+            cmd.Parameters.AddWithValue("@dateFin", dateFin);
+            cmd.Parameters.AddWithValue("@idUser", ConnectedUser.IdUser);
+            cmd.Parameters.AddWithValue("@type", type);
+
+
+
+
+
+            MySqlDataReader data = cmd.ExecuteReader();
+            List<Measure> measures = new List<Measure>();
+            while (data.Read())
+            {
+                measures.Add(new Measure((int)data["idMeasure"],
+               (double)data["glucose"],
+               (double)data["insulinRecommandation"],
+               (string)data["commentary"],
+               GetTypeById((int)data["idMeasure"]),
+               ((DateTime)data["dateofMeasure"]).ToString()));
+
+            }
+            data.Close();
+
+            return measures;
+        }
+        public string GetTypeById(int id)
+        {
+
+            Connexion connect = new Connexion();
+            // Ouverture de la connexion SQL
+            connect.OpenConnection();
+
+            // Création d'une commande SQL en fonction de l'objet connection
+            MySqlCommand cmd = connect.Connection.CreateCommand();
+
+            // Requête SQL
+            cmd.CommandText = "SELECT t.type FROM `types` as t, `hastypes` as h WHERE h.idMeasure = @idMeasure AND h.idType = t.idType";
+            cmd.Parameters.AddWithValue("@idMeasure", id);
+
+
+            MySqlDataReader data = cmd.ExecuteReader();
+            string type ;
+            data.Read();
+
+
+                type = (string)data["type"];
+
+            
+            data.Close();
+
+            return type;
+        }
+        public int GetTypeByName(string type)
+        {
+
+            Connexion connect = new Connexion();
+            // Ouverture de la connexion SQL
+            connect.OpenConnection();
+
+            // Création d'une commande SQL en fonction de l'objet connection
+            MySqlCommand cmd = connect.Connection.CreateCommand();
+
+            // Requête SQL
+            cmd.CommandText = "SELECT idType FROM `types` WHERE type = @type";
+            cmd.Parameters.AddWithValue("@type", type);
+
+
+            MySqlDataReader data = cmd.ExecuteReader();
+            int typeToReturn;
+            data.Read();
+
+
+            typeToReturn = (int)data["idType"];
+
+
+            data.Close();
+
+            return typeToReturn;
+        }
+        public double GetMesureDate(string date)
+        {
+
+            Connexion connect = new Connexion();
+            // Ouverture de la connexion SQL
+            connect.OpenConnection();
+
+            // Création d'une commande SQL en fonction de l'objet connection
+            MySqlCommand cmd = connect.Connection.CreateCommand();
+
+            // Requête SQL
+            cmd.CommandText = "SELECT avg(`glucose`) as glucose FROM `measures` WHERE `dateofMeasure` = @date";
+            cmd.Parameters.AddWithValue("@date", date);
+
+
+
+
+            MySqlDataReader data = cmd.ExecuteReader();
+            double mesure;
+            data.Read();
+            try
+            {
+                mesure = (double)data["glucose"];
+            }
+            catch
+            {
+                mesure = 0;
+            }
+
+            data.Close();
+
+            return mesure;
+        }
         public Measure GetMesureById(int id)
         {
 
@@ -93,26 +250,80 @@ namespace mdwBunifu
             // Requête SQL
             cmd.CommandText = "SELECT `idMesure`, `glucose`, `insulinRecommandation`, `commentary`, `typeofMeasure`, `dateMesure`, `idUser` FROM `measures` WHERE  idMesure = @idMesure";
             cmd.Parameters.AddWithValue("@idMesure", id);
-            
+
 
 
 
             MySqlDataReader data = cmd.ExecuteReader();
             Measure mesure;
             data.Read();
-                mesure = new Measure((int)data["idMeasure"],
-               (double)data["glucose"],
-               (double)data["insulinRecommandation"],
-               (string)data["commentary"],
-               (string)data["typeofMeasure"],
-               ((DateTime)data["dateofMeasure"]).ToString());
+            mesure = new Measure((int)data["idMeasure"],
+           (double)data["glucose"],
+           (double)data["insulinRecommandation"],
+           (string)data["commentary"],
+           GetTypeById((int)data["idMeasure"]),
+           ((DateTime)data["dateofMeasure"]).ToString());
 
-            
+
             data.Close();
 
             return mesure;
         }
-        public bool verifMeasure(string date, string type )
+
+        public List<string> GetAllTypes()
+        {
+
+
+            Connexion connect = new Connexion();
+            // Ouverture de la connexion SQL
+            connect.OpenConnection();
+
+            // Création d'une commande SQL en fonction de l'objet connection
+            MySqlCommand cmd = connect.Connection.CreateCommand();
+
+            // Requête SQL
+            cmd.CommandText = "SELECT * FROM `types`";
+
+
+            MySqlDataReader data = cmd.ExecuteReader();
+            List<string> types = new List<string>();
+            while (data.Read())
+            {
+                types.Add((string)data["type"]);
+
+            }
+            data.Close();
+
+            return types;
+        }
+        public List<string> GetAllTypesByUser()
+        {
+
+
+            Connexion connect = new Connexion();
+            // Ouverture de la connexion SQL
+            connect.OpenConnection();
+
+            // Création d'une commande SQL en fonction de l'objet connection
+            MySqlCommand cmd = connect.Connection.CreateCommand();
+
+            // Requête SQL
+            cmd.CommandText = "SELECT DISTINCT t.type FROM `types` as t , `hastypes` as h, `measures` as m WHERE h.idMeasure = m.idMeasure AND h.idType = t.idType AND m.IdUser = @idUser";
+            cmd.Parameters.AddWithValue("@idUser", this.ConnectedUser.IdUser);
+
+
+            MySqlDataReader data = cmd.ExecuteReader();
+            List<string> types = new List<string>();
+            while (data.Read())
+            {
+                types.Add((string)data["type"]);
+
+            }
+            data.Close();
+
+            return types;
+        }
+        public bool verifMeasure(string date, string type)
         {
             int nbResultat = 0;
             // Ouverture de la connexion SQL
@@ -122,10 +333,10 @@ namespace mdwBunifu
             MySqlCommand cmd = myConnexion.Connection.CreateCommand();
 
             // Requête SQL
-             cmd.CommandText = "SELECT idMeasure FROM `measures` WHERE `dateofMeasure` = '"+date+ "' AND `typeofMeasure` ='"+type+"';";
+            cmd.CommandText = "SELECT idMeasure FROM `measures` WHERE `dateofMeasure` = '" + date + "' AND `typeofMeasure` ='" + type + "';";
 
             // utilisation de l'objet contact passé en paramètre
-         
+
 
             MySqlDataReader reader = cmd.ExecuteReader();
 
@@ -175,7 +386,7 @@ namespace mdwBunifu
             return day + "." + month;
         }
 
-        public void ChangeMesure(double glucose,double insu, string comment, string type, string dateMesure, int idMesure)
+        public void ChangeMesure(double glucose, double insu, string comment, string type, string dateMesure, int idMesure)
         {
             try
             {
@@ -187,7 +398,7 @@ namespace mdwBunifu
                 MySqlCommand cmd = myConnexion.Connection.CreateCommand();
 
                 // Requête SQL
-                cmd.CommandText = "UPDATE `measures` SET `glucose`="+glucose+ " , `insulinRecommandation`="+insu+ " , `commentary`='"+comment+ "' , `typeofMeasure`='"+type+ "',`dateofMeasure`='"+dateMesure+ "' WHERE `idMeasure`="+idMesure+"";
+                cmd.CommandText = "UPDATE `measures` SET `glucose`=" + glucose + " , `insulinRecommandation`=" + insu + " , `commentary`='" + comment + "' , `typeofMeasure`='" + type + "',`dateofMeasure`='" + dateMesure + "' WHERE `idMeasure`=" + idMesure + "";
 
                 // utilisation de l'objet contact passé en paramètre
                 cmd.Parameters.AddWithValue("@glucose", glucose);
@@ -212,31 +423,31 @@ namespace mdwBunifu
             }
         }
 
-        public List<string> getAllType()
-        {
-            Connexion connect = new Connexion();
-            // Ouverture de la connexion SQL
-            connect.OpenConnection();
+        //public List<string> getAllTypes()
+        //{
+        //    Connexion connect = new Connexion();
+        //    // Ouverture de la connexion SQL
+        //    connect.OpenConnection();
 
-            // Création d'une commande SQL en fonction de l'objet connection
-            MySqlCommand cmd = connect.Connection.CreateCommand();
+        //    // Création d'une commande SQL en fonction de l'objet connection
+        //    MySqlCommand cmd = connect.Connection.CreateCommand();
 
-            // Requête SQL
-            cmd.CommandText = "SELECT Distinct `typeofMeasure` FROM `measures` where idUser = @idUser ORDER BY typeofMeasure ASC";
-            cmd.Parameters.AddWithValue("@idUser", this.ConnectedUser.IdUser);
+        //    // Requête SQL
+        //    cmd.CommandText = "SELECT Distinct `typeofMeasure` FROM `measures` where idUser = @idUser ORDER BY typeofMeasure ASC";
+        //    cmd.Parameters.AddWithValue("@idUser", this.ConnectedUser.IdUser);
 
-            MySqlDataReader data = cmd.ExecuteReader();
-            List<string> types = new List<string>();
-            while (data.Read())
-            {
-                types.Add((string)data["typeofMeasure"]);
+        //    MySqlDataReader data = cmd.ExecuteReader();
+        //    List<string> types = new List<string>();
+        //    while (data.Read())
+        //    {
+        //        types.Add((string)data["typeofMeasure"]);
 
-            }
-            data.Close();
+        //    }
+        //    data.Close();
 
-            return types;
-        }
-        public void AddMesure(double glucose, double insulinRecommandation,string commentary, string type, string date)
+        //    return types;
+        //}
+        public void AddMesure(double glucose, double insulinRecommandation, string commentary, string type, string date)
         {
             try
             {
@@ -294,7 +505,7 @@ namespace mdwBunifu
                (double)data["glucose"],
                (double)data["insulinRecommandation"],
                (string)data["commentary"],
-               (string)data["typeofMeasure"],
+               GetTypeById((int)data["idMeasure"]),
                ((DateTime)data["dateofMeasure"]).ToShortDateString());
 
 

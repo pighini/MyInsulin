@@ -10,7 +10,7 @@ namespace mdwBunifu
     public class ModelMyInsulin
     {
         private Connexion myConnexion = new Connexion();
-        public List<Recommandation> GetRecommandation(int idUser)
+        public List<InsulineTable> GetRecommandation(int idUser)
         {
 
             Connexion connect = new Connexion();
@@ -27,10 +27,10 @@ namespace mdwBunifu
 
 
             MySqlDataReader data = cmd.ExecuteReader();
-            List<Recommandation> recos = new List<Recommandation>();
+            List<InsulineTable> recos = new List<InsulineTable>();
             while (data.Read())
             {
-                recos.Add(new Recommandation((int)data["idRecommandation"],
+                recos.Add(new InsulineTable((int)data["idRecommandation"],
                (int)data["minHeight"],
                (int)data["maxHeight"],
                (int)data["recommandation"]));
@@ -95,7 +95,41 @@ namespace mdwBunifu
             // Fermeture de la connexion
             connect.CloseConnection();
         }
-        
+        public double getRecommandationInsu(double glycemie, int idUser)
+        {
+            
+                Connexion connect = new Connexion();
+                // Ouverture de la connexion SQL
+                connect.OpenConnection();
+
+                // Création d'une commande SQL en fonction de l'objet connection
+                MySqlCommand cmd = connect.Connection.CreateCommand();
+
+                // Requête SQL
+                cmd.CommandText = "SELECT `Recommandation` FROM `insulintables` WHERE @glycemie >= `minGlucose` AND @glycemie <`maxGlucose` AND `idUser` = @idUser";
+                cmd.Parameters.AddWithValue("@glycemie", glycemie);
+                cmd.Parameters.AddWithValue("@idUser", idUser);
+
+
+
+
+
+                MySqlDataReader data = cmd.ExecuteReader();
+                double insu;
+            
+                data.Read();
+            try
+            {
+                insu = (double)data["Recommandation"];
+            }
+            catch
+            {
+                insu = 0;
+            }
+                data.Close();
+                return insu;
+            
+        }
         public int GetLastId()
         {
 

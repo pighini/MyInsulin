@@ -30,9 +30,6 @@ C:\Users\PIGHINIL_INFO\Desktop\MyInsulin\finalmdw\mdwBunifu\mdwBunifu\obj\Debug\
 C:\Users\PIGHINIL_INFO\Desktop\MyInsulin\finalmdw\mdwBunifu\mdwBunifu\obj\Debug\mdwBunifu.boxProfil.resources
 C:\Users\PIGHINIL_INFO\Desktop\MyInsulin\finalmdw\mdwBunifu\mdwBunifu\obj\Debug\mdwBunifu.boxTableau.resources
 C:\Users\PIGHINIL_INFO\Desktop\MyInsulin\finalmdw\mdwBunifu\mdwBunifu\obj\Debug\mayDaylyWeyght.btnAccueil.resources
-C:\Users\PIGHINIL_INFO\Desktop\MyInsulin\finalmdw\mdwBunifu\mdwBunifu\obj\Debug\mayDaylyWeyght.btnNewMesure.resources
-C:\Users\PIGHINIL_INFO\Desktop\MyInsulin\finalmdw\mdwBunifu\mdwBunifu\obj\Debug\mayDaylyWeyght.btnProfil.resources
-C:\Users\PIGHINIL_INFO\Desktop\MyInsulin\finalmdw\mdwBunifu\mdwBunifu\obj\Debug\mdwBunifu.btnTableau.resources
 C:\Users\PIGHINIL_INFO\Desktop\MyInsulin\finalmdw\mdwBunifu\mdwBunifu\obj\Debug\mdwBunifu.frm_login.resources
 C:\Users\PIGHINIL_INFO\Desktop\MyInsulin\finalmdw\mdwBunifu\mdwBunifu\obj\Debug\mdwBunifu.frmMain.resources
 C:\Users\PIGHINIL_INFO\Desktop\MyInsulin\finalmdw\mdwBunifu\mdwBunifu\obj\Debug\mdwBunifu.boxGraphique.resources

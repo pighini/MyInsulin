@@ -14,7 +14,7 @@ namespace mdwBunifu
     public partial class boxGraphique : UserControl
     {
         private ModelMeasure _model;
-
+        Series tendanceSerie;
         public ModelMeasure Model
         {
             get { return _model; }
@@ -25,92 +25,144 @@ namespace mdwBunifu
         {
             InitializeComponent();
             this.Model = mod;
-            CreateChart("DAY");
+            dtpDebut.Value = DateTime.Now;
+            dtpFin.Value = DateTime.Now.AddDays(1);
+            fillTypes();
+
 
         }
-        
-        private void CreateChart(string unit)
+        private void fillTypes()
         {
-            chartmesure.Series.Clear();
-            const string uDay = "DAY";
-            const  string uMonth = "MONTH";
-            const string uYear = "YEAR";
-            Series poids = new Series
+            foreach (string type in this.Model.GetAllTypesByUser())
             {
-                Name = "Poids",
+                lbxLeft.Items.Add(type);
+            }
+        }
+        private void AddTendance()
+        {
+            if (tendanceSerie != null)
+            {
+                chartmesure.Series.Remove(tendanceSerie);
+            }
+            Series glycemie = new Series
+            {
+                Name = "Tendance",
                 ChartType = SeriesChartType.Line,
                 XValueType = ChartValueType.DateTime,
                 YValueType = ChartValueType.Int32,
                 MarkerStyle = MarkerStyle.Circle,
                 MarkerSize = 5,
-                MarkerColor = Color.Red
+                MarkerColor = Color.Pink
             };
-            string dateDeb;
-            string dateFin;
-            List<Measure> mesures;
-
-
-            switch (unit)
+            DateTime dateDebut = dtpDebut.Value;
+            DateTime dateFin = dtpFin.Value;
+            List<DateTime> datesMeasure = new List<DateTime>();
+            int cpt = 0;
+            for (DateTime i = dateDebut; i < dateFin; i= i.AddDays(1))
             {
-                case uDay:
-                    mesures = Model.GetMesure(8, uDay);
-                    dateDeb = mesures.ElementAt(0).DateMesure;
-                    dateFin = mesures.ElementAt(mesures.Count - 1).DateMesure;
-                    //lblEnd.Text = this.Model.DateForDays(dateFin);
-                    //lblStart.Text = this.Model.DateForDays(dateDeb);
-                    break;
-                case uMonth:
-                    mesures = Model.GetMesure(1,uMonth);
-                     dateDeb = mesures.ElementAt(0).DateMesure;
-                     dateFin = mesures.ElementAt(mesures.Count - 1).DateMesure;
-                    //lblEnd.Text = this.Model.DateForDays(dateFin);
-                    //lblStart.Text = this.Model.DateForDays(dateDeb);
-                    break;
-                case uYear:
-                    mesures = Model.GetMesure(1, uYear);
-                    dateDeb = mesures.ElementAt(0).DateMesure;
-                    dateFin = mesures.ElementAt(mesures.Count - 1).DateMesure;
-                    //lblEnd.Text = this.Model.DateForDays(dateFin);
-                    //lblStart.Text = this.Model.DateForDays(dateDeb);
-                    break;
-                default:
-                    mesures = Model.GetMesure(8, uDay);
-                    break;
+                cpt++;
+                datesMeasure.Add(i);
             }
-            foreach (var mes in mesures)
+            string dateTend;
+            double tendance;
+            foreach (DateTime date in datesMeasure)
             {
+                
+                dateTend = date.ToString("yyyy-MM-dd");
+                tendance = this.Model.GetMesureDate(dateTend);
+                if (tendance != 0)
+                {
+                    glycemie.Points.AddXY(dateTend, tendance);
+                }
+            }            
 
-                poids.Points.AddXY(mes.DateMesure, mes.Glucose);
+            chartmesure.Series.Add(glycemie);
+            tendanceSerie = glycemie; 
+        }
+        private void AddByType()
+        {
+            Random rnd = new Random();
+            chartmesure.Series.Clear();
+            foreach (string type in lbxRight.Items)
+            {
+                
+                Series glycemie = new Series
+                {
+                    Name = type,
+                    ChartType = SeriesChartType.Line,
+                    XValueType = ChartValueType.DateTime,
+                    YValueType = ChartValueType.Int32,
+                    MarkerStyle = MarkerStyle.Circle,
+                    MarkerSize = 5,
+                    MarkerColor = Color.Red
+            };
+                DateTime dateMesure = dtpDebut.Value;
+                string dateDeb = dateMesure.ToString("yyyy-MM-dd");
+                dateMesure = dtpFin.Value;
+                string dateFin = dateMesure.ToString("yyyy-MM-dd");
+                List<Measure> mesures;
+                string formattedDate;
+                mesures = this.Model.GetMesureByType(dateDeb, dateFin, this.Model.GetTypeByName(type));
 
+                foreach (var mes in mesures)
+                {
+
+                    formattedDate = mes.DateMesure.Substring(0, 5).Replace('.', '-');
+                    glycemie.Points.AddXY(mes.DateMesure, mes.Glucose);
+
+                }
+
+                chartmesure.Series.Add(glycemie);
             }
-
-            
-            
-            chartmesure.Series.Add(poids);
-
 
         }
-        
 
-        //private void bunifuCheckbox_Click(object sender, EventArgs e)
-        //{
-        //    ns1.BunifuCheckbox radioBtn = (ns1.BunifuCheckbox)sender;
-        //    if(radioBtn.Tag == cbxTendance.Tag)
-        //    {
-        //        bunifuCheckbox2.Checked = false;
-        //        bunifuCheckbox3.Checked = false;
-        //    }
-        //    if (radioBtn.Tag == bunifuCheckbox2.Tag)
-        //    {
-        //        cbxTendance.Checked = false;
-        //        bunifuCheckbox3.Checked = false;
-        //    }
-        //    if(radioBtn.Tag == bunifuCheckbox3.Tag)
-        //    {
-        //        cbxTendance.Checked = false;
-        //        bunifuCheckbox2.Checked = false;
-        //    }
-        //    CreateChart(radioBtn.Tag.ToString());
-        //}
+        private void dtp_onValueChanged(object sender, EventArgs e)
+        {
+            AddByType();
+            refreshTend();
+        }
+        private void refreshTend()
+        {
+            if(cbxTendance.Checked)
+            {
+                AddTendance();
+            }
+        }
+        private void cbxTendance_OnChange(object sender, EventArgs e)
+        {
+            refreshTend();
+        }
+
+        private void btnToRight_Click(object sender, EventArgs e)
+        {
+            ListBox lsbtmp = new ListBox();
+            foreach (var item in lbxLeft.SelectedItems)
+            {
+                lsbtmp.Items.Add(item);
+            }
+            foreach (var item in lsbtmp.Items)
+            {
+                lbxLeft.Items.Remove(item);
+                lbxRight.Items.Add(item);
+            }
+            AddByType();
+        }
+
+        private void btnToLeft_Click(object sender, EventArgs e)
+        {
+            ListBox lsbtmp = new ListBox();
+            foreach (var item in lbxRight.SelectedItems)
+            {
+                lsbtmp.Items.Add(item);
+            }
+            foreach (var item in lsbtmp.Items)
+            {
+                lbxRight.Items.Remove(item);
+                lbxLeft.Items.Add(item);
+            }
+            AddByType();
+
+        }
     }
 }
