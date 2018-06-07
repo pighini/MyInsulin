@@ -31,12 +31,12 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.cbxTendance = new ns1.BunifuCheckbox();
             this.label4 = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
+            this.pbPreviousWeek = new System.Windows.Forms.PictureBox();
+            this.pbNextWeek = new System.Windows.Forms.PictureBox();
+            ((System.ComponentModel.ISupportInitialize)(this.pbPreviousWeek)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbNextWeek)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
@@ -63,27 +63,9 @@
             this.panel3.Size = new System.Drawing.Size(500, 1);
             this.panel3.TabIndex = 1;
             // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Image = global::mdwBunifu.Properties.Resources.icons8_droite_26;
-            this.pictureBox1.Location = new System.Drawing.Point(53, 20);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(27, 26);
-            this.pictureBox1.TabIndex = 2;
-            this.pictureBox1.TabStop = false;
-            // 
-            // pictureBox2
-            // 
-            this.pictureBox2.Image = global::mdwBunifu.Properties.Resources.icons8_gauche_26;
-            this.pictureBox2.Location = new System.Drawing.Point(14, 20);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(27, 27);
-            this.pictureBox2.TabIndex = 3;
-            this.pictureBox2.TabStop = false;
-            // 
             // cbxTendance
             // 
-            this.cbxTendance.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(132)))), ((int)(((byte)(135)))), ((int)(((byte)(140)))));
+            this.cbxTendance.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(205)))), ((int)(((byte)(117)))));
             this.cbxTendance.ChechedOffColor = System.Drawing.Color.FromArgb(((int)(((byte)(132)))), ((int)(((byte)(135)))), ((int)(((byte)(140)))));
             this.cbxTendance.Checked = false;
             this.cbxTendance.CheckedOnColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(205)))), ((int)(((byte)(117)))));
@@ -104,6 +86,26 @@
             this.label4.TabIndex = 19;
             this.label4.Text = "Tendance";
             // 
+            // pbPreviousWeek
+            // 
+            this.pbPreviousWeek.Image = global::mdwBunifu.Properties.Resources.icons8_gauche_26;
+            this.pbPreviousWeek.Location = new System.Drawing.Point(14, 20);
+            this.pbPreviousWeek.Name = "pbPreviousWeek";
+            this.pbPreviousWeek.Size = new System.Drawing.Size(27, 27);
+            this.pbPreviousWeek.TabIndex = 3;
+            this.pbPreviousWeek.TabStop = false;
+            this.pbPreviousWeek.Click += new System.EventHandler(this.pbPreviousWeek_Click);
+            // 
+            // pbNextWeek
+            // 
+            this.pbNextWeek.Image = global::mdwBunifu.Properties.Resources.icons8_droite_26;
+            this.pbNextWeek.Location = new System.Drawing.Point(53, 20);
+            this.pbNextWeek.Name = "pbNextWeek";
+            this.pbNextWeek.Size = new System.Drawing.Size(27, 26);
+            this.pbNextWeek.TabIndex = 2;
+            this.pbNextWeek.TabStop = false;
+            this.pbNextWeek.Click += new System.EventHandler(this.pbNextWeek_Click);
+            // 
             // boxTableau
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -111,15 +113,15 @@
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(50)))), ((int)(((byte)(44)))));
             this.Controls.Add(this.cbxTendance);
             this.Controls.Add(this.label4);
-            this.Controls.Add(this.pictureBox2);
-            this.Controls.Add(this.pictureBox1);
+            this.Controls.Add(this.pbPreviousWeek);
+            this.Controls.Add(this.pbNextWeek);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Name = "boxTableau";
             this.Size = new System.Drawing.Size(580, 524);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbPreviousWeek)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbNextWeek)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -130,8 +132,8 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Panel panel3;
-        private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.PictureBox pictureBox2;
+        private System.Windows.Forms.PictureBox pbNextWeek;
+        private System.Windows.Forms.PictureBox pbPreviousWeek;
         private ns1.BunifuCheckbox cbxTendance;
         private System.Windows.Forms.Label label4;
     }

@@ -15,23 +15,23 @@ namespace mdwBunifu
             get { return _idReco; }
             set { _idReco = value; }
         }
-        private int _min;
+        private double _min;
 
-        public int Min
+        public double Min
         {
             get { return _min; }
             set { _min = value; }
         }
-        private int _max;
+        private double _max;
 
-        public int Max
+        public double Max
         {
             get { return _max; }
             set { _max = value; }
         }
-        private int _nbRecommandation;
+        private double _nbRecommandation;
 
-        public int NbRecommandation 
+        public double NbRecommandation 
         {
             get { return _nbRecommandation; }
             set { _nbRecommandation = value; }
@@ -45,7 +45,7 @@ namespace mdwBunifu
         }
 
 
-        public InsulineTable(int id, int min, int max, int reco)
+        public InsulineTable(int id, double min, double max, double reco)
         {
             this.IdReco = id;
             this.Min = min;

@@ -42,8 +42,8 @@
             this.tbxCommentary = new ns1.BunifuMetroTextbox();
             this.label5 = new System.Windows.Forms.Label();
             this.tbxInsuline = new ns1.BunifuMetroTextbox();
-            this.btnSendMesure = new ns1.BunifuThinButton2();
             this.btnDelete = new ns1.BunifuThinButton2();
+            this.btnSendMesure = new ns1.BunifuThinButton2();
             this.SuspendLayout();
             // 
             // lblMesure
@@ -216,32 +216,6 @@
             this.tbxInsuline.TabIndex = 15;
             this.tbxInsuline.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             // 
-            // btnSendMesure
-            // 
-            this.btnSendMesure.ActiveBorderThickness = 1;
-            this.btnSendMesure.ActiveCornerRadius = 1;
-            this.btnSendMesure.ActiveFillColor = System.Drawing.Color.SeaGreen;
-            this.btnSendMesure.ActiveForecolor = System.Drawing.Color.White;
-            this.btnSendMesure.ActiveLineColor = System.Drawing.Color.SeaGreen;
-            this.btnSendMesure.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(50)))), ((int)(((byte)(44)))));
-            this.btnSendMesure.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnSendMesure.BackgroundImage")));
-            this.btnSendMesure.ButtonText = "Envoyer";
-            this.btnSendMesure.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnSendMesure.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSendMesure.ForeColor = System.Drawing.Color.White;
-            this.btnSendMesure.IdleBorderThickness = 1;
-            this.btnSendMesure.IdleCornerRadius = 1;
-            this.btnSendMesure.IdleFillColor = System.Drawing.Color.SeaGreen;
-            this.btnSendMesure.IdleForecolor = System.Drawing.Color.White;
-            this.btnSendMesure.IdleLineColor = System.Drawing.Color.SeaGreen;
-            this.btnSendMesure.Location = new System.Drawing.Point(120, 373);
-            this.btnSendMesure.Margin = new System.Windows.Forms.Padding(5);
-            this.btnSendMesure.Name = "btnSendMesure";
-            this.btnSendMesure.Size = new System.Drawing.Size(326, 65);
-            this.btnSendMesure.TabIndex = 6;
-            this.btnSendMesure.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.btnSendMesure.Click += new System.EventHandler(this.btnSendMesure_Click);
-            // 
             // btnDelete
             // 
             this.btnDelete.ActiveBorderThickness = 1;
@@ -267,6 +241,33 @@
             this.btnDelete.TabIndex = 16;
             this.btnDelete.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.btnDelete.Visible = false;
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
+            // 
+            // btnSendMesure
+            // 
+            this.btnSendMesure.ActiveBorderThickness = 1;
+            this.btnSendMesure.ActiveCornerRadius = 1;
+            this.btnSendMesure.ActiveFillColor = System.Drawing.Color.SeaGreen;
+            this.btnSendMesure.ActiveForecolor = System.Drawing.Color.White;
+            this.btnSendMesure.ActiveLineColor = System.Drawing.Color.SeaGreen;
+            this.btnSendMesure.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(50)))), ((int)(((byte)(44)))));
+            this.btnSendMesure.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnSendMesure.BackgroundImage")));
+            this.btnSendMesure.ButtonText = "Envoyer";
+            this.btnSendMesure.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnSendMesure.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSendMesure.ForeColor = System.Drawing.Color.White;
+            this.btnSendMesure.IdleBorderThickness = 1;
+            this.btnSendMesure.IdleCornerRadius = 1;
+            this.btnSendMesure.IdleFillColor = System.Drawing.Color.SeaGreen;
+            this.btnSendMesure.IdleForecolor = System.Drawing.Color.White;
+            this.btnSendMesure.IdleLineColor = System.Drawing.Color.SeaGreen;
+            this.btnSendMesure.Location = new System.Drawing.Point(120, 373);
+            this.btnSendMesure.Margin = new System.Windows.Forms.Padding(5);
+            this.btnSendMesure.Name = "btnSendMesure";
+            this.btnSendMesure.Size = new System.Drawing.Size(326, 65);
+            this.btnSendMesure.TabIndex = 6;
+            this.btnSendMesure.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.btnSendMesure.Click += new System.EventHandler(this.btnSendMesure_Click);
             // 
             // boxMesures
             // 

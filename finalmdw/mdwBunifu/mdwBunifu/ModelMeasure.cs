@@ -43,7 +43,7 @@ namespace mdwBunifu
                 return false;
             }
         }
-        public List<Measure> GetMesureWeekly(int interval, string unit)
+        public List<Measure> GetMesureWeekly(int interval, string unit, string date)
         {
 
             Connexion connect = new Connexion();
@@ -54,8 +54,8 @@ namespace mdwBunifu
             MySqlCommand cmd = connect.Connection.CreateCommand();
 
             // Requête SQL
-            cmd.CommandText = "SELECT * FROM `measures` WHERE `dateofMeasure` < NOW() and `dateofMeasure` > DATE_SUB( @today , INTERVAL @interval " + unit + ") and idUser = @idUser ORDER BY `dateofMeasure` ASC";
-            cmd.Parameters.AddWithValue("@today", DateTime.Now);
+            cmd.CommandText = "SELECT * FROM `measures` WHERE `dateofMeasure` < @date and `dateofMeasure` > DATE_SUB( @date , INTERVAL @interval " + unit + ") and idUser = @idUser ORDER BY `dateofMeasure` ASC";
+            cmd.Parameters.AddWithValue("@date", date);
             cmd.Parameters.AddWithValue("@idUser", ConnectedUser.IdUser);
             cmd.Parameters.AddWithValue("@interval", interval);
             cmd.Parameters.AddWithValue("@unit", unit);
@@ -323,6 +323,37 @@ namespace mdwBunifu
 
             return types;
         }
+        public List<string> GetTypesWeekly(int interval, string unit, string date)
+        {
+
+            Connexion connect = new Connexion();
+            // Ouverture de la connexion SQL
+            connect.OpenConnection();
+
+            // Création d'une commande SQL en fonction de l'objet connection
+            MySqlCommand cmd = connect.Connection.CreateCommand();
+
+            // Requête SQL
+            cmd.CommandText = "SELECT DISTINCT idType FROM `measures` WHERE `dateofMeasure` <= @date and `dateofMeasure` > DATE_SUB( @date , INTERVAL @interval " + unit + ") and idUser = @idUser ORDER BY `dateofMeasure` ASC";
+            cmd.Parameters.AddWithValue("@date", DateTime.Parse(date));
+            cmd.Parameters.AddWithValue("@idUser", ConnectedUser.IdUser);
+            cmd.Parameters.AddWithValue("@interval", interval);
+            cmd.Parameters.AddWithValue("@unit", unit);
+
+
+
+            MySqlDataReader data = cmd.ExecuteReader();
+            List<string> types = new List<string>();
+            while (data.Read())
+            {
+                types.Add(
+               GetTypeById((int)data["idType"]));
+
+            }
+            data.Close();
+
+            return types;
+        }
         public bool verifMeasure(string date, string type)
         {
             int nbResultat = 0;
@@ -402,7 +433,6 @@ namespace mdwBunifu
 
                 // utilisation de l'objet contact passé en paramètre
                
-
 
                 // Exécution de la commande SQL
                 cmd.ExecuteNonQuery();

@@ -21,7 +21,7 @@ namespace mdwBunifu
             MySqlCommand cmd = connect.Connection.CreateCommand();
 
             // Requête SQL
-            cmd.CommandText = "SELECT `idRecommandation`, `minHeight`, `maxHeight`, `recommandation`, `idUser` FROM `recommandation` WHERE `idUser` = @idUser ORDER BY `minHeight` ASC";
+            cmd.CommandText = "SELECT `idInsulinTable`, `minGlucose`, `maxGlucose`, `recommandation` FROM `insulintables` WHERE `idUser` = @idUser ORDER BY `minGlucose` ASC";
             cmd.Parameters.AddWithValue("@idUser", idUser);
 
 
@@ -30,17 +30,17 @@ namespace mdwBunifu
             List<InsulineTable> recos = new List<InsulineTable>();
             while (data.Read())
             {
-                recos.Add(new InsulineTable((int)data["idRecommandation"],
-               (int)data["minHeight"],
-               (int)data["maxHeight"],
-               (int)data["recommandation"]));
+                recos.Add(new InsulineTable((int)data["idInsulinTable"],
+               (double)data["minGlucose"],
+               (double)data["maxGlucose"],
+               (double)data["recommandation"]));
 
             }
             data.Close();
 
             return recos;
         }
-        public void ChangeReco(int idReco, int min, int max, int reco)
+        public void ChangeReco(int idReco, double min, double max, double reco)
         {
             try
             {
@@ -52,7 +52,7 @@ namespace mdwBunifu
                 MySqlCommand cmd = myConnexion.Connection.CreateCommand();
 
                 // Requête SQL
-                cmd.CommandText = "UPDATE recommandation SET minHeight = @min ,maxHeight = @max  , recommandation = @reco  WHERE idRecommandation =@idReco";
+                cmd.CommandText = "UPDATE insulin tables SET minGlucose = @min ,maxGlucose = @max  , recommandation = @reco  WHERE idInsulinTable =@idReco";
 
                 // utilisation de l'objet contact passé en paramètre
                 cmd.Parameters.AddWithValue("@min", min);
@@ -66,7 +66,7 @@ namespace mdwBunifu
                 // Fermeture de la connexion
                 myConnexion.CloseConnection();
             }
-            catch
+            catch 
             {
                 // Gestion des erreurs :
                 // Possibilité de créer un Logger pour les exceptions SQL reçus
@@ -83,7 +83,7 @@ namespace mdwBunifu
             MySqlCommand cmd = connect.Connection.CreateCommand();
 
             // Requête SQL
-            cmd.CommandText = "DELETE FROM `recommandation` WHERE `idRecommandation` = @idReco";
+            cmd.CommandText = "DELETE FROM `insulintables` WHERE `idInsulinTable` = @idReco";
 
 
 
@@ -106,21 +106,16 @@ namespace mdwBunifu
                 MySqlCommand cmd = connect.Connection.CreateCommand();
 
                 // Requête SQL
-                cmd.CommandText = "SELECT `Recommandation` FROM `insulintables` WHERE @glycemie >= `minGlucose` AND @glycemie <`maxGlucose` AND `idUser` = @idUser";
+                cmd.CommandText = "SELECT `recommandation` FROM `insulintables` WHERE @glycemie >= `minGlucose` AND @glycemie <`maxGlucose` AND `idUser` = @idUser";
                 cmd.Parameters.AddWithValue("@glycemie", glycemie);
                 cmd.Parameters.AddWithValue("@idUser", idUser);
-
-
-
-
-
                 MySqlDataReader data = cmd.ExecuteReader();
                 double insu;
             
                 data.Read();
             try
             {
-                insu = (double)data["Recommandation"];
+                insu = (double)data["recommandation"];
             }
             catch
             {
@@ -141,7 +136,7 @@ namespace mdwBunifu
             MySqlCommand cmd = connect.Connection.CreateCommand();
 
             // Requête SQL
-            cmd.CommandText = "SELECT `idRecommandation` FROM `recommandation` ORDER BY `idRecommandation`DESC";
+            cmd.CommandText = "SELECT `idInsulinTable` FROM `insulintables` ORDER BY `idInsulinTable`DESC";
             
 
 
@@ -150,7 +145,7 @@ namespace mdwBunifu
             MySqlDataReader data = cmd.ExecuteReader();
             int id;
             data.Read();
-            id = (int)data["idRecommandation"];
+            id = (int)data["idInsulinTable"];
 
 
             data.Close();

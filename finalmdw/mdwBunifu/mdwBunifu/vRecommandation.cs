@@ -26,23 +26,23 @@ namespace mdwBunifu
             get { return _idReco; }
             set { _idReco = value; }
         }
-        private int _min;
+        private double _min;
 
-        public int Min
+        public double Min
         {
             get { return _min; }
             set { _min = value; }
         }
-        private int _max;
+        private double _max;
 
-        public int Max
+        public double Max
         {
             get { return _max; }
             set { _max = value; }
         }
-        private int _nbRecommandation;
+        private double _nbRecommandation;
 
-        public int NbRecommandation
+        public double NbRecommandation
         {
             get { return _nbRecommandation; }
             set { _nbRecommandation = value; }
@@ -57,7 +57,7 @@ namespace mdwBunifu
         private int oldMin;
         private int oldMax;
         private int oldReco;
-        public vRecommandation(ModelMyInsulin mod, int id, int min, int max, int reco, int idUser)
+        public vRecommandation(ModelMyInsulin mod, int id, double min, double max, double reco, int idUser)
         {
             InitializeComponent();
             this.Modele = mod;
