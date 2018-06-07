@@ -45,7 +45,7 @@ namespace mdwBunifu
             btns.Add("Accueil", Properties.Resources.icons8_home_32);
             btns.Add("Mesures", Properties.Resources.icons8_plus_32);
             btns.Add("Graphiques", Properties.Resources.icons8_statistics_32);
-            btns.Add("Tableau", Properties.Resources.icons8_statistics_32);
+            btns.Add("Tableau", Properties.Resources.icons8_tableau_26);
             btns.Add("Recommandations",Properties.Resources.icons8_conseil_32);
             btns.Add("Profil", Properties.Resources.icons8_user_32);
 

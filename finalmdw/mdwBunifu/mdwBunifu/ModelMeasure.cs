@@ -54,7 +54,7 @@ namespace mdwBunifu
             MySqlCommand cmd = connect.Connection.CreateCommand();
 
             // Requête SQL
-            cmd.CommandText = "SELECT `idMesure`, `glucose`, `insulinRecommandation`, `type`, `dateMesure`, `idUser` FROM `measures` WHERE `dateMesure` < NOW() and `dateMesure` > DATE_SUB( @today , INTERVAL @interval " + unit + ") and idUser = @idUser ORDER BY `dateMesure` ASC";
+            cmd.CommandText = "SELECT * FROM `measures` WHERE `dateofMeasure` < NOW() and `dateofMeasure` > DATE_SUB( @today , INTERVAL @interval " + unit + ") and idUser = @idUser ORDER BY `dateofMeasure` ASC";
             cmd.Parameters.AddWithValue("@today", DateTime.Now);
             cmd.Parameters.AddWithValue("@idUser", ConnectedUser.IdUser);
             cmd.Parameters.AddWithValue("@interval", interval);
@@ -66,11 +66,11 @@ namespace mdwBunifu
             List<Measure> measures = new List<Measure>();
             while (data.Read())
             {
-                measures.Add(new Measure((int)data["idMesure"],
-               (int)data["glucose"],
-               (int)data["insulinRecommandation"],
+                measures.Add(new Measure((int)data["idMeasure"],
+               (double)data["glucose"],
+               (double)data["insulinRecommandation"],
                (string)data["commentary"],
-               GetTypeById((int)data["idMeasure"]),
+               GetTypeById((int)data["idType"]),
                ((DateTime)data["dateofMeasure"]).ToString()));
 
             }
@@ -105,7 +105,7 @@ namespace mdwBunifu
                (double)data["glucose"],
                (double)data["insulinRecommandation"],
                (string)data["commentary"],
-                GetTypeById((int)data["idMeasure"]),
+                GetTypeById((int)data["idType"]),
                ((DateTime)data["dateofMeasure"]).ToString()));
 
             }
@@ -124,7 +124,7 @@ namespace mdwBunifu
             MySqlCommand cmd = connect.Connection.CreateCommand();
 
             // Requête SQL
-            cmd.CommandText = "SELECT * FROM `measures` WHERE `idUser` = @idUser AND `dateofMeasure` >= @dateDeb AND `dateofMeasure` <= @dateFin AND `typeofMeasure`= @type ";
+            cmd.CommandText = "SELECT * FROM `measures` WHERE `idUser` = @idUser AND `dateofMeasure` >= @dateDeb AND `dateofMeasure` <= @dateFin AND `idType`= @type ";
             cmd.Parameters.AddWithValue("@dateDeb", dateDebut);
             cmd.Parameters.AddWithValue("@dateFin", dateFin);
             cmd.Parameters.AddWithValue("@idUser", ConnectedUser.IdUser);
@@ -142,7 +142,7 @@ namespace mdwBunifu
                (double)data["glucose"],
                (double)data["insulinRecommandation"],
                (string)data["commentary"],
-               GetTypeById((int)data["idMeasure"]),
+               GetTypeById((int)data["idType"]),
                ((DateTime)data["dateofMeasure"]).ToString()));
 
             }
@@ -161,8 +161,8 @@ namespace mdwBunifu
             MySqlCommand cmd = connect.Connection.CreateCommand();
 
             // Requête SQL
-            cmd.CommandText = "SELECT t.type FROM `types` as t, `hastypes` as h WHERE h.idMeasure = @idMeasure AND h.idType = t.idType";
-            cmd.Parameters.AddWithValue("@idMeasure", id);
+            cmd.CommandText = "SELECT type FROM `types` WHERE idType = @idType";
+            cmd.Parameters.AddWithValue("@idType", id);
 
 
             MySqlDataReader data = cmd.ExecuteReader();
@@ -248,7 +248,7 @@ namespace mdwBunifu
             MySqlCommand cmd = connect.Connection.CreateCommand();
 
             // Requête SQL
-            cmd.CommandText = "SELECT `idMesure`, `glucose`, `insulinRecommandation`, `commentary`, `typeofMeasure`, `dateMesure`, `idUser` FROM `measures` WHERE  idMesure = @idMesure";
+            cmd.CommandText = "SELECT * FROM `measures` WHERE  idMeasure = @idMesure";
             cmd.Parameters.AddWithValue("@idMesure", id);
 
 
@@ -261,7 +261,7 @@ namespace mdwBunifu
            (double)data["glucose"],
            (double)data["insulinRecommandation"],
            (string)data["commentary"],
-           GetTypeById((int)data["idMeasure"]),
+           GetTypeById((int)data["idType"]),
            ((DateTime)data["dateofMeasure"]).ToString());
 
 
@@ -308,7 +308,7 @@ namespace mdwBunifu
             MySqlCommand cmd = connect.Connection.CreateCommand();
 
             // Requête SQL
-            cmd.CommandText = "SELECT DISTINCT t.type FROM `types` as t , `hastypes` as h, `measures` as m WHERE h.idMeasure = m.idMeasure AND h.idType = t.idType AND m.IdUser = @idUser";
+            cmd.CommandText = "SELECT t.type FROM `hastypes` as h, `types` as t WHERE h.idUser = @idUser AND h.idType=t.idType";
             cmd.Parameters.AddWithValue("@idUser", this.ConnectedUser.IdUser);
 
 
@@ -333,7 +333,7 @@ namespace mdwBunifu
             MySqlCommand cmd = myConnexion.Connection.CreateCommand();
 
             // Requête SQL
-            cmd.CommandText = "SELECT idMeasure FROM `measures` WHERE `dateofMeasure` = '" + date + "' AND `typeofMeasure` ='" + type + "';";
+            cmd.CommandText = "SELECT idMeasure FROM `measures` WHERE `dateofMeasure` = '" + date + "' AND `idType` ='" + GetTypeByName(type) + "';";
 
             // utilisation de l'objet contact passé en paramètre
 
@@ -398,15 +398,10 @@ namespace mdwBunifu
                 MySqlCommand cmd = myConnexion.Connection.CreateCommand();
 
                 // Requête SQL
-                cmd.CommandText = "UPDATE `measures` SET `glucose`=" + glucose + " , `insulinRecommandation`=" + insu + " , `commentary`='" + comment + "' , `typeofMeasure`='" + type + "',`dateofMeasure`='" + dateMesure + "' WHERE `idMeasure`=" + idMesure + "";
+                cmd.CommandText = "UPDATE `measures` SET `glucose`=" + glucose + " , `insulinRecommandation`=" + insu + " , `commentary`='" + comment + "' , `idType`='" + GetTypeByName(type) + "',`dateofMeasure`='" + dateMesure + "' WHERE `idMeasure`=" + idMesure + "";
 
                 // utilisation de l'objet contact passé en paramètre
-                cmd.Parameters.AddWithValue("@glucose", glucose);
-                cmd.Parameters.AddWithValue("@insulin", insu);
-                cmd.Parameters.AddWithValue("@comment", comment);
-                cmd.Parameters.AddWithValue("@type", type);
-                cmd.Parameters.AddWithValue("@DateMesure", dateMesure);
-                cmd.Parameters.AddWithValue("@idMeasure", idMesure);
+               
 
 
                 // Exécution de la commande SQL
@@ -459,14 +454,14 @@ namespace mdwBunifu
                 MySqlCommand cmd = myConnexion.Connection.CreateCommand();
 
                 // Requête SQL
-                cmd.CommandText = "INSERT INTO `measures`(`glucose`, `insulinRecommandation`, `commentary`,`typeofMeasure`, `dateofMeasure`, `idUser`) VALUES (@glucose , @insulinRecommandation, @commentary , @type ,@dateMesure , @idUser)";
+                cmd.CommandText = "INSERT INTO `measures`(`glucose`, `insulinRecommandation`, `commentary`, `dateofMeasure`, `idUser`, `idType`) VALUES (@glucose , @insulinRecommandation, @commentary , @dateMesure , @idUser, @type )";
 
                 // utilisation de l'objet contact passé en paramètre
                 cmd.Parameters.AddWithValue("@glucose", glucose);
                 cmd.Parameters.AddWithValue("@insulinRecommandation", insulinRecommandation);
                 cmd.Parameters.AddWithValue("@commentary", commentary);
-                cmd.Parameters.AddWithValue("@type", type);
-                cmd.Parameters.AddWithValue("@DateMesure", date);
+                cmd.Parameters.AddWithValue("@type", GetTypeByName(type));
+                cmd.Parameters.AddWithValue("@dateMesure", date);
                 cmd.Parameters.AddWithValue("@idUser", ConnectedUser.IdUser);
 
 
@@ -505,7 +500,7 @@ namespace mdwBunifu
                (double)data["glucose"],
                (double)data["insulinRecommandation"],
                (string)data["commentary"],
-               GetTypeById((int)data["idMeasure"]),
+               GetTypeById((int)data["idType"]),
                ((DateTime)data["dateofMeasure"]).ToShortDateString());
 
 

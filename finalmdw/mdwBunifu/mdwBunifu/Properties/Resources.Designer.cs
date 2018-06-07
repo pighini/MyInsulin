@@ -213,6 +213,16 @@ namespace mdwBunifu.Properties {
         /// <summary>
         ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap icons8_tableau_26 {
+            get {
+                object obj = ResourceManager.GetObject("icons8_tableau_26", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap icons8_user_32 {
             get {
                 object obj = ResourceManager.GetObject("icons8_user_32", resourceCulture);

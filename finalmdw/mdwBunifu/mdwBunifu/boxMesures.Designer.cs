@@ -104,10 +104,7 @@
             this.ddType.BackColor = System.Drawing.Color.Transparent;
             this.ddType.BorderRadius = 3;
             this.ddType.ForeColor = System.Drawing.Color.White;
-            this.ddType.Items = new string[] {
-        "matin",
-        "midi",
-        "soir"};
+            this.ddType.Items = new string[0];
             this.ddType.Location = new System.Drawing.Point(187, 111);
             this.ddType.Name = "ddType";
             this.ddType.NomalColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(139)))), ((int)(((byte)(87)))));

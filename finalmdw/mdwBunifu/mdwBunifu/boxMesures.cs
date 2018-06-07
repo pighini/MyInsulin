@@ -41,9 +41,14 @@ namespace mdwBunifu
             InitializeComponent();
             Modele = modele;
             this.Modification = mod;
+            
             this.ModelInsu = new ModelMyInsulin();
             tbxInsuline.Enabled = false;
             btnDelete.Visible = false;
+            foreach (string type in this.Modele.GetAllTypesByUser())
+            {
+                ddType.AddItem(type);
+            }
             if (this.Modification)
             {
                 fillWithValue(this.Modele.Mes);
@@ -58,6 +63,7 @@ namespace mdwBunifu
             
             int cpt = 0;
             int typePos = 0;
+            
             foreach (var type in ddType.Items)
             {
                 if (type.ToString() == mes.Type)
@@ -66,6 +72,7 @@ namespace mdwBunifu
                 }
                 cpt++;
             }
+            
             
             tbxGlycemie.Text = mes.Glucose.ToString();
             tbxInsuline.Text = mes.InsulinRecommandation.ToString();

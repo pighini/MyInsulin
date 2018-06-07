@@ -108,7 +108,7 @@ namespace mdwBunifu
                 {
 
                     formattedDate = mes.DateMesure.Substring(0, 5).Replace('.', '-');
-                    glycemie.Points.AddXY(mes.DateMesure, mes.Glucose);
+                    glycemie.Points.AddXY(formattedDate, mes.Glucose);
 
                 }
 
