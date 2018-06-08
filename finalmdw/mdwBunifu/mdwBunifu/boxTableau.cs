@@ -51,6 +51,7 @@ namespace mdwBunifu
         }
         private void GenerateTable()
         {
+            double tend = 0;
             cpt = 0;
             cptType = 0;
             dateFormatted = date.AddDays(8 * this.NbWeek).ToString("yyyy-MM-dd");
@@ -73,11 +74,26 @@ namespace mdwBunifu
                 }
 
             }
+            if (cbxTendance.Checked)
+            {
+                addTendanceLabel();
+            }
+            
+            addColumn();
+
             foreach (Measure mes in this.Model.GetMesureWeekly(8, "DAY", dateFormatted))
             {
                 if (mes.DateMesure.Substring(0, 5).Replace('.', '-') != oldDateStr)
                 {
-                    addDate(mes.DateMesure);
+                    DateTime dt = DateTime.Parse(mes.DateMesure);
+                    string toshow = dt.ToString("yyyy-MM-dd");
+                    if (cbxTendance.Checked)
+                    {
+                        fillWithtend((tend / lblTypes.Length).ToString(), toshow);
+                    }
+                    tend += mes.Glucose;
+                    
+                    addDate(toshow);
                     addRow();
                     cpt++;
                 }
@@ -86,6 +102,8 @@ namespace mdwBunifu
                 fillWithValue(mes);
             }
             addRow();
+            
+
 
         }
         private void CleanTable()
@@ -145,7 +163,9 @@ namespace mdwBunifu
             int x;
             int y;
             IEnumerable<Label> labels = Controls.OfType<Label>();
-            Label lbl = labels.Where(l => l.Text == mes.DateMesure).ToArray()[0];
+            DateTime dt = DateTime.Parse(mes.DateMesure);
+            string dateMes = dt.ToString("yyyy-MM-dd");
+            Label lbl = labels.Where(l => l.Text == dateMes).ToArray()[0];
 
 
             //Positionne et fix la valeur
@@ -155,6 +175,30 @@ namespace mdwBunifu
             x = 110 + (col * 70);
             y = 87 + (line * 46);
             addValueToTab(mes.IdMesure, mes.Glucose, x, y);
+            
+
+        }
+        private void fillWithtend(string val, string date)
+        {
+
+            Control[] labels = this.Controls.Find("lblDate", true); 
+            Label lbl = (Label)labels.Where(l => l.Text == date).ToArray()[0];
+            int line;
+            int col;
+            int x;
+            int y;
+            
+          
+
+
+            //Positionne et fix la valeur
+            line = (int)lbl.Tag;
+            lbl = (Label)this.Controls.Find("lblTend", true)[0];
+            col = (int)lbl.Tag;
+            x = 110 + (col * 70);
+            y = 87 + (line * 46);
+            addTendVal(val);
+
 
         }
         private void addDate(string dateTime)
@@ -163,15 +207,34 @@ namespace mdwBunifu
             {
                 Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0))),
                 ForeColor = System.Drawing.Color.White,
-                Location = new System.Drawing.Point(5, 87 + (cpt * 46)),
+                Location = new System.Drawing.Point(0, 87 + (cpt * 46)),
                 Name = "lblDate"
 
             };
 
             date.Tag = cpt;
-            date.Size = new System.Drawing.Size(90, 20);
+            date.Size = new System.Drawing.Size(100, 20);
             date.Text = dateTime;
             this.Controls.Add(date);
+
+
+
+        }
+        private void addTendVal(string val)
+        {
+            Label tend = new Label
+            {
+                Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0))),
+                ForeColor = System.Drawing.Color.White,
+                Location = new System.Drawing.Point(5, 87 + (cpt * 46)),
+                Name = "lblTendVal"
+
+            };
+
+            tend.Tag = cpt;
+            tend.Size = new System.Drawing.Size(90, 20);
+            tend.Text = val;
+            this.Controls.Add(tend);
 
 
 
@@ -189,6 +252,21 @@ namespace mdwBunifu
                 Text = typeMesure
             };
             this.Controls.Add(type);
+        }
+        private void addTendanceLabel()
+        {
+            Label tend = new Label
+            {
+                
+                Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0))),
+                ForeColor = System.Drawing.Color.White,
+                Location = new System.Drawing.Point(110 + (cptType * 70), 30),
+                Name = "lblTend",
+                Tag = cptType,
+                Size = new System.Drawing.Size(50, 30),
+                Text = "Tend"
+            };
+            this.Controls.Add(tend);
         }
         private void addColumn()
         {
@@ -261,6 +339,19 @@ namespace mdwBunifu
 
             }
 
+        }
+
+        private void cbxTendance_OnChange(object sender, EventArgs e)
+        {
+            if (cbxTendance.Checked)
+            {
+
+                GenerateTable();
+            }
+            else
+            {
+                CleanTable();
+            }
         }
     }
 }

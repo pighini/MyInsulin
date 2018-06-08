@@ -50,7 +50,7 @@
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.Color.White;
-            this.panel2.Location = new System.Drawing.Point(95, 3);
+            this.panel2.Location = new System.Drawing.Point(99, 3);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(5, 459);
             this.panel2.TabIndex = 1;
@@ -65,7 +65,7 @@
             // 
             // cbxTendance
             // 
-            this.cbxTendance.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(205)))), ((int)(((byte)(117)))));
+            this.cbxTendance.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(132)))), ((int)(((byte)(135)))), ((int)(((byte)(140)))));
             this.cbxTendance.ChechedOffColor = System.Drawing.Color.FromArgb(((int)(((byte)(132)))), ((int)(((byte)(135)))), ((int)(((byte)(140)))));
             this.cbxTendance.Checked = false;
             this.cbxTendance.CheckedOnColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(205)))), ((int)(((byte)(117)))));
@@ -74,6 +74,7 @@
             this.cbxTendance.Name = "cbxTendance";
             this.cbxTendance.Size = new System.Drawing.Size(20, 20);
             this.cbxTendance.TabIndex = 20;
+            this.cbxTendance.OnChange += new System.EventHandler(this.cbxTendance_OnChange);
             // 
             // label4
             // 
