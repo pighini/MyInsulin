@@ -14,13 +14,6 @@ namespace mdwBunifu
     {
         Control[] lblDates;
         Control[] lblTypes;
-
-
-
-
-
-
-
         DateTime oldDate = DateTime.Now.AddDays(8);
         string oldDateStr;
         DateTime date = DateTime.Now;
@@ -51,7 +44,7 @@ namespace mdwBunifu
             this.Model = mod;
             this.NbWeek = 0;
             dateFormatted = date.ToString("yyyy-MM-dd");
-  
+
 
 
             GenerateTable();
@@ -65,10 +58,10 @@ namespace mdwBunifu
             lblTypes = Controls.Find("lblType", true);
             List<string> insertedTypes = new List<string>();
             oldDateStr = oldDate.ToString("yyyy-MM-dd");
-            foreach (string type in Model.GetTypesWeekly(8,"DAY",dateFormatted))
+            foreach (string type in Model.GetTypesWeekly(8, "DAY", dateFormatted))
             {
 
-                if (!insertedTypes.Exists(s => s == type))
+                if (!insertedTypes.Contains(type))
                 {
                     insertedTypes.Add(type);
                     addType(type);
@@ -88,8 +81,8 @@ namespace mdwBunifu
                     addRow();
                     cpt++;
                 }
-       
-                oldDateStr = mes.DateMesure.Substring(0, 5).Replace('.', '-');                
+
+                oldDateStr = mes.DateMesure.Substring(0, 5).Replace('.', '-');
                 fillWithValue(mes);
             }
             addRow();
@@ -97,55 +90,37 @@ namespace mdwBunifu
         }
         private void CleanTable()
         {
-            lblTypes = Controls.Find("lblType", true);
-            Control[] plVerts = Controls.Find("plVert", true);
-            Control[] plHoriz = Controls.Find("plHoriz", true);
-
-            int tagPl;
-            int tagLbl;
-
-            foreach (Panel pl in plVerts)
+            Control[] plVerts;
+            Control[] plHoriz;
+            while (this.Controls.Count > 7)
             {
-                lblTypes = Controls.Find("lblType", true);
-                tagPl = (int)pl.Tag;
-                foreach (Label type in lblTypes)
-                {
-                    tagLbl = (int)type.Tag;
 
-                    if (tagPl > tagLbl)
-                    {
-                        this.Controls.Remove(pl);
-                    }
+                 plVerts = Controls.Find("plVert", true);
+                 plHoriz= Controls.Find("plHoriz", true);
+
+
+
+                foreach (Panel pl in plVerts)
+                {
+                    this.Controls.Remove(pl);
+
                 }
-                       
-            }
-            foreach (Panel pl in plHoriz)
-            {
-                lblDates = Controls.Find("lblDate", true);
-                tagPl = (int)pl.Tag;
-                foreach (Label type in lblDates)
+                foreach (Panel pl in plHoriz)
                 {
-                    tagLbl = (int)type.Tag-1;
-
-                    if (tagPl > tagLbl)
-                    {
-                        this.Controls.Remove(pl);
-                    }
+                    this.Controls.Remove(pl);
                 }
 
-            }
-
-            foreach (Control lbl in this.Controls)
-            {
-                if (lbl.GetType()== typeof(Label))
+                foreach (Control lbl in this.Controls)
                 {
-                    if (lbl.Name == "lblType" || lbl.Name == "lblValue" || lbl.Name == "lblDate")
+                    if (lbl.GetType() == typeof(Label))
                     {
-                        this.Controls.RemoveByKey(lbl.Name);
+                        if (lbl.Name == "lblType" || lbl.Name == "lblValue" || lbl.Name == "lblDate")
+                        {
+                            this.Controls.RemoveByKey(lbl.Name);
+                        }
                     }
                 }
             }
-           
         }
         private void addRow()
         {
@@ -156,8 +131,8 @@ namespace mdwBunifu
                 Location = new System.Drawing.Point(0, 63 + (cpt * 48)),
                 Size = new System.Drawing.Size(530, 1)
             };
-            this.Name = "plHoriz";
-            this.Tag = cpt;
+            sepa.Name = "plHoriz";
+            sepa.Tag = cpt;
             this.Controls.Add(sepa);
 
         }
@@ -192,14 +167,14 @@ namespace mdwBunifu
                 Name = "lblDate"
 
             };
-            
+
             date.Tag = cpt;
             date.Size = new System.Drawing.Size(90, 20);
             date.Text = dateTime;
             this.Controls.Add(date);
 
-            
-            
+
+
         }
         private void addType(string typeMesure)
         {
@@ -223,7 +198,7 @@ namespace mdwBunifu
                 BackColor = System.Drawing.Color.White,
                 Location = new System.Drawing.Point(165 + (cptType * 70), 0),
                 Size = new System.Drawing.Size(1, 400)
-                
+
             };
             sepa.Name = "plVert";
             sepa.Tag = cptType;
@@ -251,8 +226,8 @@ namespace mdwBunifu
         {
             Label myFriend = (Label)sender;
             var parent = this.Parent;
-           
-            
+
+
             this.Hide();
             this.Model.Mes = this.Model.GetMesureById((int)myFriend.Tag);
             boxMesures bxM = new boxMesures(this.Model, true)
@@ -262,18 +237,18 @@ namespace mdwBunifu
                 Name = "Menu"
             };
             parent.Controls.Add(bxM);
-          
+
 
 
         }
 
         private void pbPreviousWeek_Click(object sender, EventArgs e)
         {
-           
+
             this.NbWeek--;
             CleanTable();
             GenerateTable();
-            
+
         }
 
         private void pbNextWeek_Click(object sender, EventArgs e)

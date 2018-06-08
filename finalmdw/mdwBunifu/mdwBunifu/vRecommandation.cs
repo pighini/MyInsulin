@@ -19,6 +19,14 @@ namespace mdwBunifu
             get { return _modele; }
             set { _modele = value; }
         }
+        private bool _alreadyAdded;
+
+        public bool AlreadyAdded
+        {
+            get { return _alreadyAdded; }
+            set { _alreadyAdded = value; }
+        }
+
         private int _idReco;
 
         public int IdReco
@@ -57,7 +65,8 @@ namespace mdwBunifu
         private int oldMin;
         private int oldMax;
         private int oldReco;
-        public vRecommandation(ModelMyInsulin mod, int id, double min, double max, double reco, int idUser)
+        private bool toAdd;
+        public vRecommandation(ModelMyInsulin mod, int id, double min, double max, double reco, int idUser, bool added)
         {
             InitializeComponent();
             this.Modele = mod;
@@ -66,6 +75,7 @@ namespace mdwBunifu
             this.Max = max;
             this.NbRecommandation = reco;
             this.IdUser = idUser;
+            this.AlreadyAdded = added;
             FillWithValue();
             pbChange.Image = Properties.Resources.icons8_edit_property_26_lightGrey;
        
@@ -81,20 +91,65 @@ namespace mdwBunifu
         private void tbx_OnValueChanged(object sender, EventArgs e)
         {
             pbChange.Image = Properties.Resources.icons8_edit_orange;
+            toAdd = true;
+            double min;
+            double max;
+            double reco;
+            try
+            {
+                 min = Convert.ToDouble(tbxMin.Text);
+                 max = Convert.ToDouble(tbxMax.Text);
+                 reco = Convert.ToDouble(tbxReco.Text);
+            }
+            catch
+            {
+                min = 0;
+                max = 0;
+                reco = 0;
+            }
+
+            if ( min < this.Modele.GetMaxGluc(this.IdUser) || max < min || reco < this.Modele.getMaxReco(this.IdUser) )
+            {
+                pbChange.Image = Properties.Resources.icons8_edit_property_26_red;
+                toAdd = false;
+            }
+           
         }
 
         private void pbChange_Click(object sender, EventArgs e)
         {
-            this.Min = Convert.ToInt32(tbxMin.Text);
-            this.Max = Convert.ToInt32(tbxMax.Text);
-            this.NbRecommandation = Convert.ToInt32(tbxReco.Text);
-            pbChange.Image = Properties.Resources.icons8_edit_green;
-            this.Modele.ChangeReco(this.IdReco, this.Min, this.Max, this.NbRecommandation);
-            pbChange.Refresh();
-            System.Threading.Thread.Sleep(4000);
-            pbChange.Image = Properties.Resources.icons8_edit_property_26_lightGrey;
-
-
+            Image img = Properties.Resources.icons8_edit_property_26_red;
+            if (toAdd )
+            {
+                if (this.AlreadyAdded)
+                {
+                    this.Min = Convert.ToDouble(tbxMin.Text);
+                    this.Max = Convert.ToDouble(tbxMax.Text);
+                    this.NbRecommandation = Convert.ToInt32(tbxReco.Text);
+                    pbChange.Image = Properties.Resources.icons8_edit_green;
+                    this.Modele.ChangeReco(this.IdReco, this.Min, this.Max, this.NbRecommandation);
+                    pbChange.Refresh();
+                    System.Threading.Thread.Sleep(1000);
+                    pbChange.Image = Properties.Resources.icons8_edit_property_26_lightGrey;
+                }
+                else
+                {
+                    this.Min = Convert.ToInt32(tbxMin.Text);
+                    this.Max = Convert.ToInt32(tbxMax.Text);
+                    this.NbRecommandation = Convert.ToInt32(tbxReco.Text);
+                    pbChange.Image = Properties.Resources.icons8_edit_green;
+                    DateTime dateMesure = DateTime.Now;
+                    string sqlDate = dateMesure.ToString("yyyy-MM-dd");
+                    this.Modele.AddReco(this.IdReco, this.Min, this.Max, this.NbRecommandation, sqlDate, this.IdUser);
+                    pbChange.Refresh();
+                    System.Threading.Thread.Sleep(1000);
+                    pbChange.Image = Properties.Resources.icons8_edit_property_26_lightGrey;
+                }
+            }
+            else
+            {
+                MessageBox.Show("Les données ne sont pas cohérentes");
+            }
         }
 
         private void pbDel_Click(object sender, EventArgs e)

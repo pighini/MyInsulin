@@ -56,11 +56,11 @@
     <Compile Include="boxMesures.Designer.cs">
       <DependentUpon>boxMesures.cs</DependentUpon>
     </Compile>
-    <Compile Include="boxProfil.cs">
+    <Compile Include="boxRecommandation.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="boxProfil.Designer.cs">
-      <DependentUpon>boxProfil.cs</DependentUpon>
+    <Compile Include="boxRecommandation.Designer.cs">
+      <DependentUpon>boxRecommandation.cs</DependentUpon>
     </Compile>
     <Compile Include="boxTableau.cs">
       <SubType>UserControl</SubType>
@@ -104,14 +104,14 @@
     <Compile Include="vRecommandation.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="vRecommandation.Designer.cs">
+    <Compile Include="vRecommandation.designer.cs">
       <DependentUpon>vRecommandation.cs</DependentUpon>
     </Compile>
     <EmbeddedResource Include="boxMesures.resx">
       <DependentUpon>boxMesures.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="boxProfil.resx">
-      <DependentUpon>boxProfil.cs</DependentUpon>
+    <EmbeddedResource Include="boxRecommandation.resx">
+      <DependentUpon>boxRecommandation.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="boxTableau.resx">
       <DependentUpon>boxTableau.cs</DependentUpon>
@@ -207,6 +207,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\icons8-tableau-26.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-réduire-la-fenêtre-32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-horloge-32.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

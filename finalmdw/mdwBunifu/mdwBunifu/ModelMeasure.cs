@@ -308,7 +308,7 @@ namespace mdwBunifu
             MySqlCommand cmd = connect.Connection.CreateCommand();
 
             // Requête SQL
-            cmd.CommandText = "SELECT t.type FROM `hastypes` as h, `types` as t WHERE h.idUser = @idUser AND h.idType=t.idType";
+            cmd.CommandText = "SELECT t.type FROM `hastypes` as h, `types` as t WHERE h.idUser = @idUser AND h.idType=t.idType ORDER BY `type` ASC ";
             cmd.Parameters.AddWithValue("@idUser", this.ConnectedUser.IdUser);
 
 
@@ -334,7 +334,7 @@ namespace mdwBunifu
             MySqlCommand cmd = connect.Connection.CreateCommand();
 
             // Requête SQL
-            cmd.CommandText = "SELECT DISTINCT idType FROM `measures` WHERE `dateofMeasure` <= @date and `dateofMeasure` > DATE_SUB( @date , INTERVAL @interval " + unit + ") and idUser = @idUser ORDER BY `dateofMeasure` ASC";
+            cmd.CommandText = "SELECT DISTINCT idType FROM `measures` WHERE `dateofMeasure` < @date and `dateofMeasure` > DATE_SUB( @date , INTERVAL @interval " + unit + ") and idUser = @idUser ORDER BY `dateofMeasure` ASC";
             cmd.Parameters.AddWithValue("@date", DateTime.Parse(date));
             cmd.Parameters.AddWithValue("@idUser", ConnectedUser.IdUser);
             cmd.Parameters.AddWithValue("@interval", interval);
@@ -432,7 +432,7 @@ namespace mdwBunifu
                 cmd.CommandText = "UPDATE `measures` SET `glucose`=" + glucose + " , `insulinRecommandation`=" + insu + " , `commentary`='" + comment + "' , `idType`='" + GetTypeByName(type) + "',`dateofMeasure`='" + dateMesure + "' WHERE `idMeasure`=" + idMesure + "";
 
                 // utilisation de l'objet contact passé en paramètre
-               
+
 
                 // Exécution de la commande SQL
                 cmd.ExecuteNonQuery();
@@ -447,7 +447,37 @@ namespace mdwBunifu
                 // Possibilité de créer une méthode avec un booléan en retour pour savoir si le contact à été ajouté correctement.
             }
         }
+        public void DelMeasure( int idMesure)
+        {
+            try
+            {
 
+                // Ouverture de la connexion SQL
+                myConnexion.OpenConnection();
+
+                // Création d'une commande SQL en fonction de l'objet connection
+                MySqlCommand cmd = myConnexion.Connection.CreateCommand();
+
+                // Requête SQL
+                cmd.CommandText = "DELETE FROM `measures` WHERE `idMeasure` = @idMeasure";
+                cmd.Parameters.AddWithValue("@idMeasure", idMesure);
+
+                // utilisation de l'objet contact passé en paramètre
+
+
+                // Exécution de la commande SQL
+                cmd.ExecuteNonQuery();
+
+                // Fermeture de la connexion
+                myConnexion.CloseConnection();
+            }
+            catch
+            {
+                // Gestion des erreurs :
+                // Possibilité de créer un Logger pour les exceptions SQL reçus
+                // Possibilité de créer une méthode avec un booléan en retour pour savoir si le contact à été ajouté correctement.
+            }
+        }
         //public List<string> getAllTypes()
         //{
         //    Connexion connect = new Connexion();

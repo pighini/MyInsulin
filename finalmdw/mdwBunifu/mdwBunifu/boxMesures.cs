@@ -12,7 +12,7 @@ namespace mdwBunifu
 {
     public partial class boxMesures : UserControl
     {
-        
+
         private ModelMeasure _model;
         private bool _mod;
 
@@ -41,14 +41,11 @@ namespace mdwBunifu
             InitializeComponent();
             Modele = modele;
             this.Modification = mod;
-            
+
             this.ModelInsu = new ModelMyInsulin();
             tbxInsuline.Enabled = false;
             btnDelete.Visible = false;
-            foreach (string type in this.Modele.GetAllTypesByUser())
-            {
-                ddType.AddItem(type);
-            }
+            ddType.Items = Modele.GetAllTypesByUser().ToArray();
             if (this.Modification)
             {
                 fillWithValue(this.Modele.Mes);
@@ -60,10 +57,10 @@ namespace mdwBunifu
         }
         private void fillWithValue(Measure mes)
         {
-            
+
             int cpt = 0;
             int typePos = 0;
-            
+
             foreach (var type in ddType.Items)
             {
                 if (type.ToString() == mes.Type)
@@ -72,8 +69,8 @@ namespace mdwBunifu
                 }
                 cpt++;
             }
-            
-            
+
+
             tbxGlycemie.Text = mes.Glucose.ToString();
             tbxInsuline.Text = mes.InsulinRecommandation.ToString();
             ddType.selectedIndex = typePos;
@@ -105,21 +102,21 @@ namespace mdwBunifu
                     {
                         type = "0";
                     }
-                    if (tbxGlycemie.Text != "" && type !="0")
+                    if (tbxGlycemie.Text != "" && type != "0")
                     {
                         double glucose = Convert.ToDouble(tbxGlycemie.Text);
                         string comment = tbxCommentary.Text;
-                        
-                        
+
+
                         tbxGlycemie.Text = "";
-                        DateTime dateMesure = dtpDateMesure.Value;                      
+                        DateTime dateMesure = dtpDateMesure.Value;
                         string sqlDate = dateMesure.ToString("yyyy-MM-dd");
 
 
                         if (!this.Modele.verifMeasure(sqlDate, type))
                         {
                             double reco = this.ModelInsu.getRecommandationInsu(glucose, this.Modele.ConnectedUser.IdUser);
-                            this.Modele.AddMesure(glucose,reco, comment, type, sqlDate);
+                            this.Modele.AddMesure(glucose, reco, comment, type, sqlDate);
                             lblSend.Visible = true;
                             lblSend.Text = "Mesure ajoutée";
                             lblSend.Refresh();
@@ -133,7 +130,7 @@ namespace mdwBunifu
                             {
                                 this.Modele.Mes = this.Modele.GetMesureByTypeAndDate(sqlDate, type);
 
-                                this.Modele.ChangeMesure(glucose, this.ModelInsu.getRecommandationInsu(glucose,this.Modele.ConnectedUser.IdUser) , comment, type, sqlDate, this.Modele.Mes.IdMesure);
+                                this.Modele.ChangeMesure(glucose, this.ModelInsu.getRecommandationInsu(glucose, this.Modele.ConnectedUser.IdUser), comment, type, sqlDate, this.Modele.Mes.IdMesure);
 
 
 
@@ -142,8 +139,8 @@ namespace mdwBunifu
                             {
                                 MessageBox.Show("La mesure n'a pas été changer");
                                 tbxGlycemie.Text = glucose.ToString();
-                                tbxCommentary.Text = comment; 
-                                
+                                tbxCommentary.Text = comment;
+
                             }
                         }
                     }
@@ -168,12 +165,12 @@ namespace mdwBunifu
                 {
                     if (tbxGlycemie.Text != "")
                     {
-                        
+
                         double glucose = Convert.ToDouble(tbxGlycemie.Text);
                         double insu = Convert.ToDouble(tbxInsuline.Text);
                         string comment = tbxCommentary.Text;
                         tbxInsuline.Enabled = true;
-                        btnDelete.Visible = true ;
+                        btnDelete.Visible = true;
                         string type = ddType.selectedValue;
                         tbxGlycemie.Text = "";
                         DateTime dateMesure = dtpDateMesure.Value;
@@ -196,7 +193,7 @@ namespace mdwBunifu
                             if (dialogResult == DialogResult.Yes)
                             {
 
-                                this.Modele.ChangeMesure(glucose, this.ModelInsu.getRecommandationInsu(glucose,this.Modele.ConnectedUser.IdUser), comment, type, sqlDate, this.Modele.Mes.IdMesure);
+                                this.Modele.ChangeMesure(glucose, this.ModelInsu.getRecommandationInsu(glucose, this.Modele.ConnectedUser.IdUser), comment, type, sqlDate, this.Modele.Mes.IdMesure);
 
 
 
@@ -216,7 +213,7 @@ namespace mdwBunifu
                 }
             }
         }
-        
+
 
         private void tbx_KeyPress(object sender, KeyPressEventArgs e)
         {
@@ -229,12 +226,12 @@ namespace mdwBunifu
                 e.Handled = true;
             }
 
-            
+
         }
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
-
+            this.Modele.DelMeasure(this.Modele.Mes.IdMesure);
         }
     }
 }

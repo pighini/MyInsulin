@@ -1,6 +1,6 @@
 ﻿namespace mdwBunifu
 {
-    partial class boxProfil
+    partial class boxRecommandation
     {
         /// <summary> 
         /// Variable nécessaire au concepteur.
@@ -48,18 +48,19 @@
             this.plReco.AutoScroll = true;
             this.plReco.Location = new System.Drawing.Point(123, 37);
             this.plReco.Name = "plReco";
-            this.plReco.Size = new System.Drawing.Size(335, 424);
+            this.plReco.Size = new System.Drawing.Size(335, 493);
             this.plReco.TabIndex = 1;
+            this.plReco.ControlRemoved += new System.Windows.Forms.ControlEventHandler(this.plReco_ControlRemoved);
             // 
-            // boxProfil
+            // boxRecommandation
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(50)))), ((int)(((byte)(44)))));
             this.Controls.Add(this.plReco);
             this.Controls.Add(this.lblRecommandation);
-            this.Name = "boxProfil";
-            this.Size = new System.Drawing.Size(578, 464);
+            this.Name = "boxRecommandation";
+            this.Size = new System.Drawing.Size(578, 537);
             this.ResumeLayout(false);
             this.PerformLayout();
 

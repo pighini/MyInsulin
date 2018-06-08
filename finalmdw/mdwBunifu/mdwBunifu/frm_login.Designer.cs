@@ -619,6 +619,7 @@
             this.Controls.Add(this.btnSignUp);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "frm_login";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Form1";
             this.slideB.ResumeLayout(false);
             this.slideB.PerformLayout();

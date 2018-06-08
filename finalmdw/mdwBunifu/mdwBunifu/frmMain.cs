@@ -42,12 +42,11 @@ namespace mdwBunifu
         {
             int cpt = 0;
             int locaY = 87;
-            btns.Add("Accueil", Properties.Resources.icons8_home_32);
             btns.Add("Mesures", Properties.Resources.icons8_plus_32);
             btns.Add("Graphiques", Properties.Resources.icons8_statistics_32);
             btns.Add("Tableau", Properties.Resources.icons8_tableau_26);
             btns.Add("Recommandations",Properties.Resources.icons8_conseil_32);
-            btns.Add("Profil", Properties.Resources.icons8_user_32);
+            btns.Add("Type", Properties.Resources.icons8_horloge_32);
 
             foreach (var btn in btns)
             {
@@ -80,7 +79,7 @@ namespace mdwBunifu
         }
         private void showReco()
         {
-            boxProfil bxProf = new boxProfil(this.Model.ConnectedUser.IdUser)
+            boxRecommandation bxProf = new boxRecommandation(this.Model.ConnectedUser.IdUser)
             {
                 Location = new Point(12, 13),
                 Visible = true,
@@ -105,24 +104,26 @@ namespace mdwBunifu
             {
                 case 1:
                     closeMenu();
+                    showMesures();
                     break;
                 case 2:
                     
                     closeMenu();
-                    showMesures();
+                    showGraph();
+
                     break;
                 case 3:
-                    closeMenu();
-                    showGraph();
-                    break;
-                case 4:
                     closeMenu();
                     showTable();
 
                     break;
-                case 5:
+                case 4:
                     closeMenu();
                     showReco();
+
+                    break;
+                case 5:
+                    closeMenu();
                     break;
 
             }
@@ -177,6 +178,11 @@ namespace mdwBunifu
         private void btnAccueil1_Click(object sender, EventArgs e)
         {
             CreateLeftButtons();
+        }
+
+        private void pbHide_Click(object sender, EventArgs e)
+        {
+            this.WindowState = FormWindowState.Minimized;
         }
     }
 }

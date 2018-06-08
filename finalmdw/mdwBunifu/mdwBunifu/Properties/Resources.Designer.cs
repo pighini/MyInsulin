@@ -173,6 +173,16 @@ namespace mdwBunifu.Properties {
         /// <summary>
         ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap icons8_horloge_32 {
+            get {
+                object obj = ResourceManager.GetObject("icons8_horloge_32", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap icons8_multiplier_24__1_ {
             get {
                 object obj = ResourceManager.GetObject("icons8_multiplier_24__1_", resourceCulture);
@@ -196,6 +206,16 @@ namespace mdwBunifu.Properties {
         internal static System.Drawing.Bitmap icons8_plus_50__1_ {
             get {
                 object obj = ResourceManager.GetObject("icons8_plus_50__1_", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap icons8_réduire_la_fenêtre_32 {
+            get {
+                object obj = ResourceManager.GetObject("icons8_réduire_la_fenêtre_32", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

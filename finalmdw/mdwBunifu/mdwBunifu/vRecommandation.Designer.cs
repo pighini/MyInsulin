@@ -114,9 +114,9 @@
             // pbDel
             // 
             this.pbDel.Image = global::mdwBunifu.Properties.Resources.icons8_multiplier_24__1_;
-            this.pbDel.Location = new System.Drawing.Point(258, 20);
+            this.pbDel.Location = new System.Drawing.Point(254, 20);
             this.pbDel.Name = "pbDel";
-            this.pbDel.Size = new System.Drawing.Size(32, 28);
+            this.pbDel.Size = new System.Drawing.Size(25, 28);
             this.pbDel.TabIndex = 6;
             this.pbDel.TabStop = false;
             this.pbDel.Click += new System.EventHandler(this.pbDel_Click);
@@ -124,7 +124,7 @@
             // pbChange
             // 
             this.pbChange.Image = global::mdwBunifu.Properties.Resources.icons8_edit_property_26_lightGrey;
-            this.pbChange.Location = new System.Drawing.Point(227, 20);
+            this.pbChange.Location = new System.Drawing.Point(224, 20);
             this.pbChange.Name = "pbChange";
             this.pbChange.Size = new System.Drawing.Size(24, 28);
             this.pbChange.TabIndex = 5;
@@ -154,7 +154,7 @@
             this.Controls.Add(this.tbxMin);
             this.ForeColor = System.Drawing.Color.Black;
             this.Name = "vRecommandation";
-            this.Size = new System.Drawing.Size(293, 55);
+            this.Size = new System.Drawing.Size(287, 55);
             ((System.ComponentModel.ISupportInitialize)(this.pbDel)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbChange)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();

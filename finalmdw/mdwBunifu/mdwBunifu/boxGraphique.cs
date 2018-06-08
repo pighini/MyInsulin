@@ -72,7 +72,7 @@ namespace mdwBunifu
                 tendance = this.Model.GetMesureDate(dateTend);
                 if (tendance != 0)
                 {
-                    glycemie.Points.AddXY(dateTend, tendance);
+                    glycemie.Points.AddXY(dateTend.Substring(5,5), tendance);
                 }
             }            
 

@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace mdwBunifu
 {
-    public partial class boxProfil : UserControl
+    public partial class boxRecommandation : UserControl
     {
         private ModelMyInsulin _model;
 
@@ -30,7 +30,7 @@ namespace mdwBunifu
         int cpt = 0;
         int locaY = 0;
         vRecommandation oldReco;
-        public boxProfil(int id)
+        public boxRecommandation(int id)
         {
             InitializeComponent();
             this.Model = new ModelMyInsulin();
@@ -47,9 +47,9 @@ namespace mdwBunifu
             {
 
 
-                vRecommandation vReco = new vRecommandation(this.Model, reco.IdReco, reco.Min, reco.Max, reco.NbRecommandation, this.IdUser)
+                vRecommandation vReco = new vRecommandation(this.Model, reco.IdReco, reco.Min, reco.Max, reco.NbRecommandation, this.IdUser, true)
                 {
-                    Name = "btnAccueil" + cpt.ToString(),
+                    Name = "btnReco",
                     Tag = reco.IdReco,
                     Parent = plReco,
                     Location = new Point(23, locaY + (50 * cpt))
@@ -64,9 +64,9 @@ namespace mdwBunifu
         private void add_Click(object sender, EventArgs e)
         {
             int id = this.Model.GetLastId() + 1;
-            vRecommandation vReco = new vRecommandation(this.Model, id,0,0,0, this.IdUser)
+            vRecommandation vReco = new vRecommandation(this.Model, id,0,0,0, this.IdUser, false)
             {
-                Name = "btnAccueil" + cpt.ToString(),
+                Name = "btnReco",
                 Tag = id,
                 Parent = plReco,
                 Location = new Point(23, locaY + (50 * cpt))
@@ -82,7 +82,6 @@ namespace mdwBunifu
             plReco.Controls.Add(vReco);
             cpt++;
             RemovePb();
-            GenerateAddRecoBtn();
             oldReco = vReco;
             
         }
@@ -96,11 +95,24 @@ namespace mdwBunifu
         {
             PictureBox pbAdd = new PictureBox();
             pbAdd.Name = "add";
-            pbAdd.Location = new Point(80, 20 + locaY + (50 * cpt));
+            pbAdd.Location = new Point(80, 40 + locaY + (50 * plReco.Controls.Count));
             //pbAdd.Top = oldReco.Bottom;
             pbAdd.Image = Properties.Resources.icons8_plus_50__1_;
             pbAdd.Click += add_Click;
             plReco.Controls.Add(pbAdd);
+            
+        }
+
+        private void plReco_ControlRemoved(object sender, ControlEventArgs e)
+        {
+            RemovePb();
+            if (plReco.Controls.Find("add", true).Length == 0)
+            {
+                GenerateAddRecoBtn();
+                Control[] recos = plReco.Controls.Find("btnReco", true);
+                oldReco =(vRecommandation)recos[recos.Length-1];
+                cpt--;
+            }
             
         }
     }
