@@ -44,8 +44,7 @@ namespace mdwBunifu
             this.Model = mod;
             this.NbWeek = 0;
             dateFormatted = date.ToString("yyyy-MM-dd");
-
-
+    
 
             GenerateTable();
         }
@@ -302,21 +301,23 @@ namespace mdwBunifu
 
         private void lblValue_Click(object sender, EventArgs e)
         {
-            Label myFriend = (Label)sender;
-            var parent = this.Parent;
-
-
-            this.Hide();
-            this.Model.Mes = this.Model.GetMesureById((int)myFriend.Tag);
-            boxMesures bxM = new boxMesures(this.Model, true)
+            if (!this.Model.ConnectedUser.IsDoctor)
             {
-                Location = new Point(20, 7),
-                Visible = true,
-                Name = "Menu"
-            };
-            parent.Controls.Add(bxM);
+                Label myFriend = (Label)sender;
+                var parent = this.Parent;
 
 
+                this.Hide();
+                this.Model.Mes = this.Model.GetMesureById((int)myFriend.Tag);
+                boxMesures bxM = new boxMesures(this.Model, true)
+                {
+                    Location = new Point(20, 7),
+                    Visible = true,
+                    Name = "Menu"
+                };
+                parent.Controls.Add(bxM);
+
+            }
 
         }
 

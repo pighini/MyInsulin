@@ -28,6 +28,10 @@ namespace mdwBunifu
             dtpDebut.Value = DateTime.Now;
             dtpFin.Value = DateTime.Now.AddDays(1);
             fillTypes();
+            if(this.Model.ConnectedUser.IsDoctor)
+            {
+                gbtype.Visible = false;
+            }
 
 
         }
@@ -164,5 +168,56 @@ namespace mdwBunifu
             AddByType();
 
         }
+
+        private void pbAdd_Click(object sender, EventArgs e)
+        {
+            string type = tbxType.Text;
+            int id;
+            id = this.Model.GetTypeByName(type);
+            if(id != 0)
+            {
+                if (!lbxLeft.Items.Contains(type))
+                {
+                    this.Model.AddHasType(id, this.Model.ConnectedUser.IdUser);
+                    lbxLeft.Items.Add(type);
+                }
+                else
+                {
+                    lblError.Visible = true;
+                    System.Threading.Thread.Sleep(1000);
+                    lblError.Visible = false;
+
+                }
+                
+            }
+            else
+            {
+                this.Model.AddType(type);
+                id = this.Model.GetTypeByName(type);
+                this.Model.AddHasType(id, this.Model.ConnectedUser.IdUser);
+                lbxLeft.Items.Add(type);
+                
+
+
+            }
+            
+        }
+
+        private void pbDel_Click(object sender, EventArgs e)
+        {
+            List<string> lbxToR = new List<string>();
+           foreach(var type in lbxLeft.SelectedItems)
+            {
+                this.Model.DeleteType(this.Model.GetTypeByName(type.ToString()));
+                lbxToR.Add(type.ToString());
+                
+            }
+            foreach (var todel in lbxToR)
+            {
+                lbxLeft.Items.Remove(todel);
+            }
+        }
+
+
     }
 }

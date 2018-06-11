@@ -33,20 +33,47 @@ namespace mdwBunifu
         public frmMain(ModelUser model)
         {
             InitializeComponent();
-            CreateLeftButtons();           
+            ddPatient.Visible = false;
+            lblPatient.Visible = false;
             this.Model = model;
             this.ModeleMesure = new ModelMeasure(this.Model.ConnectedUser);
-                    
+            CreateLeftButtons();
+            if(this.Model.ConnectedUser.IsDoctor)
+            {
+                List<string> names = new List<string>();
+                foreach (var item in this.Model.GetAllUserForDoc())
+                {
+                    names.Add(item[0] + " " + item[1]);
+                }
+                ddPatient.Items = names.ToArray();
+                ddPatient.selectedIndex = 0;
+                ddPatient.Visible = true;
+                lblPatient.Visible = true;
+                string[] namesPatient = ddPatient.selectedValue.Split(' ');
+                this.ModeleMesure.ConnectedUser.IdUser = this.Model.GetIdByNames(namesPatient[1],namesPatient[0]);
+            }
+
         }
         private void CreateLeftButtons()
         {
             int cpt = 0;
-            int locaY = 87;
-            btns.Add("Mesures", Properties.Resources.icons8_plus_32);
-            btns.Add("Graphiques", Properties.Resources.icons8_statistics_32);
-            btns.Add("Tableau", Properties.Resources.icons8_tableau_26);
-            btns.Add("Recommandations",Properties.Resources.icons8_conseil_32);
-            btns.Add("Type", Properties.Resources.icons8_horloge_32);
+            int locaY = 120;
+            if (this.Model.ConnectedUser.IsDoctor)
+            {
+                btns.Add("Graphiques", Properties.Resources.icons8_statistics_32);
+                btns.Add("Tableau", Properties.Resources.icons8_tableau_26);
+                btns.Add("Recommandations", Properties.Resources.icons8_conseil_32);
+                btns.Add("Patients", Properties.Resources.icons8_user_32);
+
+            }
+            else
+            {
+                btns.Add("Mesures", Properties.Resources.icons8_plus_32);
+                btns.Add("Graphiques", Properties.Resources.icons8_statistics_32);
+                btns.Add("Tableau", Properties.Resources.icons8_tableau_26);
+                btns.Add("Recommandations", Properties.Resources.icons8_conseil_32);
+                
+            }
 
             foreach (var btn in btns)
             {
@@ -77,6 +104,16 @@ namespace mdwBunifu
             };
             panelMenu.Controls.Add(bxMes);
         }
+        private void showPatient()
+        {
+            boxPatient bxMes = new boxPatient(this.Model)
+            {
+                Location = new Point(12, 13),
+                Visible = true,
+                Name = "Menu"
+            };
+            panelMenu.Controls.Add(bxMes);
+        }
         private void showReco()
         {
             boxRecommandation bxProf = new boxRecommandation(this.Model.ConnectedUser.IdUser)
@@ -100,32 +137,62 @@ namespace mdwBunifu
             }
             int valueButton = (int)selectedButton.Tag;
             selectedButton.BackColor = Color.MediumSeaGreen;
-            switch (valueButton)
+            if (!this.Model.ConnectedUser.IsDoctor)
             {
-                case 1:
-                    closeMenu();
-                    showMesures();
-                    break;
-                case 2:
+                switch (valueButton)
+                {
+                    case 1:
+                        closeMenu();
+                        showMesures();
+                        break;
+                    case 2:
+
+                        closeMenu();
+                        showGraph();
+
+                        break;
+                    case 3:
+                        closeMenu();
+                        showTable();
+
+                        break;
+                    case 4:
+                        closeMenu();
+                        showReco();
+
+                        break;
+                   
+
+                }
+            }
+            else
+            {
+               
+                switch (valueButton)
+                {
+                    case 1:
+                        closeMenu();
+                        showGraph();
+                        break;
+                    case 2:
+
+                        closeMenu();
+                        showTable();
+
+                        break;
+                    case 3:
+                        closeMenu();
+                        showReco();
+
+                        break;
+                    case 4:
+                        closeMenu();
+                        showPatient();
+
+                        break;
                     
-                    closeMenu();
-                    showGraph();
 
-                    break;
-                case 3:
-                    closeMenu();
-                    showTable();
-
-                    break;
-                case 4:
-                    closeMenu();
-                    showReco();
-
-                    break;
-                case 5:
-                    closeMenu();
-                    break;
-
+                }
             }
         }
 

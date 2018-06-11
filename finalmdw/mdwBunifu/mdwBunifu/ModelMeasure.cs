@@ -166,13 +166,13 @@ namespace mdwBunifu
 
 
             MySqlDataReader data = cmd.ExecuteReader();
-            string type ;
+            string type;
             data.Read();
 
 
-                type = (string)data["type"];
+            type = (string)data["type"];
 
-            
+
             data.Close();
 
             return type;
@@ -196,13 +196,157 @@ namespace mdwBunifu
             int typeToReturn;
             data.Read();
 
+            try
+            {
+                typeToReturn = (int)data["idType"];
+            }
+            catch
+            {
+                typeToReturn = 0;
+            }
+            data.Close();
 
-            typeToReturn = (int)data["idType"];
+            return typeToReturn;
+        }
+        public int GetHasType(int idtype)
+        {
+
+            Connexion connect = new Connexion();
+            // Ouverture de la connexion SQL
+            connect.OpenConnection();
+
+            // Création d'une commande SQL en fonction de l'objet connection
+            MySqlCommand cmd = connect.Connection.CreateCommand();
+
+            // Requête SQL
+            cmd.CommandText = "SELECT idType FROM `hastypes` WHERE idType = @idtype";
+            cmd.Parameters.AddWithValue("@idtype", idtype);
+
+
+            MySqlDataReader data = cmd.ExecuteReader();
+            int typeToReturn;
+            data.Read();
+
+            try
+            {
+                typeToReturn = (int)data["idType"];
+            }
+            catch
+            {
+                typeToReturn = 0;
+            }
+            data.Close();
+
+            return typeToReturn;
+        }
+        public void AddType(string type)
+        {
+            try
+            {
+
+                // Ouverture de la connexion SQL
+                myConnexion.OpenConnection();
+
+                // Création d'une commande SQL en fonction de l'objet connection
+                MySqlCommand cmd = myConnexion.Connection.CreateCommand();
+
+                // Requête SQL
+                cmd.CommandText = "INSERT INTO `types`( `type`) VALUES (@type)";
+
+                // utilisation de l'objet contact passé en paramètre
+                cmd.Parameters.AddWithValue("@type", type);
+
+
+                // Exécution de la commande SQL
+                cmd.ExecuteNonQuery();
+
+                // Fermeture de la connexion
+                myConnexion.CloseConnection();
+            }
+            catch
+            {
+                // Gestion des erreurs :
+                // Possibilité de créer un Logger pour les exceptions SQL reçus
+                // Possibilité de créer une méthode avec un booléan en retour pour savoir si le contact à été ajouté correctement.
+            }
+        }
+        public void DeleteType(int id)
+        {
+            Connexion connect = new Connexion();
+            // Ouverture de la connexion SQL
+            connect.OpenConnection();
+
+            // Création d'une commande SQL en fonction de l'objet connection
+            MySqlCommand cmd = connect.Connection.CreateCommand();
+
+            // Requête SQL
+            cmd.CommandText = "DELETE FROM `types` WHERE `idType` = @idType";
+
+
+
+            cmd.Parameters.AddWithValue("@idType", id);
+
+            // Exécution de la commande SQL
+            cmd.ExecuteNonQuery();
+
+            // Fermeture de la connexion
+            connect.CloseConnection();
+        }
+        public int GetLastId()
+        {
+
+            Connexion connect = new Connexion();
+            // Ouverture de la connexion SQL
+            connect.OpenConnection();
+
+            // Création d'une commande SQL en fonction de l'objet connection
+            MySqlCommand cmd = connect.Connection.CreateCommand();
+
+            // Requête SQL
+            cmd.CommandText = "SELECT `idType` FROM `insulintables` ORDER BY `idInsulinTable`DESC";
+
+
+
+
+
+            MySqlDataReader data = cmd.ExecuteReader();
+            int id;
+            data.Read();
+            id = (int)data["idInsulinTable"];
 
 
             data.Close();
 
-            return typeToReturn;
+            return id;
+        }
+        public void AddHasType( int idType , int idUser)
+        {
+            try
+            {
+
+                // Ouverture de la connexion SQL
+                myConnexion.OpenConnection();
+
+                // Création d'une commande SQL en fonction de l'objet connection
+                MySqlCommand cmd = myConnexion.Connection.CreateCommand();
+
+                // Requête SQL
+                cmd.CommandText = "INSERT INTO `hastypes`(`idType`, `idUser`) VALUES ("+idType+" , "+idUser+")";
+
+                // utilisation de l'objet contact passé en paramètre
+
+                // Exécution de la commande SQL
+                cmd.ExecuteNonQuery();
+
+                // Fermeture de la connexion
+                myConnexion.CloseConnection();
+            }
+            catch
+            {
+                // Gestion des erreurs :
+                // Possibilité de créer un Logger pour les exceptions SQL reçus
+                // Possibilité de créer une méthode avec un booléan en retour pour savoir si le contact à été ajouté correctement.
+            }
         }
         public double GetMesureDate(string date)
         {

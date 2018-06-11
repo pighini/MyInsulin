@@ -41,6 +41,8 @@
             this.tbxPasswordInsc = new ns1.BunifuMetroTextbox();
             this.tbxPassword = new ns1.BunifuMetroTextbox();
             this.slideA = new System.Windows.Forms.Panel();
+            this.bunifuCustomLabel5 = new ns1.BunifuCustomLabel();
+            this.cbxDoctor = new ns1.BunifuCheckbox();
             this.bunifuCustomLabel9 = new ns1.BunifuCustomLabel();
             this.tbxPrenom = new ns1.BunifuMetroTextbox();
             this.bunifuMetroTextbox4 = new ns1.BunifuMetroTextbox();
@@ -89,7 +91,7 @@
             this.slideB.Controls.Add(this.bunifuCustomLabel6);
             this.slideB.Controls.Add(this.tbxPasswordInsc);
             this.slideB.Controls.Add(this.tbxPassword);
-            this.slideB.Location = new System.Drawing.Point(68, 90);
+            this.slideB.Location = new System.Drawing.Point(70, 90);
             this.slideB.Name = "slideB";
             this.slideB.Size = new System.Drawing.Size(404, 500);
             this.slideB.TabIndex = 11;
@@ -235,6 +237,8 @@
             // 
             // slideA
             // 
+            this.slideA.Controls.Add(this.bunifuCustomLabel5);
+            this.slideA.Controls.Add(this.cbxDoctor);
             this.slideA.Controls.Add(this.bunifuCustomLabel9);
             this.slideA.Controls.Add(this.tbxPrenom);
             this.slideA.Controls.Add(this.bunifuMetroTextbox4);
@@ -256,15 +260,38 @@
             this.slideA.Controls.Add(this.bunifuCustomLabel1);
             this.slideA.Location = new System.Drawing.Point(79, 92);
             this.slideA.Name = "slideA";
-            this.slideA.Size = new System.Drawing.Size(423, 498);
+            this.slideA.Size = new System.Drawing.Size(405, 498);
             this.slideA.TabIndex = 13;
+            // 
+            // bunifuCustomLabel5
+            // 
+            this.bunifuCustomLabel5.AutoSize = true;
+            this.bunifuCustomLabel5.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.bunifuCustomLabel5.ForeColor = System.Drawing.Color.DarkGray;
+            this.bunifuCustomLabel5.Location = new System.Drawing.Point(14, 405);
+            this.bunifuCustomLabel5.Name = "bunifuCustomLabel5";
+            this.bunifuCustomLabel5.Size = new System.Drawing.Size(201, 17);
+            this.bunifuCustomLabel5.TabIndex = 17;
+            this.bunifuCustomLabel5.Text = "S\'inscrire en tant que médecin";
+            // 
+            // cbxDoctor
+            // 
+            this.cbxDoctor.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(132)))), ((int)(((byte)(135)))), ((int)(((byte)(140)))));
+            this.cbxDoctor.ChechedOffColor = System.Drawing.Color.FromArgb(((int)(((byte)(132)))), ((int)(((byte)(135)))), ((int)(((byte)(140)))));
+            this.cbxDoctor.Checked = false;
+            this.cbxDoctor.CheckedOnColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(205)))), ((int)(((byte)(117)))));
+            this.cbxDoctor.ForeColor = System.Drawing.Color.White;
+            this.cbxDoctor.Location = new System.Drawing.Point(221, 405);
+            this.cbxDoctor.Name = "cbxDoctor";
+            this.cbxDoctor.Size = new System.Drawing.Size(20, 20);
+            this.cbxDoctor.TabIndex = 16;
             // 
             // bunifuCustomLabel9
             // 
             this.bunifuCustomLabel9.AutoSize = true;
             this.bunifuCustomLabel9.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.bunifuCustomLabel9.ForeColor = System.Drawing.Color.DarkGray;
-            this.bunifuCustomLabel9.Location = new System.Drawing.Point(19, 106);
+            this.bunifuCustomLabel9.Location = new System.Drawing.Point(17, 98);
             this.bunifuCustomLabel9.Name = "bunifuCustomLabel9";
             this.bunifuCustomLabel9.Size = new System.Drawing.Size(58, 17);
             this.bunifuCustomLabel9.TabIndex = 15;
@@ -280,7 +307,7 @@
             this.tbxPrenom.Font = new System.Drawing.Font("Century Gothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbxPrenom.ForeColor = System.Drawing.Color.Silver;
             this.tbxPrenom.isPassword = false;
-            this.tbxPrenom.Location = new System.Drawing.Point(18, 127);
+            this.tbxPrenom.Location = new System.Drawing.Point(16, 119);
             this.tbxPrenom.Margin = new System.Windows.Forms.Padding(4);
             this.tbxPrenom.Name = "tbxPrenom";
             this.tbxPrenom.Size = new System.Drawing.Size(326, 37);
@@ -297,7 +324,7 @@
             this.bunifuMetroTextbox4.Font = new System.Drawing.Font("Century Gothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.bunifuMetroTextbox4.ForeColor = System.Drawing.Color.Silver;
             this.bunifuMetroTextbox4.isPassword = true;
-            this.bunifuMetroTextbox4.Location = new System.Drawing.Point(19, 127);
+            this.bunifuMetroTextbox4.Location = new System.Drawing.Point(17, 119);
             this.bunifuMetroTextbox4.Margin = new System.Windows.Forms.Padding(4);
             this.bunifuMetroTextbox4.Name = "bunifuMetroTextbox4";
             this.bunifuMetroTextbox4.Size = new System.Drawing.Size(323, 37);
@@ -354,7 +381,7 @@
             // 
             this.lblRepeatPassword.Font = new System.Drawing.Font("Century Gothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblRepeatPassword.ForeColor = System.Drawing.Color.Red;
-            this.lblRepeatPassword.Location = new System.Drawing.Point(20, 395);
+            this.lblRepeatPassword.Location = new System.Drawing.Point(19, 390);
             this.lblRepeatPassword.Name = "lblRepeatPassword";
             this.lblRepeatPassword.Size = new System.Drawing.Size(323, 15);
             this.lblRepeatPassword.TabIndex = 9;
@@ -364,7 +391,7 @@
             // 
             this.lblErrorPassword.Font = new System.Drawing.Font("Century Gothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblErrorPassword.ForeColor = System.Drawing.Color.Red;
-            this.lblErrorPassword.Location = new System.Drawing.Point(19, 319);
+            this.lblErrorPassword.Location = new System.Drawing.Point(16, 303);
             this.lblErrorPassword.Name = "lblErrorPassword";
             this.lblErrorPassword.Size = new System.Drawing.Size(323, 15);
             this.lblErrorPassword.TabIndex = 8;
@@ -374,7 +401,7 @@
             // 
             this.lblErrorUsername.Font = new System.Drawing.Font("Century Gothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblErrorUsername.ForeColor = System.Drawing.Color.Red;
-            this.lblErrorUsername.Location = new System.Drawing.Point(20, 241);
+            this.lblErrorUsername.Location = new System.Drawing.Point(18, 226);
             this.lblErrorUsername.Name = "lblErrorUsername";
             this.lblErrorUsername.Size = new System.Drawing.Size(323, 15);
             this.lblErrorUsername.TabIndex = 7;
@@ -385,7 +412,7 @@
             this.bunifuCustomLabel4.AutoSize = true;
             this.bunifuCustomLabel4.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.bunifuCustomLabel4.ForeColor = System.Drawing.Color.DarkGray;
-            this.bunifuCustomLabel4.Location = new System.Drawing.Point(20, 335);
+            this.bunifuCustomLabel4.Location = new System.Drawing.Point(15, 323);
             this.bunifuCustomLabel4.Name = "bunifuCustomLabel4";
             this.bunifuCustomLabel4.Size = new System.Drawing.Size(165, 17);
             this.bunifuCustomLabel4.TabIndex = 6;
@@ -409,7 +436,7 @@
             this.btnSubmit.IdleFillColor = System.Drawing.Color.SeaGreen;
             this.btnSubmit.IdleForecolor = System.Drawing.Color.White;
             this.btnSubmit.IdleLineColor = System.Drawing.Color.SeaGreen;
-            this.btnSubmit.Location = new System.Drawing.Point(18, 414);
+            this.btnSubmit.Location = new System.Drawing.Point(17, 433);
             this.btnSubmit.Margin = new System.Windows.Forms.Padding(5);
             this.btnSubmit.Name = "btnSubmit";
             this.btnSubmit.Size = new System.Drawing.Size(326, 65);
@@ -427,7 +454,7 @@
             this.tbxRepeatPassword.Font = new System.Drawing.Font("Century Gothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbxRepeatPassword.ForeColor = System.Drawing.Color.Silver;
             this.tbxRepeatPassword.isPassword = true;
-            this.tbxRepeatPassword.Location = new System.Drawing.Point(20, 356);
+            this.tbxRepeatPassword.Location = new System.Drawing.Point(15, 344);
             this.tbxRepeatPassword.Margin = new System.Windows.Forms.Padding(4);
             this.tbxRepeatPassword.Name = "tbxRepeatPassword";
             this.tbxRepeatPassword.Size = new System.Drawing.Size(322, 37);
@@ -440,7 +467,7 @@
             this.bunifuCustomLabel3.AutoSize = true;
             this.bunifuCustomLabel3.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.bunifuCustomLabel3.ForeColor = System.Drawing.Color.DarkGray;
-            this.bunifuCustomLabel3.Location = new System.Drawing.Point(19, 258);
+            this.bunifuCustomLabel3.Location = new System.Drawing.Point(16, 242);
             this.bunifuCustomLabel3.Name = "bunifuCustomLabel3";
             this.bunifuCustomLabel3.Size = new System.Drawing.Size(94, 17);
             this.bunifuCustomLabel3.TabIndex = 4;
@@ -456,7 +483,7 @@
             this.tbxNewPassword.Font = new System.Drawing.Font("Century Gothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbxNewPassword.ForeColor = System.Drawing.Color.Silver;
             this.tbxNewPassword.isPassword = true;
-            this.tbxNewPassword.Location = new System.Drawing.Point(18, 279);
+            this.tbxNewPassword.Location = new System.Drawing.Point(15, 263);
             this.tbxNewPassword.Margin = new System.Windows.Forms.Padding(4);
             this.tbxNewPassword.Name = "tbxNewPassword";
             this.tbxNewPassword.Size = new System.Drawing.Size(324, 37);
@@ -474,7 +501,7 @@
             this.bunifuMetroTextbox2.Font = new System.Drawing.Font("Century Gothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.bunifuMetroTextbox2.ForeColor = System.Drawing.Color.Silver;
             this.bunifuMetroTextbox2.isPassword = true;
-            this.bunifuMetroTextbox2.Location = new System.Drawing.Point(19, 279);
+            this.bunifuMetroTextbox2.Location = new System.Drawing.Point(16, 263);
             this.bunifuMetroTextbox2.Margin = new System.Windows.Forms.Padding(4);
             this.bunifuMetroTextbox2.Name = "bunifuMetroTextbox2";
             this.bunifuMetroTextbox2.Size = new System.Drawing.Size(323, 37);
@@ -487,7 +514,7 @@
             this.bunifuCustomLabel2.AutoSize = true;
             this.bunifuCustomLabel2.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.bunifuCustomLabel2.ForeColor = System.Drawing.Color.DarkGray;
-            this.bunifuCustomLabel2.Location = new System.Drawing.Point(19, 179);
+            this.bunifuCustomLabel2.Location = new System.Drawing.Point(17, 164);
             this.bunifuCustomLabel2.Name = "bunifuCustomLabel2";
             this.bunifuCustomLabel2.Size = new System.Drawing.Size(43, 17);
             this.bunifuCustomLabel2.TabIndex = 2;
@@ -503,7 +530,7 @@
             this.tbxEmail.Font = new System.Drawing.Font("Century Gothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbxEmail.ForeColor = System.Drawing.Color.Silver;
             this.tbxEmail.isPassword = false;
-            this.tbxEmail.Location = new System.Drawing.Point(18, 200);
+            this.tbxEmail.Location = new System.Drawing.Point(16, 185);
             this.tbxEmail.Margin = new System.Windows.Forms.Padding(4);
             this.tbxEmail.Name = "tbxEmail";
             this.tbxEmail.Size = new System.Drawing.Size(325, 37);
@@ -521,7 +548,7 @@
             this.bunifuMetroTextbox1.Font = new System.Drawing.Font("Century Gothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.bunifuMetroTextbox1.ForeColor = System.Drawing.Color.Silver;
             this.bunifuMetroTextbox1.isPassword = false;
-            this.bunifuMetroTextbox1.Location = new System.Drawing.Point(19, 200);
+            this.bunifuMetroTextbox1.Location = new System.Drawing.Point(17, 185);
             this.bunifuMetroTextbox1.Margin = new System.Windows.Forms.Padding(4);
             this.bunifuMetroTextbox1.Name = "bunifuMetroTextbox1";
             this.bunifuMetroTextbox1.Size = new System.Drawing.Size(323, 37);
@@ -666,5 +693,7 @@
         private ns1.BunifuMetroTextbox tbxNom;
         private ns1.BunifuMetroTextbox bunifuMetroTextbox6;
         private ns1.BunifuImageButton btnCloseLogin;
+        private ns1.BunifuCustomLabel bunifuCustomLabel5;
+        private ns1.BunifuCheckbox cbxDoctor;
     }
 }

@@ -44,6 +44,15 @@ namespace mdwBunifu
             this.Email = email;
             
         }
+        private bool _isDoctor;
+
+        public bool IsDoctor     
+        {
+            get { return _isDoctor; }
+            set { _isDoctor = value; }
+        }
+       
+
 
     }
 }

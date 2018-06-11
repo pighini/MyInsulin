@@ -86,6 +86,7 @@ namespace mdwBunifu
             lastName = tbxNom.Text;
             password = tbxNom.Text;
             password = Modele.CalculateSHA1(password, Encoding.UTF8);
+            bool isDoc = cbxDoctor.Checked;
 
 
 
@@ -110,7 +111,7 @@ namespace mdwBunifu
                         else
                         {
                             lblRepeatPassword.Text = "";
-                            Modele.AddUser(firstName, lastName, email, password);
+                            Modele.AddUser(firstName, lastName, email, password, isDoc);
                             ShowSignIn();
                         }
                     }

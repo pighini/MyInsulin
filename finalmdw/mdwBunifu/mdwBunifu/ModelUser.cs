@@ -34,7 +34,7 @@ namespace mdwBunifu
         }
 
 
-        public void AddUser(string firstName, string lastName, string email, string password)
+        public void AddUser(string firstName, string lastName, string email, string password, bool isDoctor)
         {
             try
             {
@@ -46,13 +46,16 @@ namespace mdwBunifu
                 MySqlCommand cmd = myConnexion.Connection.CreateCommand();
 
                 // Requête SQL
-                cmd.CommandText = "INSERT INTO `users`(`firstName`,`lastName`,`email`, `password`) VALUES (@fName, @lName, @email, @password)";
+                cmd.CommandText = "INSERT INTO `users`(`firstName`,`lastName`,`email`, `password`, `isDoctor`) VALUES (@fName, @lName, @email, @password, @isDoctor)";
 
                 // utilisation de l'objet contact passé en paramètre
                 cmd.Parameters.AddWithValue("@fName",firstName);
                 cmd.Parameters.AddWithValue("@lName",lastName);
                 cmd.Parameters.AddWithValue("@email",email);
                 cmd.Parameters.AddWithValue("@password",password);
+                cmd.Parameters.AddWithValue("@isDoctor", isDoctor);
+
+
 
                 // Exécution de la commande SQL
                 cmd.ExecuteNonQuery();
@@ -67,6 +70,99 @@ namespace mdwBunifu
                 // Possibilité de créer un Logger pour les exceptions SQL reçus
                 // Possibilité de créer une méthode avec un booléan en retour pour savoir si le contact à été ajouté correctement.
             }
+        }
+
+        public int GetIdByName(string fName, string lName, string password)
+        {
+            
+            // Ouverture de la connexion SQL
+            myConnexion.OpenConnection();
+
+            // Création d'une commande SQL en fonction de l'objet connection
+            MySqlCommand cmd = myConnexion.Connection.CreateCommand();
+
+            // Requête SQL
+            cmd.CommandText = "SELECT * FROM `users` WHERE `firstName` =@fName AND `lastName` =@lName AND `password` =@pwd;";
+
+            // utilisation de l'objet contact passé en paramètre
+            cmd.Parameters.AddWithValue("@lName", lName);
+            cmd.Parameters.AddWithValue("@fName", fName);
+            cmd.Parameters.AddWithValue("@pwd", CalculateSHA1(password, Encoding.UTF8));
+
+            
+
+            MySqlDataReader data = cmd.ExecuteReader();
+            int id;
+            data.Read();
+
+            id = (int)data["idUser"];
+
+            data.Close();
+
+            // Fermeture de la connexion
+            myConnexion.CloseConnection();
+
+            return id;
+        }
+        public int GetIdByNames(string fName, string lName)
+        {
+            
+            // Ouverture de la connexion SQL
+            myConnexion.OpenConnection();
+
+            // Création d'une commande SQL en fonction de l'objet connection
+            MySqlCommand cmd = myConnexion.Connection.CreateCommand();
+
+            // Requête SQL
+            cmd.CommandText = "SELECT * FROM `users` WHERE `firstName` =@fName AND `lastName` =@lName";
+
+            // utilisation de l'objet contact passé en paramètre
+            cmd.Parameters.AddWithValue("@lName", lName);
+            cmd.Parameters.AddWithValue("@fName", fName);
+
+
+            
+
+            MySqlDataReader data = cmd.ExecuteReader();
+            int id;
+            data.Read();
+
+            id = (int)data["idUser"];
+
+            data.Close();
+
+            // Fermeture de la connexion
+            myConnexion.CloseConnection();
+
+            return id;
+        }
+
+        public List<string[]> GetAllUserForDoc()
+        {
+
+
+            Connexion connect = new Connexion();
+            // Ouverture de la connexion SQL
+            connect.OpenConnection();
+
+            // Création d'une commande SQL en fonction de l'objet connection
+            MySqlCommand cmd = connect.Connection.CreateCommand();
+
+            // Requête SQL
+            cmd.CommandText = "SELECT `lastName` ,`firstName` FROM `users` WHERE `idMedecin` = @idMedecin";
+            cmd.Parameters.AddWithValue("@idMedecin", this.ConnectedUser.IdUser);
+
+
+            MySqlDataReader data = cmd.ExecuteReader();
+            List<string[]> users = new List<string[]>();
+            while (data.Read())
+            {
+                users.Add(new string[] { (string)data["lastName"], (string)data["firstName"] });
+
+            }
+            data.Close();
+
+            return users;
         }
         public bool UserExist(string email)
         {
@@ -107,6 +203,79 @@ namespace mdwBunifu
                 return true;
 
             }
+        }
+        public bool CheckPatient(string fName, string lName, string password)
+        {
+            int nbResultat = 0;
+            // Ouverture de la connexion SQL
+            myConnexion.OpenConnection();
+
+            // Création d'une commande SQL en fonction de l'objet connection
+            MySqlCommand cmd = myConnexion.Connection.CreateCommand();
+
+            // Requête SQL
+            cmd.CommandText = "SELECT * FROM `users` WHERE `firstName` =@fName AND `lastName` =@lName AND `password` =@pwd;";
+
+            // utilisation de l'objet contact passé en paramètre
+            cmd.Parameters.AddWithValue("@lName", lName);
+            cmd.Parameters.AddWithValue("@fName", fName);
+            cmd.Parameters.AddWithValue("@pwd", CalculateSHA1(password, Encoding.UTF8));
+
+            List<User> list = new List<User>();
+
+            MySqlDataReader reader = cmd.ExecuteReader();
+
+
+            while (reader.Read())
+            {
+                nbResultat++;
+            }
+
+            reader.Close();
+
+            // Fermeture de la connexion
+            myConnexion.CloseConnection();
+
+            if (nbResultat == 0)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+
+            }
+        }
+        public void AddPatient(int idMed, int idUser)
+        {
+            int nbResultat = 0;
+            // Ouverture de la connexion SQL
+            myConnexion.OpenConnection();
+
+            // Création d'une commande SQL en fonction de l'objet connection
+            MySqlCommand cmd = myConnexion.Connection.CreateCommand();
+
+            // Requête SQL
+            cmd.CommandText = "UPDATE `users` SET `idMedecin`= @idMed WHERE `idUser` = @idUser";
+
+            // utilisation de l'objet contact passé en paramètre
+            cmd.Parameters.AddWithValue("@idMed", idMed);
+            cmd.Parameters.AddWithValue("@idUser", idUser);
+
+            MySqlDataReader reader = cmd.ExecuteReader();
+
+
+            while (reader.Read())
+            {
+                nbResultat++;
+            }
+
+            reader.Close();
+
+            // Fermeture de la connexion
+            myConnexion.CloseConnection();
+
+
         }
         public string CalculateSHA1(string text, Encoding enc)//methode pour encrypter une chaine en Sha1
         {
@@ -149,6 +318,7 @@ namespace mdwBunifu
             {
                 ConnectedUser = new User(email);
                 ConnectedUser.IdUser = GetId();
+                ConnectedUser.IsDoctor = IsDoctor();
 
                 return true;
 
@@ -158,6 +328,30 @@ namespace mdwBunifu
                 return false;
             }
         }
+
+        private bool IsDoctor()
+        {
+            bool isDoc;
+            Connexion connect = new Connexion();
+            // Ouverture de la connexion SQL
+            connect.OpenConnection();
+
+            // Création d'une commande SQL en fonction de l'objet connection
+            MySqlCommand cmd = connect.Connection.CreateCommand();
+
+            // Requête SQL
+            cmd.CommandText = "SELECT `isDoctor` FROM `users` WHERE `email` = @email;";
+            cmd.Parameters.AddWithValue("@email", ConnectedUser.Email);
+
+
+            MySqlDataReader data = cmd.ExecuteReader();
+            data.Read();
+            isDoc = (bool)data["isDoctor"];
+            data.Close();
+
+            return isDoc;
+        }
+        
         public int GetId()
         {
             int idUser;

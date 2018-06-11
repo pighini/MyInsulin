@@ -56,6 +56,12 @@
     <Compile Include="boxMesures.Designer.cs">
       <DependentUpon>boxMesures.cs</DependentUpon>
     </Compile>
+    <Compile Include="boxPatient.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="boxPatient.Designer.cs">
+      <DependentUpon>boxPatient.cs</DependentUpon>
+    </Compile>
     <Compile Include="boxRecommandation.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -67,6 +73,12 @@
     </Compile>
     <Compile Include="boxTableau.Designer.cs">
       <DependentUpon>boxTableau.cs</DependentUpon>
+    </Compile>
+    <Compile Include="boxTypes.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="boxTypes.Designer.cs">
+      <DependentUpon>boxTypes.cs</DependentUpon>
     </Compile>
     <Compile Include="btnAccueil.cs">
       <SubType>UserControl</SubType>
@@ -110,11 +122,17 @@
     <EmbeddedResource Include="boxMesures.resx">
       <DependentUpon>boxMesures.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="boxPatient.resx">
+      <DependentUpon>boxPatient.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="boxRecommandation.resx">
       <DependentUpon>boxRecommandation.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="boxTableau.resx">
       <DependentUpon>boxTableau.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="boxTypes.resx">
+      <DependentUpon>boxTypes.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="btnAccueil.resx">
       <DependentUpon>btnAccueil.cs</DependentUpon>
@@ -213,6 +231,18 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\icons8-horloge-32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-coche-16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-multiplier-16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-multiplier-16 %281%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-coche-16 %281%29.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
