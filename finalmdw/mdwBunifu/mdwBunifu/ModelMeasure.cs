@@ -280,7 +280,7 @@ namespace mdwBunifu
             MySqlCommand cmd = connect.Connection.CreateCommand();
 
             // Requête SQL
-            cmd.CommandText = "DELETE FROM `types` WHERE `idType` = @idType";
+            cmd.CommandText = "DELETE FROM `hastypes` WHERE `idType` = @idType";
 
 
 
@@ -622,30 +622,7 @@ namespace mdwBunifu
                 // Possibilité de créer une méthode avec un booléan en retour pour savoir si le contact à été ajouté correctement.
             }
         }
-        //public List<string> getAllTypes()
-        //{
-        //    Connexion connect = new Connexion();
-        //    // Ouverture de la connexion SQL
-        //    connect.OpenConnection();
-
-        //    // Création d'une commande SQL en fonction de l'objet connection
-        //    MySqlCommand cmd = connect.Connection.CreateCommand();
-
-        //    // Requête SQL
-        //    cmd.CommandText = "SELECT Distinct `typeofMeasure` FROM `measures` where idUser = @idUser ORDER BY typeofMeasure ASC";
-        //    cmd.Parameters.AddWithValue("@idUser", this.ConnectedUser.IdUser);
-
-        //    MySqlDataReader data = cmd.ExecuteReader();
-        //    List<string> types = new List<string>();
-        //    while (data.Read())
-        //    {
-        //        types.Add((string)data["typeofMeasure"]);
-
-        //    }
-        //    data.Close();
-
-        //    return types;
-        //}
+       
         public void AddMesure(double glucose, double insulinRecommandation, string commentary, string type, string date)
         {
             try

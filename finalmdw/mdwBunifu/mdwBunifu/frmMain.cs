@@ -36,7 +36,8 @@ namespace mdwBunifu
             ddPatient.Visible = false;
             lblPatient.Visible = false;
             this.Model = model;
-            this.ModeleMesure = new ModelMeasure(this.Model.ConnectedUser);
+            User usr = new User(this.Model.ConnectedUser);
+            this.ModeleMesure = new ModelMeasure(usr);
             CreateLeftButtons();
             if(this.Model.ConnectedUser.IsDoctor)
             {
@@ -49,15 +50,20 @@ namespace mdwBunifu
                 ddPatient.selectedIndex = 0;
                 ddPatient.Visible = true;
                 lblPatient.Visible = true;
+                tbxGlycemie.Visible = true;
+                pbAdd.Visible = true;
+                pbDel.Visible = true;
                 string[] namesPatient = ddPatient.selectedValue.Split(' ');
-                this.ModeleMesure.ConnectedUser.IdUser = this.Model.GetIdByNames(namesPatient[1],namesPatient[0]);
+                this.Model.ConnectedUser.IdUser = this.Model.ConnectedUser.IdUser;
+              this.ModeleMesure.ConnectedUser.IdUser = this.Model.GetIdByNames(namesPatient[1],namesPatient[0]);
+               
             }
 
         }
         private void CreateLeftButtons()
         {
             int cpt = 0;
-            int locaY = 120;
+            int locaY = 140;
             if (this.Model.ConnectedUser.IsDoctor)
             {
                 btns.Add("Graphiques", Properties.Resources.icons8_statistics_32);
@@ -116,7 +122,7 @@ namespace mdwBunifu
         }
         private void showReco()
         {
-            boxRecommandation bxProf = new boxRecommandation(this.Model.ConnectedUser.IdUser)
+            boxRecommandation bxProf = new boxRecommandation(this.ModeleMesure.ConnectedUser.IdUser)
             {
                 Location = new Point(12, 13),
                 Visible = true,
@@ -208,7 +214,7 @@ namespace mdwBunifu
         }
         private void showTable()
         {
-            boxTableau boxTable = new boxTableau(this.ModeleMesure)
+            boxTableau boxTable = new boxTableau(this.ModeleMesure, this.Model)
             {
                 Location = new Point(12, 13),
                 Visible = true,
@@ -237,11 +243,21 @@ namespace mdwBunifu
 
         private void btnClose_Click(object sender, EventArgs e)
         {
-            
-                this.Close();
+           
+
+            Application.Exit();
            
         }
+        private void frmMain_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            DialogResult drs = new DialogResult();
+            drs = MessageBox.Show("Voulez-vous quitter?", "Quitter", MessageBoxButtons.OKCancel);
+            if (drs == DialogResult.Cancel)
+            {
+                e.Cancel = true;
+            }
 
+        }
         private void btnAccueil1_Click(object sender, EventArgs e)
         {
             CreateLeftButtons();
@@ -251,5 +267,7 @@ namespace mdwBunifu
         {
             this.WindowState = FormWindowState.Minimized;
         }
+
+
     }
 }

@@ -173,6 +173,16 @@ namespace mdwBunifu.Properties {
         /// <summary>
         ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap icons8_effacer_16 {
+            get {
+                object obj = ResourceManager.GetObject("icons8_effacer_16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap icons8_gauche_26 {
             get {
                 object obj = ResourceManager.GetObject("icons8_gauche_26", resourceCulture);
@@ -226,6 +236,16 @@ namespace mdwBunifu.Properties {
         internal static System.Drawing.Bitmap icons8_multiplier_24__1_ {
             get {
                 object obj = ResourceManager.GetObject("icons8_multiplier_24__1_", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap icons8_plus_16 {
+            get {
+                object obj = ResourceManager.GetObject("icons8_plus_16", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -287,6 +307,16 @@ namespace mdwBunifu.Properties {
             get {
                 object obj = ResourceManager.GetObject("icons8_user_32", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Drawing.Icon semblable à (Icône).
+        /// </summary>
+        internal static System.Drawing.Icon logoIco {
+            get {
+                object obj = ResourceManager.GetObject("logoIco", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
             }
         }
     }

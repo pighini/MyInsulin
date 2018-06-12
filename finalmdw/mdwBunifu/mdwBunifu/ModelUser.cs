@@ -72,7 +72,7 @@ namespace mdwBunifu
             }
         }
 
-        public int GetIdByName(string fName, string lName, string password)
+        public int GetIdByLogin(string fName, string lName, string password)
         {
             
             // Ouverture de la connexion SQL

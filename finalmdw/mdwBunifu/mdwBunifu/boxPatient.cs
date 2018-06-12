@@ -39,7 +39,7 @@ namespace mdwBunifu
             string password = tbxPassword.Text;
             if(this.ModelUser.CheckPatient(prenom, nom,password))
             {
-                this.ModelUser.AddPatient(this.ModelUser.ConnectedUser.IdUser, this.ModelUser.GetIdByName(prenom,nom,password));
+                 this.ModelUser.AddPatient(this.ModelUser.ConnectedUser.IdUser, this.ModelUser.GetIdByLogin(prenom,nom,password));
             }
             else
             {

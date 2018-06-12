@@ -44,6 +44,7 @@
             this.tbxInsuline = new ns1.BunifuMetroTextbox();
             this.btnDelete = new ns1.BunifuThinButton2();
             this.btnSendMesure = new ns1.BunifuThinButton2();
+            this.bunifuCustomLabel1 = new ns1.BunifuCustomLabel();
             this.SuspendLayout();
             // 
             // lblMesure
@@ -135,7 +136,8 @@
             this.dtpDateMesure.Name = "dtpDateMesure";
             this.dtpDateMesure.Size = new System.Drawing.Size(266, 36);
             this.dtpDateMesure.TabIndex = 9;
-            this.dtpDateMesure.Value = new System.DateTime(2018, 5, 14, 11, 13, 32, 807);
+            this.dtpDateMesure.Value = new System.DateTime(2018, 6, 12, 0, 0, 0, 0);
+            this.dtpDateMesure.onValueChanged += new System.EventHandler(this.dtpDateMesure_onValueChanged);
             // 
             // label2
             // 
@@ -269,11 +271,25 @@
             this.btnSendMesure.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.btnSendMesure.Click += new System.EventHandler(this.btnSendMesure_Click);
             // 
+            // bunifuCustomLabel1
+            // 
+            this.bunifuCustomLabel1.AutoSize = true;
+            this.bunifuCustomLabel1.BackColor = System.Drawing.Color.Transparent;
+            this.bunifuCustomLabel1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.bunifuCustomLabel1.ForeColor = System.Drawing.Color.Red;
+            this.bunifuCustomLabel1.Location = new System.Drawing.Point(161, 114);
+            this.bunifuCustomLabel1.Name = "bunifuCustomLabel1";
+            this.bunifuCustomLabel1.Size = new System.Drawing.Size(13, 16);
+            this.bunifuCustomLabel1.TabIndex = 17;
+            this.bunifuCustomLabel1.Text = "*";
+            this.bunifuCustomLabel1.Click += new System.EventHandler(this.lblGlycemie_Click);
+            // 
             // boxMesures
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(50)))), ((int)(((byte)(44)))));
+            this.Controls.Add(this.bunifuCustomLabel1);
             this.Controls.Add(this.btnDelete);
             this.Controls.Add(this.tbxInsuline);
             this.Controls.Add(this.label5);
@@ -313,5 +329,6 @@
         private System.Windows.Forms.Label label5;
         private ns1.BunifuMetroTextbox tbxInsuline;
         private ns1.BunifuThinButton2 btnDelete;
+        private ns1.BunifuCustomLabel bunifuCustomLabel1;
     }
 }

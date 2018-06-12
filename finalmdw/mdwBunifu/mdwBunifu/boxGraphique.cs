@@ -1,4 +1,9 @@
-﻿using System;
+﻿/* Project : MyInsulin 
+ * Author : Lucas Pighini CFPT-I
+ * Description : The window that create the chart for the users
+ * Date : 12.06.2018
+ */
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
@@ -13,14 +18,21 @@ namespace mdwBunifu
 {
     public partial class boxGraphique : UserControl
     {
+        //Class var
         private ModelMeasure _model;
-        Series tendanceSerie;
+        Series TrendSerie;
+        Series AverageSerie;
+
+        //Property
         public ModelMeasure Model
         {
             get { return _model; }
             set { _model = value; }
         }
-
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="mod"></param>
         public boxGraphique(ModelMeasure mod)
         {
             InitializeComponent();
@@ -30,11 +42,14 @@ namespace mdwBunifu
             fillTypes();
             if(this.Model.ConnectedUser.IsDoctor)
             {
-                gbtype.Visible = false;
+                plType.Visible = false;
             }
 
 
         }
+        /// <summary>
+        /// Fill the listbox with the types of the user connected
+        /// </summary>
         private void fillTypes()
         {
             foreach (string type in this.Model.GetAllTypesByUser())
@@ -42,15 +57,18 @@ namespace mdwBunifu
                 lbxLeft.Items.Add(type);
             }
         }
-        private void AddTendance()
+        /// <summary>
+        /// Add to the chart the average of each day
+        /// </summary>
+        private void AddAverage()
         {
-            if (tendanceSerie != null)
+            if (AverageSerie != null)
             {
-                chartmesure.Series.Remove(tendanceSerie);
+                chartmesure.Series.Remove(TrendSerie);
             }
             Series glycemie = new Series
             {
-                Name = "Tendance",
+                Name = "Moyenne",
                 ChartType = SeriesChartType.Line,
                 XValueType = ChartValueType.DateTime,
                 YValueType = ChartValueType.Int32,
@@ -68,21 +86,86 @@ namespace mdwBunifu
                 datesMeasure.Add(i);
             }
             string dateTend;
-            double tendance;
+            double Trend;
             foreach (DateTime date in datesMeasure)
             {
                 
                 dateTend = date.ToString("yyyy-MM-dd");
-                tendance = this.Model.GetMesureDate(dateTend);
-                if (tendance != 0)
+                Trend = this.Model.GetMesureDate(dateTend);
+                if (Trend != 0)
                 {
-                    glycemie.Points.AddXY(dateTend.Substring(5,5), tendance);
+                    glycemie.Points.AddXY(dateTend.Substring(5,5), Trend);
                 }
             }            
 
             chartmesure.Series.Add(glycemie);
-            tendanceSerie = glycemie; 
+            AverageSerie = glycemie; 
         }
+        /// <summary>
+        /// Add the trend to the chart
+        /// </summary>
+        private void AddTrend()
+        {
+            Dictionary<string,double> Averages = new Dictionary<string, double>();
+            DateTime dateDebut = dtpDebut.Value;
+            DateTime dateFin = dtpFin.Value;
+            string dateTend;
+            double Average;
+            int cptTend = 0;
+            double Trend = 0;
+
+
+            List<DateTime> datesMeasure = new List<DateTime>();
+            int cpt = 0;
+            if (TrendSerie != null)
+            {
+                chartmesure.Series.Remove(TrendSerie);
+            }
+            Series glycemie = new Series
+            {
+                Name = "Tendance",
+                ChartType = SeriesChartType.Line,
+                XValueType = ChartValueType.DateTime,
+                YValueType = ChartValueType.Int32,
+                MarkerStyle = MarkerStyle.Circle,
+                MarkerSize = 5,
+                MarkerColor = Color.Green
+            };
+         
+            for (DateTime i = dateDebut; i < dateFin; i = i.AddDays(1))
+            {
+                cpt++;
+                datesMeasure.Add(i);
+            }
+       
+            foreach (DateTime date in datesMeasure)
+            {
+
+                dateTend = date.ToString("yyyy-MM-dd");
+                Average = this.Model.GetMesureDate(dateTend);
+                if (Average != 0)
+                {
+                    Averages.Add(dateTend, Average);
+                }
+            }
+        
+            foreach (var moy in Averages)
+            {
+                cptTend++;
+                Trend += moy.Value;
+                if(cptTend>1)
+                {
+                    glycemie.Points.AddXY(moy.Key.Substring(5,5), Trend/cptTend);
+
+                }
+
+            }
+            chartmesure.Series.Add(glycemie);
+            TrendSerie = glycemie;
+        }
+        /// <summary>
+        /// Add each curve that the the user has select
+        /// </summary>
         private void AddByType()
         {
             Random rnd = new Random();
@@ -121,23 +204,52 @@ namespace mdwBunifu
 
         }
 
+        /// <summary>
+        /// Event when the dateTimepicker's date change
+        /// Refresh the chart
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void dtp_onValueChanged(object sender, EventArgs e)
         {
             AddByType();
             refreshTend();
+            refreshAvg();
         }
-        private void refreshTend()
+        /// <summary>
+        /// Check if the user want to see the average
+        /// </summary>
+        private void refreshAvg()
         {
-            if(cbxTendance.Checked)
+            if(cbxMoyenne.Checked)
             {
-                AddTendance();
+                AddAverage();
             }
         }
-        private void cbxTendance_OnChange(object sender, EventArgs e)
+        /// <summary>
+        /// Check if the user want to see the trend
+        /// </summary>
+        private void refreshTend()
         {
-            refreshTend();
+            if (cbxTend.Checked)
+            {
+                AddTrend();
+            }
         }
-
+        /// <summary>
+        /// Event when the checkbox's value change, it refresh the average
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void cbxTrend_OnChange(object sender, EventArgs e)
+        {
+            refreshAvg();
+        }
+        /// <summary>
+        /// Event when the user click, move the selected value of the listbox into the right one 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnToRight_Click(object sender, EventArgs e)
         {
             ListBox lsbtmp = new ListBox();
@@ -152,7 +264,11 @@ namespace mdwBunifu
             }
             AddByType();
         }
-
+        /// <summary>
+        /// Event when the user click, move the selected value of the listbox into the left one
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnToLeft_Click(object sender, EventArgs e)
         {
             ListBox lsbtmp = new ListBox();
@@ -169,6 +285,11 @@ namespace mdwBunifu
 
         }
 
+        /// <summary>
+        /// Event when the user click on the pictureBox
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void pbAdd_Click(object sender, EventArgs e)
         {
             string type = tbxType.Text;
@@ -176,19 +297,25 @@ namespace mdwBunifu
             id = this.Model.GetTypeByName(type);
             if(id != 0)
             {
-                if (!lbxLeft.Items.Contains(type))
+                if (tbxType.Text != "")
                 {
-                    this.Model.AddHasType(id, this.Model.ConnectedUser.IdUser);
-                    lbxLeft.Items.Add(type);
+                    if (!lbxLeft.Items.Contains(type))
+                    {
+                        this.Model.AddHasType(id, this.Model.ConnectedUser.IdUser);
+                        lbxLeft.Items.Add(type);
+                    }
+                    else
+                    {
+                        lblError.Visible = true;
+                        System.Threading.Thread.Sleep(1000);
+                        lblError.Visible = false;
+
+                    }
                 }
                 else
                 {
-                    lblError.Visible = true;
-                    System.Threading.Thread.Sleep(1000);
-                    lblError.Visible = false;
-
+                    MessageBox.Show("Veuillez remplir le champ");
                 }
-                
             }
             else
             {
@@ -218,6 +345,10 @@ namespace mdwBunifu
             }
         }
 
-
+        private void cbxTend_OnChange(object sender, EventArgs e)
+        {
+            refreshTend();
+            
+        }
     }
 }

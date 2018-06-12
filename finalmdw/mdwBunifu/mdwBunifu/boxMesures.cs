@@ -41,7 +41,7 @@ namespace mdwBunifu
             InitializeComponent();
             Modele = modele;
             this.Modification = mod;
-
+            dtpDateMesure.Value = DateTime.Now;
             this.ModelInsu = new ModelMyInsulin();
             tbxInsuline.Enabled = false;
             btnDelete.Visible = false;
@@ -82,6 +82,7 @@ namespace mdwBunifu
         private void lblGlycemie_Click(object sender, EventArgs e)
         {
             MessageBox.Show("Champs obligatoire");
+
         }
 
         private void btnSendMesure_Click(object sender, EventArgs e)
@@ -232,6 +233,14 @@ namespace mdwBunifu
         private void btnDelete_Click(object sender, EventArgs e)
         {
             this.Modele.DelMeasure(this.Modele.Mes.IdMesure);
+        }
+
+        private void dtpDateMesure_onValueChanged(object sender, EventArgs e)
+        {
+            if(dtpDateMesure.Value > DateTime.Now)
+            {
+                dtpDateMesure.Value = DateTime.Now;
+            }
         }
     }
 }

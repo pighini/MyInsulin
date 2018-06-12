@@ -44,6 +44,12 @@ namespace mdwBunifu
             this.Email = email;
             
         }
+
+        public User(User connectedUser)
+        {
+            this.IdUser = connectedUser.IdUser;
+        }
+
         private bool _isDoctor;
 
         public bool IsDoctor     

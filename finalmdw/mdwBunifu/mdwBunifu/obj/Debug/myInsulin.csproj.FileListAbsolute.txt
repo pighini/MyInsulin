@@ -25,7 +25,6 @@ C:\Users\PIGHINIL_INFO\Desktop\MyInsulin\finalmdw\mdwBunifu\mdwBunifu\bin\Debug\
 C:\Users\PIGHINIL_INFO\Desktop\MyInsulin\finalmdw\mdwBunifu\mdwBunifu\bin\Debug\mdwBunifu.pdb
 C:\Users\PIGHINIL_INFO\Desktop\MyInsulin\finalmdw\mdwBunifu\mdwBunifu\bin\Debug\MySql.Data.dll
 C:\Users\PIGHINIL_INFO\Desktop\MyInsulin\finalmdw\mdwBunifu\mdwBunifu\bin\Debug\MySql.Data.xml
-C:\Users\PIGHINIL_INFO\Desktop\MyInsulin\finalmdw\mdwBunifu\mdwBunifu\obj\Debug\myInsulin.csprojResolveAssemblyReference.cache
 C:\Users\PIGHINIL_INFO\Desktop\MyInsulin\finalmdw\mdwBunifu\mdwBunifu\obj\Debug\mdwBunifu.boxMesures.resources
 C:\Users\PIGHINIL_INFO\Desktop\MyInsulin\finalmdw\mdwBunifu\mdwBunifu\obj\Debug\mdwBunifu.boxTableau.resources
 C:\Users\PIGHINIL_INFO\Desktop\MyInsulin\finalmdw\mdwBunifu\mdwBunifu\obj\Debug\mayDaylyWeyght.btnAccueil.resources
@@ -41,3 +40,4 @@ C:\Users\PIGHINIL_INFO\Desktop\MyInsulin\finalmdw\mdwBunifu\mdwBunifu\obj\Debug\
 C:\Users\PIGHINIL_INFO\Desktop\MyInsulin\finalmdw\mdwBunifu\mdwBunifu\obj\Debug\mdwBunifu.boxRecommandation.resources
 C:\Users\PIGHINIL_INFO\Desktop\MyInsulin\finalmdw\mdwBunifu\mdwBunifu\obj\Debug\mdwBunifu.boxTypes.resources
 C:\Users\PIGHINIL_INFO\Desktop\MyInsulin\finalmdw\mdwBunifu\mdwBunifu\obj\Debug\mdwBunifu.boxPatient.resources
+C:\Users\PIGHINIL_INFO\Desktop\MyInsulin\finalmdw\mdwBunifu\mdwBunifu\obj\Debug\myInsulin.csprojResolveAssemblyReference.cache

@@ -63,27 +63,33 @@ namespace mdwBunifu
         }
         private void add_Click(object sender, EventArgs e)
         {
-            int id = this.Model.GetLastId() + 1;
-            vRecommandation vReco = new vRecommandation(this.Model, id,0,0,0, this.IdUser, false)
+            if (plReco.Controls.Find("btnReco", true).Length <= 7)
             {
-                Name = "btnReco",
-                Tag = id,
-                Parent = plReco,
-                Location = new Point(23, locaY + (50 * cpt))
-            };
-            if (plReco.Controls.Count >= 1)
-            {
-                vReco.Top = oldReco.Bottom;
+                int id = this.Model.GetLastId() + 1;
+                vRecommandation vReco = new vRecommandation(this.Model, id, 0, 0, 0, this.IdUser, false)
+                {
+                    Name = "btnReco",
+                    Tag = id,
+                    Parent = plReco,
+                    Location = new Point(23, locaY + (50 * cpt))
+                };
+                if (plReco.Controls.Count >= 1)
+                {
+                    vReco.Top = oldReco.Bottom;
+                }
+                else
+                    vReco.Top = 0;
+
+
+                plReco.Controls.Add(vReco);
+                cpt++;
+                RemovePb();
+                oldReco = vReco;
             }
             else
-                vReco.Top = 0;
-
-           
-            plReco.Controls.Add(vReco);
-            cpt++;
-            RemovePb();
-            oldReco = vReco;
-            
+            {
+                MessageBox.Show("Nombre maximum de recommandation atteint");
+            }
         }
         private void RemovePb()
         {
