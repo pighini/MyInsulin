@@ -46,9 +46,9 @@
             // plReco
             // 
             this.plReco.AutoScroll = true;
-            this.plReco.Location = new System.Drawing.Point(123, 37);
+            this.plReco.Location = new System.Drawing.Point(39, 41);
             this.plReco.Name = "plReco";
-            this.plReco.Size = new System.Drawing.Size(335, 493);
+            this.plReco.Size = new System.Drawing.Size(495, 493);
             this.plReco.TabIndex = 1;
             this.plReco.ControlRemoved += new System.Windows.Forms.ControlEventHandler(this.plReco_ControlRemoved);
             // 

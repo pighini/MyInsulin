@@ -28,7 +28,8 @@ namespace mdwBunifu
             set { _modelMesure = value; }
         }
 
-        Dictionary<string, Image> btns = new Dictionary<string, Image>(); 
+        Dictionary<string, Image> btns = new Dictionary<string, Image>();
+        btnAccueil btnSelected;
 
         public frmMain(ModelUser model)
         {
@@ -38,6 +39,7 @@ namespace mdwBunifu
             this.Model = model;
             User usr = new User(this.Model.ConnectedUser);
             this.ModeleMesure = new ModelMeasure(usr);
+            string[] namesPatient;
             CreateLeftButtons();
             if(this.Model.ConnectedUser.IsDoctor)
             {
@@ -50,10 +52,7 @@ namespace mdwBunifu
                 ddPatient.selectedIndex = 0;
                 ddPatient.Visible = true;
                 lblPatient.Visible = true;
-                tbxGlycemie.Visible = true;
-                pbAdd.Visible = true;
-                pbDel.Visible = true;
-                string[] namesPatient = ddPatient.selectedValue.Split(' ');
+                namesPatient = ddPatient.selectedValue.Split(' ');
                 this.Model.ConnectedUser.IdUser = this.Model.ConnectedUser.IdUser;
               this.ModeleMesure.ConnectedUser.IdUser = this.Model.GetIdByNames(namesPatient[1],namesPatient[0]);
                
@@ -132,72 +131,75 @@ namespace mdwBunifu
         }
         private void toShow(object sender)
         {
-            btnAccueil selectedButton;
+            if(sender != null)
+            { 
             if (sender.GetType() == typeof(btnAccueil))
             {
-                selectedButton = (btnAccueil)sender;
+                btnSelected = (btnAccueil)sender;
             }
             else
             {
-                selectedButton = (btnAccueil)((Control)sender).Parent;
+                btnSelected = (btnAccueil)((Control)sender).Parent;
             }
-            int valueButton = (int)selectedButton.Tag;
-            selectedButton.BackColor = Color.MediumSeaGreen;
-            if (!this.Model.ConnectedUser.IsDoctor)
-            {
-                switch (valueButton)
+            int valueButton = (int)btnSelected.Tag;
+            btnSelected.BackColor = Color.MediumSeaGreen;
+                if (!this.Model.ConnectedUser.IsDoctor)
                 {
-                    case 1:
-                        closeMenu();
-                        showMesures();
-                        break;
-                    case 2:
+                    switch (valueButton)
+                    {
+                        case 1:
+                            closeMenu();
+                            showMesures();
+                            break;
+                        case 2:
 
-                        closeMenu();
-                        showGraph();
+                            closeMenu();
+                            showGraph();
 
-                        break;
-                    case 3:
-                        closeMenu();
-                        showTable();
+                            break;
+                        case 3:
+                            closeMenu();
+                            showTable();
 
-                        break;
-                    case 4:
-                        closeMenu();
-                        showReco();
+                            break;
+                        case 4:
+                            closeMenu();
+                            showReco();
 
-                        break;
-                   
+                            break;
 
+
+                    }
                 }
-            }
-            else
-            {
-               
-                switch (valueButton)
+
+                else
                 {
-                    case 1:
-                        closeMenu();
-                        showGraph();
-                        break;
-                    case 2:
 
-                        closeMenu();
-                        showTable();
+                    switch (valueButton)
+                    {
+                        case 1:
+                            closeMenu();
+                            showGraph();
+                            break;
+                        case 2:
 
-                        break;
-                    case 3:
-                        closeMenu();
-                        showReco();
+                            closeMenu();
+                            showTable();
 
-                        break;
-                    case 4:
-                        closeMenu();
-                        showPatient();
+                            break;
+                        case 3:
+                            closeMenu();
+                            showReco();
 
-                        break;
-                    
+                            break;
+                        case 4:
+                            closeMenu();
+                            showPatient();
 
+                            break;
+
+
+                    }
                 }
             }
         }
@@ -268,6 +270,12 @@ namespace mdwBunifu
             this.WindowState = FormWindowState.Minimized;
         }
 
+        private void ddPatient_onItemSelected(object sender, EventArgs e)
+        {
+            string[] namesPatient = ddPatient.selectedValue.Split(' ');
+            this.ModeleMesure.ConnectedUser.IdUser = this.Model.GetIdByNames(namesPatient[1], namesPatient[0]);
+            toShow(null);
 
+        }
     }
 }

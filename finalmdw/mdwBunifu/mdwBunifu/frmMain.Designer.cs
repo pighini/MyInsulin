@@ -30,9 +30,6 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain));
             this.plButtonAccueil = new System.Windows.Forms.Panel();
-            this.tbxGlycemie = new ns1.BunifuMetroTextbox();
-            this.pbAdd = new System.Windows.Forms.PictureBox();
-            this.pbDel = new System.Windows.Forms.PictureBox();
             this.lblPatient = new System.Windows.Forms.Label();
             this.ddPatient = new ns1.BunifuDropdown();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
@@ -40,8 +37,6 @@
             this.pbHide = new ns1.BunifuImageButton();
             this.btnClose = new ns1.BunifuImageButton();
             this.plButtonAccueil.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pbAdd)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbDel)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbHide)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnClose)).BeginInit();
@@ -49,9 +44,6 @@
             // 
             // plButtonAccueil
             // 
-            this.plButtonAccueil.Controls.Add(this.tbxGlycemie);
-            this.plButtonAccueil.Controls.Add(this.pbAdd);
-            this.plButtonAccueil.Controls.Add(this.pbDel);
             this.plButtonAccueil.Controls.Add(this.lblPatient);
             this.plButtonAccueil.Controls.Add(this.ddPatient);
             this.plButtonAccueil.Controls.Add(this.pictureBox1);
@@ -60,50 +52,12 @@
             this.plButtonAccueil.Size = new System.Drawing.Size(231, 572);
             this.plButtonAccueil.TabIndex = 0;
             // 
-            // tbxGlycemie
-            // 
-            this.tbxGlycemie.BorderColorFocused = System.Drawing.Color.SteelBlue;
-            this.tbxGlycemie.BorderColorIdle = System.Drawing.Color.White;
-            this.tbxGlycemie.BorderColorMouseHover = System.Drawing.Color.SteelBlue;
-            this.tbxGlycemie.BorderThickness = 1;
-            this.tbxGlycemie.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.tbxGlycemie.Font = new System.Drawing.Font("Century Gothic", 9.75F);
-            this.tbxGlycemie.ForeColor = System.Drawing.Color.White;
-            this.tbxGlycemie.isPassword = false;
-            this.tbxGlycemie.Location = new System.Drawing.Point(31, 505);
-            this.tbxGlycemie.Margin = new System.Windows.Forms.Padding(4);
-            this.tbxGlycemie.Name = "tbxGlycemie";
-            this.tbxGlycemie.Size = new System.Drawing.Size(124, 26);
-            this.tbxGlycemie.TabIndex = 30;
-            this.tbxGlycemie.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
-            this.tbxGlycemie.Visible = false;
-            // 
-            // pbAdd
-            // 
-            this.pbAdd.Image = global::mdwBunifu.Properties.Resources.icons8_plus_16;
-            this.pbAdd.Location = new System.Drawing.Point(162, 511);
-            this.pbAdd.Name = "pbAdd";
-            this.pbAdd.Size = new System.Drawing.Size(19, 18);
-            this.pbAdd.TabIndex = 29;
-            this.pbAdd.TabStop = false;
-            this.pbAdd.Visible = false;
-            // 
-            // pbDel
-            // 
-            this.pbDel.Image = global::mdwBunifu.Properties.Resources.icons8_multiplier_16;
-            this.pbDel.Location = new System.Drawing.Point(186, 511);
-            this.pbDel.Name = "pbDel";
-            this.pbDel.Size = new System.Drawing.Size(19, 18);
-            this.pbDel.TabIndex = 28;
-            this.pbDel.TabStop = false;
-            this.pbDel.Visible = false;
-            // 
             // lblPatient
             // 
             this.lblPatient.AutoSize = true;
             this.lblPatient.Font = new System.Drawing.Font("Century Gothic", 12F);
             this.lblPatient.ForeColor = System.Drawing.Color.White;
-            this.lblPatient.Location = new System.Drawing.Point(25, 478);
+            this.lblPatient.Location = new System.Drawing.Point(23, 512);
             this.lblPatient.Name = "lblPatient";
             this.lblPatient.Size = new System.Drawing.Size(73, 21);
             this.lblPatient.TabIndex = 11;
@@ -116,7 +70,7 @@
             this.ddPatient.BorderRadius = 3;
             this.ddPatient.ForeColor = System.Drawing.Color.White;
             this.ddPatient.Items = new string[0];
-            this.ddPatient.Location = new System.Drawing.Point(104, 478);
+            this.ddPatient.Location = new System.Drawing.Point(102, 512);
             this.ddPatient.Name = "ddPatient";
             this.ddPatient.NomalColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(139)))), ((int)(((byte)(87)))));
             this.ddPatient.onHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(36)))), ((int)(((byte)(129)))), ((int)(((byte)(77)))));
@@ -124,6 +78,7 @@
             this.ddPatient.Size = new System.Drawing.Size(102, 23);
             this.ddPatient.TabIndex = 1;
             this.ddPatient.Visible = false;
+            this.ddPatient.onItemSelected += new System.EventHandler(this.ddPatient_onItemSelected);
             // 
             // pictureBox1
             // 
@@ -191,8 +146,6 @@
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmMain_FormClosing);
             this.plButtonAccueil.ResumeLayout(false);
             this.plButtonAccueil.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pbAdd)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbDel)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbHide)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnClose)).EndInit();
@@ -208,9 +161,6 @@
         private ns1.BunifuImageButton pbHide;
         private ns1.BunifuDropdown ddPatient;
         private System.Windows.Forms.Label lblPatient;
-        private System.Windows.Forms.PictureBox pbAdd;
-        private System.Windows.Forms.PictureBox pbDel;
-        private ns1.BunifuMetroTextbox tbxGlycemie;
     }
 }
 
