@@ -74,12 +74,6 @@
     <Compile Include="boxTableau.Designer.cs">
       <DependentUpon>boxTableau.cs</DependentUpon>
     </Compile>
-    <Compile Include="boxTypes.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="boxTypes.Designer.cs">
-      <DependentUpon>boxTypes.cs</DependentUpon>
-    </Compile>
     <Compile Include="btnAccueil.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -131,9 +125,6 @@
     <EmbeddedResource Include="boxTableau.resx">
       <DependentUpon>boxTableau.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="boxTypes.resx">
-      <DependentUpon>boxTypes.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="btnAccueil.resx">
       <DependentUpon>btnAccueil.cs</DependentUpon>
     </EmbeddedResource>
@@ -159,6 +150,7 @@
     <EmbeddedResource Include="vRecommandation.resx">
       <DependentUpon>vRecommandation.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="ClassDiagramInsulin.cd" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -252,6 +244,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\icons8-effacer-16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\recommandation.PNG" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\recommandation1.PNG" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

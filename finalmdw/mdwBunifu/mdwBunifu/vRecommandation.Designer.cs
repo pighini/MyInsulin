@@ -59,7 +59,7 @@
             this.tbxMin.Name = "tbxMin";
             this.tbxMin.Size = new System.Drawing.Size(62, 44);
             this.tbxMin.TabIndex = 0;
-            this.tbxMin.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            this.tbxMin.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.tbxMin.OnValueChanged += new System.EventHandler(this.tbx_OnValueChanged);
             // 
             // tbxMax
@@ -74,12 +74,12 @@
             this.tbxMax.LineIdleColor = System.Drawing.Color.White;
             this.tbxMax.LineMouseHoverColor = System.Drawing.Color.SeaGreen;
             this.tbxMax.LineThickness = 3;
-            this.tbxMax.Location = new System.Drawing.Point(117, 7);
+            this.tbxMax.Location = new System.Drawing.Point(117, 5);
             this.tbxMax.Margin = new System.Windows.Forms.Padding(4);
             this.tbxMax.Name = "tbxMax";
             this.tbxMax.Size = new System.Drawing.Size(62, 44);
             this.tbxMax.TabIndex = 1;
-            this.tbxMax.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            this.tbxMax.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.tbxMax.OnValueChanged += new System.EventHandler(this.tbx_OnValueChanged);
             // 
             // label1
@@ -103,7 +103,7 @@
             this.tbxReco.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbxReco.ForeColor = System.Drawing.Color.White;
             this.tbxReco.isPassword = false;
-            this.tbxReco.Location = new System.Drawing.Point(257, 4);
+            this.tbxReco.Location = new System.Drawing.Point(257, 5);
             this.tbxReco.Margin = new System.Windows.Forms.Padding(4);
             this.tbxReco.Name = "tbxReco";
             this.tbxReco.Size = new System.Drawing.Size(67, 44);

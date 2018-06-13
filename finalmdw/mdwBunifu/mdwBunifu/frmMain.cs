@@ -41,9 +41,12 @@ namespace mdwBunifu
             this.ModeleMesure = new ModelMeasure(usr);
             string[] namesPatient;
             CreateLeftButtons();
+            
             if(this.Model.ConnectedUser.IsDoctor)
             {
                 List<string> names = new List<string>();
+                btnSelected = (btnAccueil)plButtonAccueil.Controls.Find("Patients",true).ToArray()[0];
+
                 foreach (var item in this.Model.GetAllUserForDoc())
                 {
                     names.Add(item[0] + " " + item[1]);
@@ -57,7 +60,11 @@ namespace mdwBunifu
               this.ModeleMesure.ConnectedUser.IdUser = this.Model.GetIdByNames(namesPatient[1],namesPatient[0]);
                
             }
-
+            else
+            {
+                btnSelected = (btnAccueil)plButtonAccueil.Controls.Find("Mesures",true).ToArray()[0];
+            }
+            toShow(null);
         }
         private void CreateLeftButtons()
         {
@@ -86,7 +93,6 @@ namespace mdwBunifu
                 
                 btnAccueil btnLeft = new btnAccueil(btn.Key, btn.Value,new Point(0,locaY));
                 locaY += 69;
-                btnLeft.Name = "btnAccueil" + cpt.ToString();
                 btnLeft.Tag = cpt;
                 btnLeft.Parent = plButtonAccueil;
                 btnLeft.Click += btnAccueil_Click;
@@ -131,15 +137,16 @@ namespace mdwBunifu
         }
         private void toShow(object sender)
         {
-            if(sender != null)
-            { 
-            if (sender.GetType() == typeof(btnAccueil))
+            if (sender != null)
             {
-                btnSelected = (btnAccueil)sender;
-            }
-            else
-            {
-                btnSelected = (btnAccueil)((Control)sender).Parent;
+                if (sender.GetType() == typeof(btnAccueil))
+                {
+                    btnSelected = (btnAccueil)sender;
+                }
+                else
+                {
+                    btnSelected = (btnAccueil)((Control)sender).Parent;
+                }
             }
             int valueButton = (int)btnSelected.Tag;
             btnSelected.BackColor = Color.MediumSeaGreen;
@@ -201,7 +208,7 @@ namespace mdwBunifu
 
                     }
                 }
-            }
+            
         }
 
         private void showGraph()

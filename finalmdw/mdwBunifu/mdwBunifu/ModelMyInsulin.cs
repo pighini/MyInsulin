@@ -7,9 +7,12 @@ using System.Threading.Tasks;
 
 namespace mdwBunifu
 {
+
     public class ModelMyInsulin
     {
+        private InsulineTable insuT;
         private Connexion myConnexion = new Connexion();
+
         public List<InsulineTable> GetRecommandation(int idUser)
         {
 

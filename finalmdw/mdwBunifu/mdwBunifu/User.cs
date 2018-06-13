@@ -57,8 +57,5 @@ namespace mdwBunifu
             get { return _isDoctor; }
             set { _isDoctor = value; }
         }
-       
-
-
     }
 }

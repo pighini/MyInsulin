@@ -52,7 +52,7 @@ namespace mdwBunifu
                     Name = "btnReco",
                     Tag = reco.IdReco,
                     Parent = plReco,
-                    Location = new Point(23, locaY + (50 * cpt))
+                    Location = new Point(55, locaY + (50 * cpt))
                 };
                 plReco.Controls.Add(vReco);
                 cpt++;
@@ -63,7 +63,7 @@ namespace mdwBunifu
         }
         private void add_Click(object sender, EventArgs e)
         {
-            if (plReco.Controls.Find("btnReco", true).Length <= 7)
+            if (plReco.Controls.Find("btnReco", true).Length <= 6)
             {
                 int id = this.Model.GetLastId() + 1;
                 vRecommandation vReco = new vRecommandation(this.Model, id, 0, 0, 0, this.IdUser, false)
@@ -71,7 +71,7 @@ namespace mdwBunifu
                     Name = "btnReco",
                     Tag = id,
                     Parent = plReco,
-                    Location = new Point(23, locaY + (50 * cpt))
+                    Location = new Point(55, locaY + (50 * cpt))
                 };
                 if (plReco.Controls.Count >= 1)
                 {
@@ -101,8 +101,7 @@ namespace mdwBunifu
         {
             PictureBox pbAdd = new PictureBox();
             pbAdd.Name = "add";
-            pbAdd.Location = new Point(80, 40 + locaY + (50 * plReco.Controls.Count));
-            //pbAdd.Top = oldReco.Bottom;
+            pbAdd.Location = new Point(200, 40 + locaY + (50 * plReco.Controls.Count));
             pbAdd.Image = Properties.Resources.icons8_plus_50__1_;
             pbAdd.Click += add_Click;
             plReco.Controls.Add(pbAdd);

@@ -87,7 +87,7 @@ namespace mdwBunifu
                 }
 
             }
-            if (cbxTendance.Checked)
+            if (cbxMoyenne.Checked)
             {
                 addTendanceLabel();
             }
@@ -109,7 +109,7 @@ namespace mdwBunifu
                      dt = DateTime.Parse(mes.DateMesure);
                     toshow = dt.ToString("yyyy-MM-dd");                                                           
                     addDate(toshow);              
-                    if (cbxTendance.Checked)
+                    if (cbxMoyenne.Checked)
                     {
                         fillWithtend(toshow);
                         tend = 0;

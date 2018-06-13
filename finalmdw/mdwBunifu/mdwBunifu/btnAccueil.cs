@@ -45,6 +45,7 @@ namespace mayDaylyWeyght
             this.pbImage.Image = ImageBtn;
             this.Loca = loca;
             this.Location = this.Loca;
+            this.Name = nom;
         }
         
         private void btnAccueil_MouseHover(object sender, EventArgs e)

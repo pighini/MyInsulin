@@ -1,0 +1,175 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="mdwBunifu.Measure" Collapsed="true">
+    <Position X="1.5" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAVAABIIAAFAAAAAAIAAAQAAIAQAAAA=</HashCode>
+      <FileName>Measure.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="mdwBunifu.ModelMeasure" Collapsed="true">
+    <Position X="1.25" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AABIAAAAAFBACAABAAEAAgIgAAACIggAAISAJQAAAUA=</HashCode>
+      <FileName>ModelMeasure.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_mes" />
+      <Field Name="myConnexion" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="mdwBunifu.ModelMyInsulin">
+    <Position X="4" Y="5.75" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Methods" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAABABABAAAAAAAAIAAAEAIAAAAAIABAAAAEA=</HashCode>
+      <FileName>ModelMyInsulin.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="myConnexion" />
+      <Field Name="insuT" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="mdwBunifu.ModelUser" Collapsed="true">
+    <Position X="7.25" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAIAAAAAAAAAAAAAAAgIACEAAAEAgAAACJQIIAAQ=</HashCode>
+      <FileName>ModelUser.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_connectedUser" />
+      <Field Name="myConnexion" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="mdwBunifu.User" Collapsed="true">
+    <Position X="8.75" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEAAEAACCAAAAAAAAEAAAAAAAQAAAAAAAACAAABAAk=</HashCode>
+      <FileName>User.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="mdwBunifu.frmMain" Collapsed="true">
+    <Position X="5.5" Y="1.75" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Methods" Collapsed="true" />
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <AssociationLine Name="ModeleMesure" Type="mdwBunifu.ModelMeasure" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="6.125" Y="2.441" />
+        <Point X="6.125" Y="4.09" />
+        <Point X="4.958" Y="4.09" Type="JumpStart" />
+        <Point X="4.792" Y="4.09" Type="JumpEnd" />
+        <Point X="3.583" Y="4.09" Type="JumpStart" />
+        <Point X="3.417" Y="4.09" Type="JumpEnd" />
+        <Point X="2.862" Y="4.09" />
+        <Point X="2.862" Y="4.402" />
+        <Point X="2.75" Y="4.402" />
+      </Path>
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="0.079" Y="0.31" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAAIAAAAACAAAQAgQlDAAgBiAAAUYLAIYNgAAABAIAA=</HashCode>
+      <FileName>frmMain.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Model" />
+      <Property Name="ModeleMesure" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="mdwBunifu.frm_login" Collapsed="true">
+    <Position X="10.25" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>I4UAAKSSACBggABiIACKIBASSECACkFAAAgFC0BAAAc=</HashCode>
+      <FileName>frm_login.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_modelUser" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="mdwBunifu.Connexion" Collapsed="true">
+    <Position X="4" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAEAAAEAABAAIQAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Connexion.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="mdwBunifu.boxTableau" Collapsed="true">
+    <Position X="8.5" Y="2.75" Width="1.5" />
+    <AssociationLine Name="_model" Type="mdwBunifu.ModelMeasure">
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="0.297" Y="0.029" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AEAICBCwCCTBwBAAQiCAkAACCAAEAAIBAKgAAREAAAI=</HashCode>
+      <FileName>boxTableau.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_model" />
+      <Field Name="_modelUser" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="mdwBunifu.boxGraphique" Collapsed="true">
+    <Position X="6.75" Y="2.75" Width="1.5" />
+    <AssociationLine Name="_model" Type="mdwBunifu.ModelMeasure" ManuallyRouted="true">
+      <Path>
+        <Point X="6.75" Y="3.096" />
+        <Point X="6.594" Y="3.096" Type="JumpStart" />
+        <Point X="6.427" Y="3.096" Type="JumpEnd" />
+        <Point X="6.333" Y="3.096" />
+        <Point X="6.333" Y="5.024" />
+        <Point X="4.958" Y="5.024" Type="JumpStart" />
+        <Point X="4.792" Y="5.024" Type="JumpEnd" />
+        <Point X="3.583" Y="5.024" Type="JumpStart" />
+        <Point X="3.417" Y="5.024" Type="JumpEnd" />
+        <Point X="2.879" Y="5.024" />
+        <Point X="2.879" Y="4.638" />
+        <Point X="2.75" Y="4.638" />
+      </Path>
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="0.297" Y="-0.325" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AYAAAAAAACAAFBEIAhOEAAAaAIAlAAQoEBkAAgAKkUQ=</HashCode>
+      <FileName>boxGraphique.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_model" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="mdwBunifu.boxMesures" Collapsed="true">
+    <Position X="2.5" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>JAAAAAABECBIABAAA0CAAAIKAEAIAAAECCgAEACgAQQ=</HashCode>
+      <FileName>boxMesures.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_model" />
+      <Field Name="_modelInsu" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="mdwBunifu.boxRecommandation" Collapsed="true">
+    <Position X="4.25" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAGCCAAAAAAgCAQEAiAAAAAAAAEIgAAAABgAA=</HashCode>
+      <FileName>boxRecommandation.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_model" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="mdwBunifu.InsulineTable" Collapsed="true">
+    <Position X="6.25" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAACBAAAAAAEAAAAAAAAAAAIAAAEBhAACABAAA=</HashCode>
+      <FileName>InsulineTable.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

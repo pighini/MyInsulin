@@ -95,6 +95,8 @@ namespace mdwBunifu
             double min;
             double max;
             double reco;
+            double minbdd;
+            double recobdd;
             try
             {
                  min = Convert.ToDouble(tbxMin.Text);
@@ -107,8 +109,9 @@ namespace mdwBunifu
                 max = 0;
                 reco = 0;
             }
-
-            if ( min < this.Modele.GetMaxGluc(this.IdUser) || max < min || reco < this.Modele.getMaxReco(this.IdUser) )
+            minbdd = this.Modele.GetMaxGluc(this.IdUser);
+            recobdd = this.Modele.getMaxReco(this.IdUser);
+            if ( min <=  minbdd|| max < min || reco < recobdd )
             {
                 pbChange.Image = Properties.Resources.icons8_edit_property_26_red;
                 toAdd = false;
