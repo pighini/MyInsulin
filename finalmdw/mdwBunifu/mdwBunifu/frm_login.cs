@@ -94,7 +94,7 @@ namespace mdwBunifu
             {
                 lblErrorConnection.Text = "";
 
-                if (!Modele.UserExist(email))
+                if (!Modele.UserExistbyEmail(email) && !Modele.UserExistbyNames(lastName,firstName))
                 {
                     lblErrorUsername.Text = "";
                     if (tbxNewPassword.Text == "")
@@ -136,7 +136,7 @@ namespace mdwBunifu
             if (Modele.isCoOpen())
             {
                 lblErrorConnection.Text = "";
-                if (Modele.loginUser(email, password))
+                if (Modele.LoginUser(email, password))
                 {
                     lblErrorLogin.Text = "";
                     this.Hide();

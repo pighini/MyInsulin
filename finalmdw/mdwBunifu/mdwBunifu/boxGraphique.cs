@@ -221,7 +221,7 @@ namespace mdwBunifu
         /// </summary>
         private void refreshAvg()
         {
-            if(cbxMoyenne.Checked)
+            if(cbxAvg.Checked)
             {
                 AddAverage();
             }
@@ -349,6 +349,11 @@ namespace mdwBunifu
         {
             refreshTend();
             
+        }
+        private void cbxAvg_OnChange(object sender, EventArgs e)
+        {
+            refreshAvg();
+
         }
     }
 }

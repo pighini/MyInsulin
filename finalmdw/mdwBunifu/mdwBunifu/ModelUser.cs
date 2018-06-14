@@ -10,7 +10,7 @@ namespace mdwBunifu
 {
     public class ModelUser
     {
-        private Connexion myConnexion = new Connexion();
+        private Connection myConnexion = new Connection();
 
         private User _connectedUser;
 
@@ -43,7 +43,7 @@ namespace mdwBunifu
                 myConnexion.OpenConnection();
 
                 // Création d'une commande SQL en fonction de l'objet connection
-                MySqlCommand cmd = myConnexion.Connection.CreateCommand();
+                MySqlCommand cmd = myConnexion.myConnection.CreateCommand();
 
                 // Requête SQL
                 cmd.CommandText = "INSERT INTO `users`(`firstName`,`lastName`,`email`, `password`, `isDoctor`) VALUES (@fName, @lName, @email, @password, @isDoctor)";
@@ -79,10 +79,10 @@ namespace mdwBunifu
             myConnexion.OpenConnection();
 
             // Création d'une commande SQL en fonction de l'objet connection
-            MySqlCommand cmd = myConnexion.Connection.CreateCommand();
+            MySqlCommand cmd = myConnexion.myConnection.CreateCommand();
 
             // Requête SQL
-            cmd.CommandText = "SELECT * FROM `users` WHERE `firstName` =@fName AND `lastName` =@lName AND `password` =@pwd;";
+            cmd.CommandText = "SELECT `idUser` FROM `users` WHERE `firstName` =@fName AND `lastName` =@lName AND `password` =@pwd;";
 
             // utilisation de l'objet contact passé en paramètre
             cmd.Parameters.AddWithValue("@lName", lName);
@@ -111,7 +111,7 @@ namespace mdwBunifu
             myConnexion.OpenConnection();
 
             // Création d'une commande SQL en fonction de l'objet connection
-            MySqlCommand cmd = myConnexion.Connection.CreateCommand();
+            MySqlCommand cmd = myConnexion.myConnection.CreateCommand();
 
             // Requête SQL
             cmd.CommandText = "SELECT * FROM `users` WHERE `firstName` =@fName AND `lastName` =@lName";
@@ -141,12 +141,12 @@ namespace mdwBunifu
         {
 
 
-            Connexion connect = new Connexion();
+            Connection connect = new Connection();
             // Ouverture de la connexion SQL
             connect.OpenConnection();
 
             // Création d'une commande SQL en fonction de l'objet connection
-            MySqlCommand cmd = connect.Connection.CreateCommand();
+            MySqlCommand cmd = connect.myConnection.CreateCommand();
 
             // Requête SQL
             cmd.CommandText = "SELECT `lastName` ,`firstName` FROM `users` WHERE `idMedecin` = @idMedecin";
@@ -164,14 +164,14 @@ namespace mdwBunifu
 
             return users;
         }
-        public bool UserExist(string email)
+        public bool UserExistbyEmail(string email)
         {
             int nbResultat = 0;
             // Ouverture de la connexion SQL
             myConnexion.OpenConnection();
 
             // Création d'une commande SQL en fonction de l'objet connection
-            MySqlCommand cmd = myConnexion.Connection.CreateCommand();
+            MySqlCommand cmd = myConnexion.myConnection.CreateCommand();
 
             // Requête SQL
             cmd.CommandText = "SELECT * FROM `users` WHERE `email` = @email;";
@@ -204,6 +204,45 @@ namespace mdwBunifu
 
             }
         }
+        public bool UserExistbyNames(string nom, string prenom)
+        {
+            int nbResultat = 0;
+            // Ouverture de la connexion SQL
+            myConnexion.OpenConnection();
+
+            // Création d'une commande SQL en fonction de l'objet connection
+            MySqlCommand cmd = myConnexion.myConnection.CreateCommand();
+
+            // Requête SQL
+            cmd.CommandText = "SELECT * FROM `users` WHERE `lastName` = @lName  AND `firstName` = @fName;";
+
+            // utilisation de l'objet contact passé en paramètre
+            cmd.Parameters.AddWithValue("@lName", nom);
+            cmd.Parameters.AddWithValue("@fName", prenom);
+
+            MySqlDataReader reader = cmd.ExecuteReader();
+
+
+            while (reader.Read())
+            {
+                nbResultat++;
+            }
+
+            reader.Close();
+
+            // Fermeture de la connexion
+            myConnexion.CloseConnection();
+
+            if (nbResultat == 0)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+
+            }
+        }
         public bool CheckPatient(string fName, string lName, string password)
         {
             int nbResultat = 0;
@@ -211,7 +250,7 @@ namespace mdwBunifu
             myConnexion.OpenConnection();
 
             // Création d'une commande SQL en fonction de l'objet connection
-            MySqlCommand cmd = myConnexion.Connection.CreateCommand();
+            MySqlCommand cmd = myConnexion.myConnection.CreateCommand();
 
             // Requête SQL
             cmd.CommandText = "SELECT * FROM `users` WHERE `firstName` =@fName AND `lastName` =@lName AND `password` =@pwd;";
@@ -253,7 +292,7 @@ namespace mdwBunifu
             myConnexion.OpenConnection();
 
             // Création d'une commande SQL en fonction de l'objet connection
-            MySqlCommand cmd = myConnexion.Connection.CreateCommand();
+            MySqlCommand cmd = myConnexion.myConnection.CreateCommand();
 
             // Requête SQL
             cmd.CommandText = "UPDATE `users` SET `idMedecin`= @idMed WHERE `idUser` = @idUser";
@@ -283,14 +322,14 @@ namespace mdwBunifu
             SHA1CryptoServiceProvider cryptoTransformSHA1 = new SHA1CryptoServiceProvider();
             return BitConverter.ToString(cryptoTransformSHA1.ComputeHash(buffer)).Replace("-", "");
         }
-        public bool loginUser(string email, string password)
+        public bool LoginUser(string email, string password)
         {
             int nbResultat = 0;
             // Ouverture de la connexion SQL
             myConnexion.OpenConnection();
 
             // Création d'une commande SQL en fonction de l'objet connection
-            MySqlCommand cmd = myConnexion.Connection.CreateCommand();
+            MySqlCommand cmd = myConnexion.myConnection.CreateCommand();
 
             // Requête SQL
             cmd.CommandText = "SELECT * FROM `users` WHERE `email` = @email AND `password` = @password;";
@@ -332,12 +371,12 @@ namespace mdwBunifu
         private bool IsDoctor()
         {
             bool isDoc;
-            Connexion connect = new Connexion();
+            Connection connect = new Connection();
             // Ouverture de la connexion SQL
             connect.OpenConnection();
 
             // Création d'une commande SQL en fonction de l'objet connection
-            MySqlCommand cmd = connect.Connection.CreateCommand();
+            MySqlCommand cmd = connect.myConnection.CreateCommand();
 
             // Requête SQL
             cmd.CommandText = "SELECT `isDoctor` FROM `users` WHERE `email` = @email;";
@@ -355,12 +394,12 @@ namespace mdwBunifu
         public int GetId()
         {
             int idUser;
-            Connexion connect = new Connexion();
+            Connection connect = new Connection();
             // Ouverture de la connexion SQL
             connect.OpenConnection();
 
             // Création d'une commande SQL en fonction de l'objet connection
-            MySqlCommand cmd = connect.Connection.CreateCommand();
+            MySqlCommand cmd = connect.myConnection.CreateCommand();
 
             // Requête SQL
             cmd.CommandText = "SELECT `idUser` FROM `users` WHERE `email` = @email;";

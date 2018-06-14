@@ -10,7 +10,7 @@ namespace mdwBunifu
 {
     public class ModelMeasure
     {
-        private Connexion myConnexion = new Connexion();
+        private Connection myConnexion = new Connection();
         private User _connectedUser;
 
         private Measure _mes;
@@ -46,12 +46,12 @@ namespace mdwBunifu
         public List<Measure> GetMesureWeekly(int interval, string unit, string date)
         {
 
-            Connexion connect = new Connexion();
+            Connection connect = new Connection();
             // Ouverture de la connexion SQL
             connect.OpenConnection();
 
             // Création d'une commande SQL en fonction de l'objet connection
-            MySqlCommand cmd = connect.Connection.CreateCommand();
+            MySqlCommand cmd = connect.myConnection.CreateCommand();
 
             // Requête SQL
             cmd.CommandText = "SELECT * FROM `measures` WHERE `dateofMeasure` < @date and `dateofMeasure` > DATE_SUB( @date , INTERVAL @interval " + unit + ") and idUser = @idUser ORDER BY `dateofMeasure` ASC";
@@ -78,50 +78,16 @@ namespace mdwBunifu
 
             return measures;
         }
-        public List<Measure> GetMesure(string dateDebut, string dateFin)
-        {
-
-            Connexion connect = new Connexion();
-            // Ouverture de la connexion SQL
-            connect.OpenConnection();
-
-            // Création d'une commande SQL en fonction de l'objet connection
-            MySqlCommand cmd = connect.Connection.CreateCommand();
-
-            // Requête SQL
-            cmd.CommandText = "SELECT * FROM `measures` WHERE `idUser` = @idUser AND `dateofMeasure` >= @dateDeb AND `dateofMeasure` <= @dateFin ";
-            cmd.Parameters.AddWithValue("@dateDeb", dateDebut);
-            cmd.Parameters.AddWithValue("@dateFin", dateFin);
-            cmd.Parameters.AddWithValue("@idUser", ConnectedUser.IdUser);
-
-
-
-
-            MySqlDataReader data = cmd.ExecuteReader();
-            List<Measure> measures = new List<Measure>();
-            while (data.Read())
-            {
-                measures.Add(new Measure((int)data["idMeasure"],
-               (double)data["glucose"],
-               (double)data["insulinRecommandation"],
-               (string)data["commentary"],
-                GetTypeById((int)data["idType"]),
-               ((DateTime)data["dateofMeasure"]).ToString()));
-
-            }
-            data.Close();
-
-            return measures;
-        }
+      
         public List<Measure> GetMesureByType(string dateDebut, string dateFin, int type)
         {
 
-            Connexion connect = new Connexion();
+            Connection connect = new Connection();
             // Ouverture de la connexion SQL
             connect.OpenConnection();
 
             // Création d'une commande SQL en fonction de l'objet connection
-            MySqlCommand cmd = connect.Connection.CreateCommand();
+            MySqlCommand cmd = connect.myConnection.CreateCommand();
 
             // Requête SQL
             cmd.CommandText = "SELECT * FROM `measures` WHERE `idUser` = @idUser AND `dateofMeasure` >= @dateDeb AND `dateofMeasure` <= @dateFin AND `idType`= @type ";
@@ -153,12 +119,12 @@ namespace mdwBunifu
         public string GetTypeById(int id)
         {
 
-            Connexion connect = new Connexion();
+            Connection connect = new Connection();
             // Ouverture de la connexion SQL
             connect.OpenConnection();
 
             // Création d'une commande SQL en fonction de l'objet connection
-            MySqlCommand cmd = connect.Connection.CreateCommand();
+            MySqlCommand cmd = connect.myConnection.CreateCommand();
 
             // Requête SQL
             cmd.CommandText = "SELECT type FROM `types` WHERE idType = @idType";
@@ -180,12 +146,12 @@ namespace mdwBunifu
         public int GetTypeByName(string type)
         {
 
-            Connexion connect = new Connexion();
+            Connection connect = new Connection();
             // Ouverture de la connexion SQL
             connect.OpenConnection();
 
             // Création d'une commande SQL en fonction de l'objet connection
-            MySqlCommand cmd = connect.Connection.CreateCommand();
+            MySqlCommand cmd = connect.myConnection.CreateCommand();
 
             // Requête SQL
             cmd.CommandText = "SELECT idType FROM `types` WHERE type = @type";
@@ -211,12 +177,12 @@ namespace mdwBunifu
         public int GetHasType(int idtype)
         {
 
-            Connexion connect = new Connexion();
+            Connection connect = new Connection();
             // Ouverture de la connexion SQL
             connect.OpenConnection();
 
             // Création d'une commande SQL en fonction de l'objet connection
-            MySqlCommand cmd = connect.Connection.CreateCommand();
+            MySqlCommand cmd = connect.myConnection.CreateCommand();
 
             // Requête SQL
             cmd.CommandText = "SELECT idType FROM `hastypes` WHERE idType = @idtype";
@@ -248,7 +214,7 @@ namespace mdwBunifu
                 myConnexion.OpenConnection();
 
                 // Création d'une commande SQL en fonction de l'objet connection
-                MySqlCommand cmd = myConnexion.Connection.CreateCommand();
+                MySqlCommand cmd = myConnexion.myConnection.CreateCommand();
 
                 // Requête SQL
                 cmd.CommandText = "INSERT INTO `types`( `type`) VALUES (@type)";
@@ -272,12 +238,12 @@ namespace mdwBunifu
         }
         public void DeleteType(int id)
         {
-            Connexion connect = new Connexion();
+            Connection connect = new Connection();
             // Ouverture de la connexion SQL
             connect.OpenConnection();
 
             // Création d'une commande SQL en fonction de l'objet connection
-            MySqlCommand cmd = connect.Connection.CreateCommand();
+            MySqlCommand cmd = connect.myConnection.CreateCommand();
 
             // Requête SQL
             cmd.CommandText = "DELETE FROM `hastypes` WHERE `idType` = @idType";
@@ -295,12 +261,12 @@ namespace mdwBunifu
         public int GetLastId()
         {
 
-            Connexion connect = new Connexion();
+            Connection connect = new Connection();
             // Ouverture de la connexion SQL
             connect.OpenConnection();
 
             // Création d'une commande SQL en fonction de l'objet connection
-            MySqlCommand cmd = connect.Connection.CreateCommand();
+            MySqlCommand cmd = connect.myConnection.CreateCommand();
 
             // Requête SQL
             cmd.CommandText = "SELECT `idType` FROM `insulintables` ORDER BY `idInsulinTable`DESC";
@@ -328,7 +294,7 @@ namespace mdwBunifu
                 myConnexion.OpenConnection();
 
                 // Création d'une commande SQL en fonction de l'objet connection
-                MySqlCommand cmd = myConnexion.Connection.CreateCommand();
+                MySqlCommand cmd = myConnexion.myConnection.CreateCommand();
 
                 // Requête SQL
                 cmd.CommandText = "INSERT INTO `hastypes`(`idType`, `idUser`) VALUES ("+idType+" , "+idUser+")";
@@ -351,12 +317,12 @@ namespace mdwBunifu
         public double GetMesureDate(string date)
         {
 
-            Connexion connect = new Connexion();
+            Connection connect = new Connection();
             // Ouverture de la connexion SQL
             connect.OpenConnection();
 
             // Création d'une commande SQL en fonction de l'objet connection
-            MySqlCommand cmd = connect.Connection.CreateCommand();
+            MySqlCommand cmd = connect.myConnection.CreateCommand();
 
             // Requête SQL
             cmd.CommandText = "SELECT avg(`glucose`) as glucose FROM `measures` WHERE `dateofMeasure` = @date";
@@ -384,12 +350,12 @@ namespace mdwBunifu
         public Measure GetMesureById(int id)
         {
 
-            Connexion connect = new Connexion();
+            Connection connect = new Connection();
             // Ouverture de la connexion SQL
             connect.OpenConnection();
 
             // Création d'une commande SQL en fonction de l'objet connection
-            MySqlCommand cmd = connect.Connection.CreateCommand();
+            MySqlCommand cmd = connect.myConnection.CreateCommand();
 
             // Requête SQL
             cmd.CommandText = "SELECT * FROM `measures` WHERE  idMeasure = @idMesure";
@@ -418,12 +384,12 @@ namespace mdwBunifu
         {
 
 
-            Connexion connect = new Connexion();
+            Connection connect = new Connection();
             // Ouverture de la connexion SQL
             connect.OpenConnection();
 
             // Création d'une commande SQL en fonction de l'objet connection
-            MySqlCommand cmd = connect.Connection.CreateCommand();
+            MySqlCommand cmd = connect.myConnection.CreateCommand();
 
             // Requête SQL
             cmd.CommandText = "SELECT * FROM `types`";
@@ -444,12 +410,12 @@ namespace mdwBunifu
         {
 
 
-            Connexion connect = new Connexion();
+            Connection connect = new Connection();
             // Ouverture de la connexion SQL
             connect.OpenConnection();
 
             // Création d'une commande SQL en fonction de l'objet connection
-            MySqlCommand cmd = connect.Connection.CreateCommand();
+            MySqlCommand cmd = connect.myConnection.CreateCommand();
 
             // Requête SQL
             cmd.CommandText = "SELECT t.type FROM `hastypes` as h, `types` as t WHERE h.idUser = @idUser AND h.idType=t.idType ORDER BY `type` ASC ";
@@ -470,12 +436,12 @@ namespace mdwBunifu
         public List<string> GetTypesWeekly(int interval, string unit, string date)
         {
 
-            Connexion connect = new Connexion();
+            Connection connect = new Connection();
             // Ouverture de la connexion SQL
             connect.OpenConnection();
 
             // Création d'une commande SQL en fonction de l'objet connection
-            MySqlCommand cmd = connect.Connection.CreateCommand();
+            MySqlCommand cmd = connect.myConnection.CreateCommand();
 
             // Requête SQL
             cmd.CommandText = "SELECT DISTINCT idType FROM `measures` WHERE `dateofMeasure` < @date and `dateofMeasure` > DATE_SUB( @date , INTERVAL @interval " + unit + ") and idUser = @idUser ORDER BY `dateofMeasure` ASC";
@@ -498,14 +464,14 @@ namespace mdwBunifu
 
             return types;
         }
-        public bool verifMeasure(string date, string type)
+        public bool VerifMeasure(string date, string type)
         {
             int nbResultat = 0;
             // Ouverture de la connexion SQL
             myConnexion.OpenConnection();
 
             // Création d'une commande SQL en fonction de l'objet connection
-            MySqlCommand cmd = myConnexion.Connection.CreateCommand();
+            MySqlCommand cmd = myConnexion.myConnection.CreateCommand();
 
             // Requête SQL
             cmd.CommandText = "SELECT idMeasure FROM `measures` WHERE `dateofMeasure` = '" + date + "' AND `idType` ='" + GetTypeByName(type) + "';";
@@ -570,7 +536,7 @@ namespace mdwBunifu
                 myConnexion.OpenConnection();
 
                 // Création d'une commande SQL en fonction de l'objet connection
-                MySqlCommand cmd = myConnexion.Connection.CreateCommand();
+                MySqlCommand cmd = myConnexion.myConnection.CreateCommand();
 
                 // Requête SQL
                 cmd.CommandText = "UPDATE `measures` SET `glucose`=" + glucose + " , `insulinRecommandation`=" + insu + " , `commentary`='" + comment + "' , `idType`='" + GetTypeByName(type) + "',`dateofMeasure`='" + dateMesure + "' WHERE `idMeasure`=" + idMesure + "";
@@ -600,7 +566,7 @@ namespace mdwBunifu
                 myConnexion.OpenConnection();
 
                 // Création d'une commande SQL en fonction de l'objet connection
-                MySqlCommand cmd = myConnexion.Connection.CreateCommand();
+                MySqlCommand cmd = myConnexion.myConnection.CreateCommand();
 
                 // Requête SQL
                 cmd.CommandText = "DELETE FROM `measures` WHERE `idMeasure` = @idMeasure";
@@ -632,7 +598,7 @@ namespace mdwBunifu
                 myConnexion.OpenConnection();
 
                 // Création d'une commande SQL en fonction de l'objet connection
-                MySqlCommand cmd = myConnexion.Connection.CreateCommand();
+                MySqlCommand cmd = myConnexion.myConnection.CreateCommand();
 
                 // Requête SQL
                 cmd.CommandText = "INSERT INTO `measures`(`glucose`, `insulinRecommandation`, `commentary`, `dateofMeasure`, `idUser`, `idType`) VALUES (@glucose , @insulinRecommandation, @commentary , @dateMesure , @idUser, @type )";
@@ -663,12 +629,12 @@ namespace mdwBunifu
         {
             try
             {
-                Connexion connect = new Connexion();
+                Connection connect = new Connection();
                 // Ouverture de la connexion SQL
                 connect.OpenConnection();
 
                 // Création d'une commande SQL en fonction de l'objet connection
-                MySqlCommand cmd = connect.Connection.CreateCommand();
+                MySqlCommand cmd = connect.myConnection.CreateCommand();
 
                 // Requête SQL
                 cmd.CommandText = "SELECT `idMeasure`, `glucose`, `insulinRecommandation`, `commentary`, `typeofMeasure`, `dateofMeasure` FROM `measures` WHERE  `dateofMeasure` = '" + date + "' AND `typeofMeasure` = '" + type + "'";

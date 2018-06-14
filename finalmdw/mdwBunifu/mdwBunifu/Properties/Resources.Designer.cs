@@ -183,6 +183,16 @@ namespace mdwBunifu.Properties {
         /// <summary>
         ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap icons8_gauche_16 {
+            get {
+                object obj = ResourceManager.GetObject("icons8-gauche-16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap icons8_gauche_26 {
             get {
                 object obj = ResourceManager.GetObject("icons8_gauche_26", resourceCulture);

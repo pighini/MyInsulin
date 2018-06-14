@@ -36,7 +36,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.dtpFin = new ns1.BunifuDatepicker();
             this.label4 = new System.Windows.Forms.Label();
-            this.cbxMoyenne = new ns1.BunifuCheckbox();
+            this.cbxAvg = new ns1.BunifuCheckbox();
             this.chartmesure = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.lbxLeft = new System.Windows.Forms.ListBox();
             this.lbxRight = new System.Windows.Forms.ListBox();
@@ -47,13 +47,15 @@
             this.plType = new System.Windows.Forms.Panel();
             this.cbxTend = new ns1.BunifuCheckbox();
             this.label5 = new System.Windows.Forms.Label();
-            this.btnToRight = new ns1.BunifuThinButton2();
-            this.btnToLeft = new ns1.BunifuThinButton2();
+            this.lblNouveau = new System.Windows.Forms.Label();
+            this.pbRight = new System.Windows.Forms.PictureBox();
+            this.pbLeft = new System.Windows.Forms.PictureBox();
             this.pbAdd = new System.Windows.Forms.PictureBox();
             this.pbDel = new System.Windows.Forms.PictureBox();
-            this.lblNouveau = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.chartmesure)).BeginInit();
             this.plType.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pbRight)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbLeft)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbAdd)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbDel)).BeginInit();
             this.SuspendLayout();
@@ -133,18 +135,18 @@
             this.label4.TabIndex = 17;
             this.label4.Text = "Moyenne";
             // 
-            // cbxMoyenne
+            // cbxAvg
             // 
-            this.cbxMoyenne.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(205)))), ((int)(((byte)(117)))));
-            this.cbxMoyenne.ChechedOffColor = System.Drawing.Color.FromArgb(((int)(((byte)(132)))), ((int)(((byte)(135)))), ((int)(((byte)(140)))));
-            this.cbxMoyenne.Checked = false;
-            this.cbxMoyenne.CheckedOnColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(205)))), ((int)(((byte)(117)))));
-            this.cbxMoyenne.ForeColor = System.Drawing.Color.White;
-            this.cbxMoyenne.Location = new System.Drawing.Point(131, 432);
-            this.cbxMoyenne.Name = "cbxMoyenne";
-            this.cbxMoyenne.Size = new System.Drawing.Size(20, 20);
-            this.cbxMoyenne.TabIndex = 18;
-            this.cbxMoyenne.OnChange += new System.EventHandler(this.cbxTend_OnChange);
+            this.cbxAvg.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(205)))), ((int)(((byte)(117)))));
+            this.cbxAvg.ChechedOffColor = System.Drawing.Color.FromArgb(((int)(((byte)(132)))), ((int)(((byte)(135)))), ((int)(((byte)(140)))));
+            this.cbxAvg.Checked = false;
+            this.cbxAvg.CheckedOnColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(205)))), ((int)(((byte)(117)))));
+            this.cbxAvg.ForeColor = System.Drawing.Color.White;
+            this.cbxAvg.Location = new System.Drawing.Point(131, 432);
+            this.cbxAvg.Name = "cbxAvg";
+            this.cbxAvg.Size = new System.Drawing.Size(20, 20);
+            this.cbxAvg.TabIndex = 18;
+            this.cbxAvg.OnChange += new System.EventHandler(this.cbxAvg_OnChange);
             // 
             // chartmesure
             // 
@@ -250,10 +252,10 @@
             // 
             // plType
             // 
+            this.plType.Controls.Add(this.pbRight);
+            this.plType.Controls.Add(this.pbLeft);
             this.plType.Controls.Add(this.lbxLeft);
-            this.plType.Controls.Add(this.btnToRight);
             this.plType.Controls.Add(this.lblError);
-            this.plType.Controls.Add(this.btnToLeft);
             this.plType.Controls.Add(this.tbxType);
             this.plType.Controls.Add(this.lbxRight);
             this.plType.Controls.Add(this.lblAfficher);
@@ -289,55 +291,36 @@
             this.label5.TabIndex = 30;
             this.label5.Text = "Tendance";
             // 
-            // btnToRight
+            // lblNouveau
             // 
-            this.btnToRight.ActiveBorderThickness = 1;
-            this.btnToRight.ActiveCornerRadius = 20;
-            this.btnToRight.ActiveFillColor = System.Drawing.Color.White;
-            this.btnToRight.ActiveForecolor = System.Drawing.Color.Black;
-            this.btnToRight.ActiveLineColor = System.Drawing.Color.White;
-            this.btnToRight.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(50)))), ((int)(((byte)(44)))));
-            this.btnToRight.ButtonText = "→";
-            this.btnToRight.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnToRight.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnToRight.ForeColor = System.Drawing.Color.SeaGreen;
-            this.btnToRight.IdleBorderThickness = 1;
-            this.btnToRight.IdleCornerRadius = 20;
-            this.btnToRight.IdleFillColor = System.Drawing.Color.White;
-            this.btnToRight.IdleForecolor = System.Drawing.Color.Black;
-            this.btnToRight.IdleLineColor = System.Drawing.Color.White;
-            this.btnToRight.Location = new System.Drawing.Point(123, 105);
-            this.btnToRight.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.btnToRight.Name = "btnToRight";
-            this.btnToRight.Size = new System.Drawing.Size(21, 17);
-            this.btnToRight.TabIndex = 24;
-            this.btnToRight.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.btnToRight.Click += new System.EventHandler(this.btnToRight_Click);
+            this.lblNouveau.AutoSize = true;
+            this.lblNouveau.Font = new System.Drawing.Font("Century Gothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblNouveau.ForeColor = System.Drawing.Color.White;
+            this.lblNouveau.Location = new System.Drawing.Point(243, 522);
+            this.lblNouveau.Name = "lblNouveau";
+            this.lblNouveau.Size = new System.Drawing.Size(96, 17);
+            this.lblNouveau.TabIndex = 29;
+            this.lblNouveau.Text = "Nouveau type ";
             // 
-            // btnToLeft
+            // pbRight
             // 
-            this.btnToLeft.ActiveBorderThickness = 1;
-            this.btnToLeft.ActiveCornerRadius = 20;
-            this.btnToLeft.ActiveFillColor = System.Drawing.Color.White;
-            this.btnToLeft.ActiveForecolor = System.Drawing.Color.Black;
-            this.btnToLeft.ActiveLineColor = System.Drawing.Color.White;
-            this.btnToLeft.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(50)))), ((int)(((byte)(44)))));
-            this.btnToLeft.ButtonText = "←\t";
-            this.btnToLeft.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnToLeft.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnToLeft.ForeColor = System.Drawing.Color.SeaGreen;
-            this.btnToLeft.IdleBorderThickness = 1;
-            this.btnToLeft.IdleCornerRadius = 20;
-            this.btnToLeft.IdleFillColor = System.Drawing.Color.White;
-            this.btnToLeft.IdleForecolor = System.Drawing.Color.Black;
-            this.btnToLeft.IdleLineColor = System.Drawing.Color.White;
-            this.btnToLeft.Location = new System.Drawing.Point(123, 79);
-            this.btnToLeft.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.btnToLeft.Name = "btnToLeft";
-            this.btnToLeft.Size = new System.Drawing.Size(21, 18);
-            this.btnToLeft.TabIndex = 23;
-            this.btnToLeft.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.btnToLeft.Click += new System.EventHandler(this.btnToLeft_Click);
+            this.pbRight.Image = global::mdwBunifu.Properties.Resources.icons8_droite_26;
+            this.pbRight.Location = new System.Drawing.Point(119, 101);
+            this.pbRight.Name = "pbRight";
+            this.pbRight.Size = new System.Drawing.Size(27, 27);
+            this.pbRight.TabIndex = 30;
+            this.pbRight.TabStop = false;
+            this.pbRight.Click += new System.EventHandler(this.btnToRight_Click);
+            // 
+            // pbLeft
+            // 
+            this.pbLeft.Image = global::mdwBunifu.Properties.Resources.icons8_gauche_26;
+            this.pbLeft.Location = new System.Drawing.Point(120, 71);
+            this.pbLeft.Name = "pbLeft";
+            this.pbLeft.Size = new System.Drawing.Size(27, 27);
+            this.pbLeft.TabIndex = 29;
+            this.pbLeft.TabStop = false;
+            this.pbLeft.Click += new System.EventHandler(this.btnToLeft_Click);
             // 
             // pbAdd
             // 
@@ -361,17 +344,6 @@
             this.pbDel.TabStop = false;
             this.pbDel.Click += new System.EventHandler(this.pbDel_Click);
             // 
-            // lblNouveau
-            // 
-            this.lblNouveau.AutoSize = true;
-            this.lblNouveau.Font = new System.Drawing.Font("Century Gothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblNouveau.ForeColor = System.Drawing.Color.White;
-            this.lblNouveau.Location = new System.Drawing.Point(243, 522);
-            this.lblNouveau.Name = "lblNouveau";
-            this.lblNouveau.Size = new System.Drawing.Size(96, 17);
-            this.lblNouveau.TabIndex = 29;
-            this.lblNouveau.Text = "Nouveau type ";
-            // 
             // boxGraphique
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -381,7 +353,7 @@
             this.Controls.Add(this.cbxTend);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.plType);
-            this.Controls.Add(this.cbxMoyenne);
+            this.Controls.Add(this.cbxAvg);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.dtpFin);
@@ -394,6 +366,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.chartmesure)).EndInit();
             this.plType.ResumeLayout(false);
             this.plType.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pbRight)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbLeft)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbAdd)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbDel)).EndInit();
             this.ResumeLayout(false);
@@ -408,14 +382,12 @@
         private System.Windows.Forms.Label label3;
         private ns1.BunifuDatepicker dtpFin;
         private System.Windows.Forms.Label label4;
-        private ns1.BunifuCheckbox cbxMoyenne;
+        private ns1.BunifuCheckbox cbxAvg;
         private System.Windows.Forms.DataVisualization.Charting.Chart chartmesure;
         private System.Windows.Forms.ListBox lbxLeft;
         private System.Windows.Forms.ListBox lbxRight;
         private System.Windows.Forms.Label lblDispo;
         private System.Windows.Forms.Label lblAfficher;
-        private ns1.BunifuThinButton2 btnToLeft;
-        private ns1.BunifuThinButton2 btnToRight;
         private ns1.BunifuMetroTextbox tbxType;
         private System.Windows.Forms.PictureBox pbDel;
         private System.Windows.Forms.PictureBox pbAdd;
@@ -424,5 +396,7 @@
         private ns1.BunifuCheckbox cbxTend;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label lblNouveau;
+        private System.Windows.Forms.PictureBox pbRight;
+        private System.Windows.Forms.PictureBox pbLeft;
     }
 }

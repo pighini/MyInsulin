@@ -114,7 +114,7 @@ namespace mdwBunifu
                         string sqlDate = dateMesure.ToString("yyyy-MM-dd");
 
 
-                        if (!this.Modele.verifMeasure(sqlDate, type))
+                        if (!this.Modele.VerifMeasure(sqlDate, type))
                         {
                             double reco = this.ModelInsu.getRecommandationInsu(glucose, this.Modele.ConnectedUser.IdUser);
                             this.Modele.AddMesure(glucose, reco, comment, type, sqlDate);
@@ -178,7 +178,7 @@ namespace mdwBunifu
                         string sqlDate = dateMesure.ToString("yyyy-MM-dd");
 
 
-                        if (!this.Modele.verifMeasure(sqlDate, type) && this.Modele.Mes.IdMesure != this.Modele.GetMesureByTypeAndDate(sqlDate, type).IdMesure)
+                        if (!this.Modele.VerifMeasure(sqlDate, type) && this.Modele.Mes.IdMesure != this.Modele.GetMesureByTypeAndDate(sqlDate, type).IdMesure)
                         {
                             this.Modele.ChangeMesure(glucose, insu, comment, type, sqlDate, Modele.Mes.IdMesure);
                             lblSend.Visible = true;

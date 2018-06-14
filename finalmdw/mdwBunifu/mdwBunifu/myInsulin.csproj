@@ -81,7 +81,7 @@
       <DependentUpon>btnAccueil.cs</DependentUpon>
     </Compile>
     <Compile Include="Measure.cs" />
-    <Compile Include="Connexion.cs" />
+    <Compile Include="Connection.cs" />
     <Compile Include="frm_login.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -250,6 +250,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\recommandation1.PNG" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-gauche-16.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

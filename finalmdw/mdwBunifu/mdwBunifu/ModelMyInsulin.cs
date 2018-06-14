@@ -11,17 +11,17 @@ namespace mdwBunifu
     public class ModelMyInsulin
     {
         private InsulineTable insuT;
-        private Connexion myConnexion = new Connexion();
+        private Connection myConnexion = new Connection();
 
         public List<InsulineTable> GetRecommandation(int idUser)
         {
 
-            Connexion connect = new Connexion();
+            Connection connect = new Connection();
             // Ouverture de la connexion SQL
             connect.OpenConnection();
 
             // Création d'une commande SQL en fonction de l'objet connection
-            MySqlCommand cmd = connect.Connection.CreateCommand();
+            MySqlCommand cmd = connect.myConnection.CreateCommand();
 
             // Requête SQL
             cmd.CommandText = "SELECT `idInsulinTable`, `minGlucose`, `maxGlucose`, `recommandation` FROM `insulintables` WHERE `idUser` = @idUser ORDER BY `minGlucose` ASC";
@@ -52,7 +52,7 @@ namespace mdwBunifu
                 myConnexion.OpenConnection();
 
                 // Création d'une commande SQL en fonction de l'objet connection
-                MySqlCommand cmd = myConnexion.Connection.CreateCommand();
+                MySqlCommand cmd = myConnexion.myConnection.CreateCommand();
 
                 // Requête SQL
                 cmd.CommandText = "INSERT INTO `insulintables`(`minGlucose`, `maxGlucose`, `timeSpec`, `recommandation`, `idUser`) VALUES (@min, @max, @date,@reco, @idUser)";
@@ -86,7 +86,7 @@ namespace mdwBunifu
                 myConnexion.OpenConnection();
 
                 // Création d'une commande SQL en fonction de l'objet connection
-                MySqlCommand cmd = myConnexion.Connection.CreateCommand();
+                MySqlCommand cmd = myConnexion.myConnection.CreateCommand();
 
                 // Requête SQL
                 cmd.CommandText = "UPDATE insulintables SET minGlucose = @min , maxGlucose = @max  , recommandation = @reco  WHERE idInsulinTable =@idReco";
@@ -112,12 +112,12 @@ namespace mdwBunifu
         }
         public void Delete(int id)
         {
-            Connexion connect = new Connexion();
+            Connection connect = new Connection();
             // Ouverture de la connexion SQL
             connect.OpenConnection();
 
             // Création d'une commande SQL en fonction de l'objet connection
-            MySqlCommand cmd = connect.Connection.CreateCommand();
+            MySqlCommand cmd = connect.myConnection.CreateCommand();
 
             // Requête SQL
             cmd.CommandText = "DELETE FROM `insulintables` WHERE `idInsulinTable` = @idReco";
@@ -135,12 +135,12 @@ namespace mdwBunifu
         public double getRecommandationInsu(double glycemie, int idUser)
         {
             
-                Connexion connect = new Connexion();
+                Connection connect = new Connection();
                 // Ouverture de la connexion SQL
                 connect.OpenConnection();
 
                 // Création d'une commande SQL en fonction de l'objet connection
-                MySqlCommand cmd = connect.Connection.CreateCommand();
+                MySqlCommand cmd = connect.myConnection.CreateCommand();
 
                 // Requête SQL
                 cmd.CommandText = "SELECT `recommandation` FROM `insulintables` WHERE @glycemie >= `minGlucose` AND @glycemie <`maxGlucose` AND `idUser` = @idUser";
@@ -165,12 +165,12 @@ namespace mdwBunifu
         public double GetMaxGluc( int idUser)
         {
 
-             Connexion connect = new Connexion();
+             Connection connect = new Connection();
             // Ouverture de la connexion SQL
             connect.OpenConnection();
 
             // Création d'une commande SQL en fonction de l'objet connection
-            MySqlCommand cmd = connect.Connection.CreateCommand();
+            MySqlCommand cmd = connect.myConnection.CreateCommand();
 
             // Requête SQL
             cmd.CommandText = "SELECT MAX(`maxGlucose`) as maxGlucose FROM `insulintables` WHERE `idUser` = @idUser";
@@ -188,12 +188,12 @@ namespace mdwBunifu
         public double getMaxReco(int idUser)
         {
 
-            Connexion connect = new Connexion();
+            Connection connect = new Connection();
             // Ouverture de la connexion SQL
             connect.OpenConnection();
 
             // Création d'une commande SQL en fonction de l'objet connection
-            MySqlCommand cmd = connect.Connection.CreateCommand();
+            MySqlCommand cmd = connect.myConnection.CreateCommand();
 
             // Requête SQL
             cmd.CommandText = "SELECT MAX(`recommandation`) as recommandation FROM `insulintables` WHERE `idUser` = @idUser";
@@ -211,12 +211,12 @@ namespace mdwBunifu
         public int GetLastId()
         {
 
-            Connexion connect = new Connexion();
+            Connection connect = new Connection();
             // Ouverture de la connexion SQL
             connect.OpenConnection();
 
             // Création d'une commande SQL en fonction de l'objet connection
-            MySqlCommand cmd = connect.Connection.CreateCommand();
+            MySqlCommand cmd = connect.myConnection.CreateCommand();
 
             // Requête SQL
             cmd.CommandText = "SELECT `idInsulinTable` FROM `insulintables` ORDER BY `idInsulinTable`DESC";

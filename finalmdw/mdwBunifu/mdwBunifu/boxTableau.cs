@@ -64,7 +64,7 @@ namespace mdwBunifu
         private void GenerateTable()
         {
             added = new List<Control>();
-            double tend = 0;
+            double Moy = 0;
             cpt = 0;
             cptType = 0;
             dateFormatted = date.AddDays(8 * this.NbWeek).ToString("yyyy-MM-dd");
@@ -87,9 +87,9 @@ namespace mdwBunifu
                 }
 
             }
-            if (cbxMoyenne.Checked)
+            if (cbxAvg.Checked)
             {
-                addTendanceLabel();
+                addMoyenneLabel();
             }
             
             addColumn();
@@ -109,10 +109,10 @@ namespace mdwBunifu
                      dt = DateTime.Parse(mes.DateMesure);
                     toshow = dt.ToString("yyyy-MM-dd");                                                           
                     addDate(toshow);              
-                    if (cbxMoyenne.Checked)
+                    if (cbxAvg.Checked)
                     {
-                        fillWithtend(toshow);
-                        tend = 0;
+                        fillWithMoy(toshow);
+                        Moy = 0;
                     }
                     addRow();
                     cpt++;
@@ -124,7 +124,7 @@ namespace mdwBunifu
                 dt = DateTime.Parse(mes.DateMesure);
                 toshow = dt.ToString("yyyy-MM-dd");
                 fillWithValue(mes);
-                tend += mes.Glucose;
+                Moy += mes.Glucose;
                 
             }
             addRow();
@@ -179,7 +179,7 @@ namespace mdwBunifu
             
 
         }
-        private void fillWithtend(string date)
+        private void fillWithMoy(string date)
         {
 
             Control[] labels = this.Controls.Find("lblDate", true); 
@@ -194,11 +194,11 @@ namespace mdwBunifu
 
             //Positionne et fix la valeur
             line = (int)lbl.Tag;
-            lbl = (Label)this.Controls.Find("lblTend", true)[0];
+            lbl = (Label)this.Controls.Find("lblMoy", true)[0];
             col = (int)lbl.Tag;
             x = 110 + (col * 70);
             y = 87 + (line * 46);
-            addTendVal(this.Model.GetMesureDate(date).ToString(),x ,y );
+            addMoyVal(this.Model.GetMesureDate(date).ToString(),x ,y );
 
 
         }
@@ -222,22 +222,22 @@ namespace mdwBunifu
 
 
         }
-        private void addTendVal(string val, int x , int y)
+        private void addMoyVal(string val, int x , int y)
         {
-            Label tend = new Label
+            Label Moy = new Label
             {
                 Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0))),
                 ForeColor = System.Drawing.Color.White,
                 Location = new System.Drawing.Point(x , y),
-                Name = "lblTendVal"
+                Name = "lblMoyVal"
 
             };
 
-            tend.Tag = cpt;
-            tend.Size = new System.Drawing.Size(90, 20);
-            tend.Text = val;
-            this.Controls.Add(tend);
-            added.Add(tend);
+            Moy.Tag = cpt;
+            Moy.Size = new System.Drawing.Size(90, 20);
+            Moy.Text = val;
+            this.Controls.Add(Moy);
+            added.Add(Moy);
 
 
         }
@@ -257,21 +257,21 @@ namespace mdwBunifu
             this.Controls.Add(type);
             added.Add(type);
         }
-        private void addTendanceLabel()
+        private void addMoyenneLabel()
         {
-            Label tend = new Label
+            Label Moy = new Label
             {
                 
                 Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0))),
                 ForeColor = System.Drawing.Color.White,
                 Location = new System.Drawing.Point(110 + (cptType * 70), 30),
-                Name = "lblTend",
+                Name = "lblMoy",
                 Tag = cptType,
                 Size = new System.Drawing.Size(50, 30),
-                Text = "Tend"
+                Text = "Moy"
             };
-            this.Controls.Add(tend);
-            added.Add(tend);
+            this.Controls.Add(Moy);
+            added.Add(Moy);
         }
         private void addColumn()
         {
@@ -350,7 +350,7 @@ namespace mdwBunifu
 
         }
 
-        private void cbxTendance_OnChange(object sender, EventArgs e)
+        private void cbxAvg_OnChange(object sender, EventArgs e)
         {
            
                 CleanTable();

@@ -31,7 +31,7 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
-            this.cbxMoyenne = new ns1.BunifuCheckbox();
+            this.cbxAvg = new ns1.BunifuCheckbox();
             this.label4 = new System.Windows.Forms.Label();
             this.pbPreviousWeek = new System.Windows.Forms.PictureBox();
             this.pbNextWeek = new System.Windows.Forms.PictureBox();
@@ -63,18 +63,18 @@
             this.panel3.Size = new System.Drawing.Size(500, 1);
             this.panel3.TabIndex = 1;
             // 
-            // cbxMoyenne
+            // cbxAvg
             // 
-            this.cbxMoyenne.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(205)))), ((int)(((byte)(117)))));
-            this.cbxMoyenne.ChechedOffColor = System.Drawing.Color.FromArgb(((int)(((byte)(132)))), ((int)(((byte)(135)))), ((int)(((byte)(140)))));
-            this.cbxMoyenne.Checked = false;
-            this.cbxMoyenne.CheckedOnColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(205)))), ((int)(((byte)(117)))));
-            this.cbxMoyenne.ForeColor = System.Drawing.Color.White;
-            this.cbxMoyenne.Location = new System.Drawing.Point(88, 478);
-            this.cbxMoyenne.Name = "cbxMoyenne";
-            this.cbxMoyenne.Size = new System.Drawing.Size(20, 20);
-            this.cbxMoyenne.TabIndex = 20;
-            this.cbxMoyenne.OnChange += new System.EventHandler(this.cbxTendance_OnChange);
+            this.cbxAvg.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(132)))), ((int)(((byte)(135)))), ((int)(((byte)(140)))));
+            this.cbxAvg.ChechedOffColor = System.Drawing.Color.FromArgb(((int)(((byte)(132)))), ((int)(((byte)(135)))), ((int)(((byte)(140)))));
+            this.cbxAvg.Checked = false;
+            this.cbxAvg.CheckedOnColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(205)))), ((int)(((byte)(117)))));
+            this.cbxAvg.ForeColor = System.Drawing.Color.White;
+            this.cbxAvg.Location = new System.Drawing.Point(88, 478);
+            this.cbxAvg.Name = "cbxAvg";
+            this.cbxAvg.Size = new System.Drawing.Size(20, 20);
+            this.cbxAvg.TabIndex = 20;
+            this.cbxAvg.OnChange += new System.EventHandler(this.cbxAvg_OnChange);
             // 
             // label4
             // 
@@ -112,7 +112,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(50)))), ((int)(((byte)(44)))));
-            this.Controls.Add(this.cbxMoyenne);
+            this.Controls.Add(this.cbxAvg);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.pbPreviousWeek);
             this.Controls.Add(this.pbNextWeek);
@@ -135,7 +135,7 @@
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.PictureBox pbNextWeek;
         private System.Windows.Forms.PictureBox pbPreviousWeek;
-        private ns1.BunifuCheckbox cbxMoyenne;
+        private ns1.BunifuCheckbox cbxAvg;
         private System.Windows.Forms.Label label4;
     }
 }

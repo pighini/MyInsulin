@@ -10,14 +10,29 @@ using MySql.Data.MySqlClient;
 
 namespace mdwBunifu
 {
-    class Connexion
+    class Connection
     {
-        public MySqlConnection Connection;
+        private MySqlConnection _connection;
 
-        public string error = string.Empty;
+        public MySqlConnection myConnection
+        {
+            get { return _connection; }
+            set { _connection = value; }
+        }
+
+
+        
+        private string _error;
+
+        public string Error
+        {
+            get { return _error; }
+            set { _error = value; }
+        }
+
 
         // Constructeur
-        public Connexion()
+        public Connection()
         {
             this.InitConnexion();
         }
@@ -27,19 +42,20 @@ namespace mdwBunifu
         {
             // Création de la chaîne de connexion
             string connectionString = "SERVER=127.0.0.1; DATABASE=myinsulin; UID=root; PASSWORD=";
-            Connection = new MySqlConnection(connectionString);
+            myConnection = new MySqlConnection(connectionString);
+            Error = String.Empty;
         }
         public bool OpenConnection()
         {
-            Connection.Close();
+            myConnection.Close();
             try
             {
-                Connection.Open();
+                myConnection.Open();
                 return true;
             }
             catch
             {
-                this.error = "Veulliez vérifier votre connexion";
+                this.Error = "Veulliez vérifier votre connexion";
                 return false;
             }
 
@@ -48,7 +64,7 @@ namespace mdwBunifu
         {
             try
             {
-                Connection.Close();
+                myConnection.Close();
                 return true;
             }
             catch
